@@ -1,0 +1,24 @@
+<div class="content">
+
+	<!-- LIST OF ITEMS -->
+	<div class="row justify-content-md-center">
+		<ul class="list-group">
+			<li class="list-group-item list-group-item-action" *ngFor="let event of events;let idx = index" >
+				      <span>{{event.name}}</span>
+				      <span class="badge">{{event.date | date}}</span>
+				      <div class="pull-right">						  
+						  <button class="btn btn-primary btn-xs fa fa-pencil" [routerLink]="['/modify', idx]"></button>
+				          <button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(event)"></button>
+				      </div>
+			</li>
+		</ul>
+	</div>
+
+	<!-- NEW ITEM -->
+	<div class="row justify-content-md-center">
+		<nav>
+			<a routerLink="/new-event" class="pull-right">New event</a>
+		</nav>
+	</div>
+</div>
+
