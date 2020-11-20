@@ -40,14 +40,7 @@ export class LoginComponent implements OnInit {
 
     }
   }
-
-  logout(){
-    this.tokerservice.signOut();
-    this.activeRouter.navigateByUrl('/login');
-  }
-
   
-
   init(){
     this.dataForm = this.loginForm.group({
       email:['', Validators.required],

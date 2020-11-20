@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { TokenService } from './_services/auth/token.service';
 import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './_interceptors';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventlistComponent,
     NeweventComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
