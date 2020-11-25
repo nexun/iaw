@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './_interceptors';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { PingService } from './_services/ping/ping.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SignupComponent } from './components/signup/signup.component';
     ],
   providers: [
     TokenService,
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    PingService
     
   ],
   bootstrap: [AppComponent]

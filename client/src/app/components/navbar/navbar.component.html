@@ -1,9 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Home</a>    
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav" class="ml-auto">
+    <a class="navbar-brand" href="#">Event Manager</a>        
+    <div class=" navbar" id="navbarNav" class="ml-auto">
       <div *ngIf="isLogin()==false">
         <ul class="navbar-nav">       
           <li class="nav-item">
@@ -15,9 +12,16 @@
           </li>      
         </ul>    
       </div>  
-      <div *ngIf="!isLogin()==false" class="ml-auto">
-          <ul class="navbar-nav">       
+      <div *ngIf="!isLogin()==false" >
+          <ul class="navbar-nav">    
             <li class="nav-item">
+              <span class="btn btn-danger">Ping {{this.ping}} </span>
+            </li>  
+            <li class="nav-item ml-1">
+              <span class="btn btn-danger">Usuario: {{this.username}} </span>
+
+            </li>        
+            <li class="nav-item ml-1">
               <a class="btn btn-light"  (click)="logout()">Logout</a>
             </li>      
           </ul>

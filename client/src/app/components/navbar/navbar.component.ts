@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/_services/auth/token.service';
+import { PingService } from 'src/app/_services/ping/ping.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,20 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private tokenservice:TokenService, 
-              private activeRouter: Router) { }
+  ping: number = 0;
+  username: string;
+  constructor(private tokenService:TokenService, 
+              private activeRouter: Router,
+              private pingService:PingService) { }
 
   ngOnInit(): void {
-
+      this.pingService.pingStream.subscribe(ping => {
+      this.ping = Math.round(ping);
+    })
   }
 
   isLogin(){
-    return this.tokenservice.isLogin();
+    if( this.tokenService.isLogin()){
+      this.username=this.tokenService.getUser().email
+      return true
+    }else return false;
   }
 
   logout(){
-    this.tokenservice.signOut();
+    this.tokenService.signOut();
     this.activeRouter.navigateByUrl('/login'); 
 
   }

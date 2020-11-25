@@ -8,7 +8,6 @@ import { EventModel } from 'src/app/_model/event.model';
 export class EventService {
 
   events:EventModel[]
-  dataForm: FormGroup;
 
   constructor(  
     private eventController:EventControllerService,
@@ -16,30 +15,21 @@ export class EventService {
     ) {    }
     
   getEvents(){
-    this.eventController.eventControllerFind().subscribe(events=>this.events=events)
+    return this.eventController.eventControllerFind()
   }
 
   getEvent(id){
     this.eventController.eventControllerFindById(id).subscribe(events=>events)
   }
-  addEvent(){
-
-    if (this.dataForm.valid){
-      const request = {
-        name:this.dataForm.value.name,
-        date:this.dataForm.value.date      
-      }
-      this.eventController.eventControllerCreate(request).subscribe((response)=>{
-        this.activeRouter.navigateByUrl('/home');
-      })
-  
-    }
+  addEvent(event){    
+    this.eventController.eventControllerCreate(event).subscribe(response=>response) //ver
   }
-  editEvent(event:Event){
-    //this.events = this.events.filter(i=>event!==i)
+  editEvent(id,request){
+    return this.eventController.eventControllerUpdateById(id,request)
   }
-  removeEvent(event:Event){
-    //this.events = this.events.filter(i=>event!==i)
-  }}
+  removeEvent(id){
+    return this.eventController.eventControllerDeleteById(id)
+  }
+}
   
 

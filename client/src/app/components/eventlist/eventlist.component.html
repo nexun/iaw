@@ -23,7 +23,7 @@
 
 -->
 
-<div class="row p-4">
+<div class="row p-4 justify-content-md-center">
 
 	<div class="p-1 align-center">
 		<table class="table table-responsive table-bordered ">
@@ -39,14 +39,14 @@
 				<tr *ngFor="let event of events;let idx = index">
 					<td><span>{{event.name}}</span></td>
 					<td><span class="badge">{{event.date }}</span></td>							
-					<td><button class="btn btn-primary btn-xs fa fa-pencil" [routerLink]="['/modify', idx]"></button></td>
-					<td><button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(event)"></button></td>
+					<td><button class="btn btn-primary btn-xs fa fa-pencil" [routerLink]="['/modify', event.id]"></button></td>
+					<td><button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(event.id)"></button></td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="row justify-content-md-center">
 			<nav>
-				<a routerLink="/new-event" class="pull-right">New event</a>
+				<button class="btn btn-success" routerLink="/new-event" >Crear evento</button>
 			</nav>
 		</div>
 	</div>
