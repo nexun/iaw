@@ -1,8 +1,10 @@
 import {ActivatedRoute,Router} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { EventModel } from 'src/app/_model/event.model'
+import { EventControllerService, UserControllerService } from 'src/app/openapi';
+import { EventlistComponent } from '../eventlist/eventlist.component';
 
 @Component({
   selector: 'app-newevent',
@@ -11,42 +13,43 @@ import { EventModel } from 'src/app/_model/event.model'
 })
 export class NeweventComponent implements OnInit {
 
-newEventForm: FormGroup
+//newEventForm: FormGroup
+dataForm: FormGroup;
 event:EventModel;
 idx:string;
-  constructor(private router: Router, private service:EventService, private route:ActivatedRoute) { 
-    this.newEventForm = new FormGroup({
-      eventName: new FormControl()
-    }); 
-  }
-  /*
-  onSubmit(){
-    this.addEvent(new Event(this.newEventForm.get('eventName').value))
-  }*/
-  updateForm(){
-    this.newEventForm = new FormGroup({
-      itemName: new FormControl(this.event.name)
-    });
-  }
+constructor(
+  private router: Router, 
+  private service:EventService, 
+  private newEventForm: FormBuilder,
+  private controllerEvent: EventControllerService,
+  private route:ActivatedRoute
+  )   {
+    this.init();
+  } 
 
-
-  addEvent(anEvent:EventModel){
-    //this.service.addEvent(anEvent)
+  addEvent(){
+    this.service.addEvent()
     this.router.navigateByUrl('/home')
   }
 
   ngOnInit() {
-    this.idx=this.route.snapshot.paramMap.get('idx');
+      this.idx=this.route.snapshot.paramMap.get('idx');
     if(this.idx==null){      
       this.event =new EventModel();
     }else{       
-      this.event= this.service.getEventList()[this.idx]      }
-    this.newEventForm = new FormGroup({ eventName: new FormControl(this.event.name)  }); 
+      this.controllerEvent.eventControllerFindById(this.idx).subscribe(event=>this.event=event) }
+      this.dataForm = new FormGroup({ eventName: new FormControl(this.event.name)  }); 
   };
-  onSubmit(): void {
+  init(){
+    this.dataForm = this.newEventForm.group({
+      name:['', Validators.required],
+      date:['', Validators.required]
+    })
+  }
+  onSubmit(): void {/*
     this.event.name=this.newEventForm.get('eventName').value
     if(this.idx==null){this.addEvent(this.event);}
-    this.router.navigateByUrl('/home') 
+    this.router.navigateByUrl('/home') */
   } 
 
 }

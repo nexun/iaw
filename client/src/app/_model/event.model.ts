@@ -1,6 +1,6 @@
-import { Event } from "src/app/openapi";
+import { Event, EventWithRelations } from "src/app/openapi";
 
-export class EventModel implements Event {
+export class EventModel implements EventWithRelations, Event {
     name:string;
     date:Date;    
     constructor(){

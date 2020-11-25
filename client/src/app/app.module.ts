@@ -10,6 +10,7 @@ import { TokenService } from './_services/auth/token.service';
 import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './_interceptors';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     EventlistComponent,
     NeweventComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
