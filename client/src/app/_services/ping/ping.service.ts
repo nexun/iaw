@@ -13,11 +13,9 @@ export class PingService {
     interval(2000)
       .subscribe((data) => {
         let timeStart: number = performance.now();
-
         this._http.get(this.url)
           .subscribe((data) => {
             let timeEnd: number = performance.now();
-
             let ping: number = timeEnd - timeStart;
             this.ping = Math.round(ping);
             this.pingStream.next(ping);

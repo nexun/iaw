@@ -19,7 +19,10 @@ export class EventlistComponent implements OnInit {
   }
   
   onRemove(id){
-     this.service.removeEvent(id).subscribe((response)=>this.ngOnInit())
+    if(confirm("Desea eliminar el evento? ")) {
+      this.service.removeEvent(id).subscribe((response)=>this.ngOnInit())
+    }
+     
      
   }
 

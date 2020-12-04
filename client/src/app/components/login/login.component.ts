@@ -12,7 +12,7 @@ import { TokenService } from 'src/app/_services/auth/token.service';
 export class LoginComponent implements OnInit {
 
   dataForm: FormGroup;
-  
+  msg:String;
   constructor(private loginForm: FormBuilder,
     private controllerUser: UserControllerService,
     private tokerservice: TokenService,
@@ -33,10 +33,12 @@ export class LoginComponent implements OnInit {
       }
 
       this.controllerUser.userControllerLogin(request).subscribe((response)=>{
-        console.log(response.token)
         this.tokerservice.saveToken(response.token);
         this.activeRouter.navigateByUrl('/');
-      })
+      },
+      (err)=>this.msg=' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Usuario y/o Contraseña inválidos</div>'
+      )
+      
 
     }
   }

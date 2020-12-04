@@ -1,30 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Event Manager</a>        
-    <div class=" navbar" id="navbarNav" class="ml-auto">
-      <div *ngIf="isLogin()==false">
-        <ul class="navbar-nav">       
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>      
-           
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Signup</a>   
-          </li>      
-        </ul>    
-      </div>  
-      <div *ngIf="!isLogin()==false" >
-          <ul class="navbar-nav">    
-            <li class="nav-item">
-              <span class="btn btn-danger">Ping {{this.ping}} </span>
-            </li>  
-            <li class="nav-item ml-1">
-              <span class="btn btn-danger">Usuario: {{this.username}} </span>
 
-            </li>        
-            <li class="nav-item ml-1">
-              <a class="btn btn-light"  (click)="logout()">Logout</a>
-            </li>      
-          </ul>
-      </div>
+  <a class="navbar-brand" href="#">Event Manager</a>
+
+
+  <div class="collapse navbar-collapse" id="navbarNav" class="ml-auto">
+    <div *ngIf="isLogin()==false">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!isLogin()==false">
+      <ul class="navbar-nav dropdown mr-auto">
+        <li class="nav-item dropdown">
+          <span class="btn btn-warning">Ping {{this.ping}} </span>
+        </li>
+        <li class="nav-item  dropdown ml-1">
+          
+          <span class="btn btn-success">{{this.username}} </span>
+
+        </li>
+        <li class="nav-item ml-1">
+          <a class="btn btn-light" (click)="logout()">Salir</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
+
+

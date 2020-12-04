@@ -12,6 +12,7 @@ import { httpInterceptorProviders } from './_interceptors';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { PingService } from './_services/ping/ping.service';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PingService } from './_services/ping/ping.service';
   providers: [
     TokenService,
     httpInterceptorProviders,
-    PingService
+    PingService,
+    DatePipe
     
   ],
   bootstrap: [AppComponent]
