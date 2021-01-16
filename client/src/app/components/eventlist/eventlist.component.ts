@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
-import { EventControllerService } from 'src/app/openapi';
 import { EventModel } from 'src/app/_model/event.model'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eventlist',
@@ -12,23 +12,22 @@ export class EventlistComponent implements OnInit {
   
   events:EventModel[]
 
-  constructor(private service: EventService, private eventController:EventControllerService) {     
-  }
-   /*
-  getEvents(){
-    this.events=this.service.getEventList()
-  }*/
-  
-  getEvents(){
-    this.eventController.eventControllerFind().subscribe(events=>(this.events=events))
+  constructor(
+    private service: EventService,
+    private activeRouter: Router
+    ) {     
   }
   
-  onRemove(anEvent){
-     this.service.removeEvent(anEvent)
+  onRemove(id){
+    if(confirm("Desea eliminar el evento? ")) {
+      this.service.removeEvent(id).subscribe((response)=>this.ngOnInit())
+    }
+     
+     
   }
 
   ngOnInit(): void {
-    this.getEvents()    
+    this.service.getEvents().subscribe(events=>this.events=events)
   }
 
   

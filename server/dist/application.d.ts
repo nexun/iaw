@@ -17,6 +17,8 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     server: <T_2 extends import("@loopback/core").Server>(ctor: import("@loopback/core").Constructor<T_2>, nameOrOptions?: string | import("@loopback/core").BindingFromClassOptions | undefined) => import("@loopback/boot").Binding<T_2>;
     servers: <T_3 extends import("@loopback/core").Server>(ctors: import("@loopback/core").Constructor<T_3>[]) => import("@loopback/boot").Binding<any>[];
     getServer: <T_4 extends import("@loopback/core").Server>(target: string | import("@loopback/core").Constructor<T_4>) => Promise<T_4>;
+    init: () => Promise<void>;
+    onInit: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
     onStart: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
     stop: () => Promise<void>;
     onStop: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
@@ -26,6 +28,7 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     interceptor: (interceptor: import("@loopback/core").Interceptor | import("@loopback/core").Constructor<import("@loopback/core").Provider<import("@loopback/core").Interceptor>>, nameOrOptions?: string | import("@loopback/core").InterceptorBindingOptions | undefined) => import("@loopback/boot").Binding<import("@loopback/core").Interceptor>;
     readonly name: string;
     readonly subscriptionManager: import("@loopback/core").ContextSubscriptionManager;
+    scope: import("@loopback/core").BindingScope;
     readonly parent: import("@loopback/core").Context | undefined;
     emitEvent: <T_6 extends import("@loopback/core").ContextEvent>(type: string, event: T_6) => void;
     emitError: (err: unknown) => void;
@@ -43,7 +46,10 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     createView: <T_7 = unknown>(filter: import("@loopback/core").BindingFilter, comparator?: import("@loopback/core").BindingComparator | undefined) => import("@loopback/core").ContextView<T_7>;
     contains: (key: import("@loopback/core").BindingAddress<unknown>) => boolean;
     isBound: (key: import("@loopback/core").BindingAddress<unknown>) => boolean;
-    getOwnerContext: (key: import("@loopback/core").BindingAddress<unknown>) => import("@loopback/core").Context | undefined;
+    getOwnerContext: (keyOrBinding: string | import("@loopback/core").BindingKey<unknown> | Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
+    getScopedContext: (scope: import("@loopback/core").BindingScope.APPLICATION | import("@loopback/core").BindingScope.SERVER | import("@loopback/core").BindingScope.REQUEST) => import("@loopback/core").Context | undefined;
+    getResolutionContext: (binding: Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
+    isVisibleTo: (ctx: import("@loopback/core").Context) => boolean;
     find: <ValueType_1 = any>(pattern?: string | RegExp | import("@loopback/core").BindingFilter | undefined) => Readonly<import("@loopback/boot").Binding<ValueType_1>>[];
     findByTag: <ValueType_2 = any>(tagFilter: string | RegExp | Record<string, any>) => Readonly<import("@loopback/boot").Binding<ValueType_2>>[];
     get: {
@@ -95,6 +101,8 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     server: <T_2_1 extends import("@loopback/core").Server>(ctor: import("@loopback/core").Constructor<T_2_1>, nameOrOptions?: string | import("@loopback/core").BindingFromClassOptions | undefined) => import("@loopback/boot").Binding<T_2_1>;
     servers: <T_3_1 extends import("@loopback/core").Server>(ctors: import("@loopback/core").Constructor<T_3_1>[]) => import("@loopback/boot").Binding<any>[];
     getServer: <T_4_1 extends import("@loopback/core").Server>(target: string | import("@loopback/core").Constructor<T_4_1>) => Promise<T_4_1>;
+    init: () => Promise<void>;
+    onInit: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
     start: () => Promise<void>;
     onStart: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
     stop: () => Promise<void>;
@@ -105,6 +113,7 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     interceptor: (interceptor: import("@loopback/core").Interceptor | import("@loopback/core").Constructor<import("@loopback/core").Provider<import("@loopback/core").Interceptor>>, nameOrOptions?: string | import("@loopback/core").InterceptorBindingOptions | undefined) => import("@loopback/boot").Binding<import("@loopback/core").Interceptor>;
     readonly name: string;
     readonly subscriptionManager: import("@loopback/core").ContextSubscriptionManager;
+    scope: import("@loopback/core").BindingScope;
     readonly parent: import("@loopback/core").Context | undefined;
     emitEvent: <T_6_1 extends import("@loopback/core").ContextEvent>(type: string, event: T_6_1) => void;
     emitError: (err: unknown) => void;
@@ -122,7 +131,10 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     createView: <T_7_1 = unknown>(filter: import("@loopback/core").BindingFilter, comparator?: import("@loopback/core").BindingComparator | undefined) => import("@loopback/core").ContextView<T_7_1>;
     contains: (key: import("@loopback/core").BindingAddress<unknown>) => boolean;
     isBound: (key: import("@loopback/core").BindingAddress<unknown>) => boolean;
-    getOwnerContext: (key: import("@loopback/core").BindingAddress<unknown>) => import("@loopback/core").Context | undefined;
+    getOwnerContext: (keyOrBinding: string | import("@loopback/core").BindingKey<unknown> | Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
+    getScopedContext: (scope: import("@loopback/core").BindingScope.APPLICATION | import("@loopback/core").BindingScope.SERVER | import("@loopback/core").BindingScope.REQUEST) => import("@loopback/core").Context | undefined;
+    getResolutionContext: (binding: Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
+    isVisibleTo: (ctx: import("@loopback/core").Context) => boolean;
     find: <ValueType_1_1 = any>(pattern?: string | RegExp | import("@loopback/core").BindingFilter | undefined) => Readonly<import("@loopback/boot").Binding<ValueType_1_1>>[];
     findByTag: <ValueType_2_1 = any>(tagFilter: string | RegExp | Record<string, any>) => Readonly<import("@loopback/boot").Binding<ValueType_2_1>>[];
     get: {
@@ -179,6 +191,8 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     server: <T_2_2 extends import("@loopback/core").Server>(ctor: import("@loopback/core").Constructor<T_2_2>, nameOrOptions?: string | import("@loopback/core").BindingFromClassOptions | undefined) => import("@loopback/boot").Binding<T_2_2>;
     servers: <T_3_2 extends import("@loopback/core").Server>(ctors: import("@loopback/core").Constructor<T_3_2>[]) => import("@loopback/boot").Binding<any>[];
     getServer: <T_4_2 extends import("@loopback/core").Server>(target: string | import("@loopback/core").Constructor<T_4_2>) => Promise<T_4_2>;
+    init: () => Promise<void>;
+    onInit: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
     start: () => Promise<void>;
     onStart: (fn: () => import("@loopback/core").ValueOrPromise<void>) => import("@loopback/boot").Binding<import("@loopback/core").LifeCycleObserver>;
     stop: () => Promise<void>;
@@ -189,6 +203,7 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     interceptor: (interceptor: import("@loopback/core").Interceptor | import("@loopback/core").Constructor<import("@loopback/core").Provider<import("@loopback/core").Interceptor>>, nameOrOptions?: string | import("@loopback/core").InterceptorBindingOptions | undefined) => import("@loopback/boot").Binding<import("@loopback/core").Interceptor>;
     readonly name: string;
     readonly subscriptionManager: import("@loopback/core").ContextSubscriptionManager;
+    scope: import("@loopback/core").BindingScope;
     readonly parent: import("@loopback/core").Context | undefined;
     emitEvent: <T_6_2 extends import("@loopback/core").ContextEvent>(type: string, event: T_6_2) => void;
     emitError: (err: unknown) => void;
@@ -206,7 +221,10 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     createView: <T_7_2 = unknown>(filter: import("@loopback/core").BindingFilter, comparator?: import("@loopback/core").BindingComparator | undefined) => import("@loopback/core").ContextView<T_7_2>;
     contains: (key: import("@loopback/core").BindingAddress<unknown>) => boolean;
     isBound: (key: import("@loopback/core").BindingAddress<unknown>) => boolean;
-    getOwnerContext: (key: import("@loopback/core").BindingAddress<unknown>) => import("@loopback/core").Context | undefined;
+    getOwnerContext: (keyOrBinding: string | import("@loopback/core").BindingKey<unknown> | Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
+    getScopedContext: (scope: import("@loopback/core").BindingScope.APPLICATION | import("@loopback/core").BindingScope.SERVER | import("@loopback/core").BindingScope.REQUEST) => import("@loopback/core").Context | undefined;
+    getResolutionContext: (binding: Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
+    isVisibleTo: (ctx: import("@loopback/core").Context) => boolean;
     find: <ValueType_1_2 = any>(pattern?: string | RegExp | import("@loopback/core").BindingFilter | undefined) => Readonly<import("@loopback/boot").Binding<ValueType_1_2>>[];
     findByTag: <ValueType_2_2 = any>(tagFilter: string | RegExp | Record<string, any>) => Readonly<import("@loopback/boot").Binding<ValueType_2_2>>[];
     get: {

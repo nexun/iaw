@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <a class="navbar-brand" href="#">Meeting-o-Matic</a>
+
+
+  <div class="collapse navbar-collapse" id="navbarNav" class="ml-auto">
+    <div *ngIf="isLogin()==false">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!isLogin()==false">
+      <ul class="navbar-nav dropdown mr-auto">
+        <li class="nav-item dropdown m-1">
+          <span class="btn btn-warning ">Ping {{this.ping}} </span>
+        </li>
+        <li class="nav-item  dropdown m-1">
+          
+          <span class="btn btn-success">{{this.username}} </span>
+
+        </li>
+        <li class="nav-item m-1">
+          <a class="btn btn-light" (click)="logout()">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+

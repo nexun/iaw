@@ -4,4 +4,5 @@ export interface TokenServiceInterface {
     saveToken(token: string): void;
     isLogin(): boolean;
     getToken(): string;
+
 }
