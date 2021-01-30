@@ -51,6 +51,8 @@ export class EventController {
     })
     event: Omit<Event, 'id'>,
   ): Promise<Event> {
+    console.log("llegooo")
+    console.log(event)
     return this.eventRepository.create(event);
   }
 

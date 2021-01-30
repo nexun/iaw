@@ -79,8 +79,6 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
         (event: string | symbol, listener: (...args: any[]) => void): import("@loopback/core").Application;
     };
     addListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
-    prependListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
-    prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     removeListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     off: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     removeAllListeners: (event?: string | symbol | undefined) => import("@loopback/core").Application;
@@ -89,8 +87,10 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     listeners: (event: string | symbol) => Function[];
     rawListeners: (event: string | symbol) => Function[];
     emit: (event: string | symbol, ...args: any[]) => boolean;
-    eventNames: () => (string | symbol)[];
     listenerCount: (type: string | symbol) => number;
+    prependListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
+    prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
+    eventNames: () => (string | symbol)[];
 }) & (new (...args: any[]) => {
     serviceProvider<S_1>(provider: import("@loopback/core").Constructor<import("@loopback/core").Provider<S_1>>, nameOrOptions?: string | import("@loopback/core").ServiceOptions | undefined): import("@loopback/boot").Binding<S_1>;
     component<C_1 extends import("@loopback/core").Component = import("@loopback/core").Component>(componentCtor: import("@loopback/core").Constructor<C_1>, nameOrOptions?: string | import("@loopback/core").BindingFromClassOptions | undefined): import("@loopback/boot").Binding<C_1>;
@@ -164,8 +164,6 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
         (event: string | symbol, listener: (...args: any[]) => void): import("@loopback/core").Application;
     };
     addListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
-    prependListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
-    prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     removeListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     off: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     removeAllListeners: (event?: string | symbol | undefined) => import("@loopback/core").Application;
@@ -174,8 +172,10 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     listeners: (event: string | symbol) => Function[];
     rawListeners: (event: string | symbol) => Function[];
     emit: (event: string | symbol, ...args: any[]) => boolean;
-    eventNames: () => (string | symbol)[];
     listenerCount: (type: string | symbol) => number;
+    prependListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
+    prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
+    eventNames: () => (string | symbol)[];
 }) & (new (...args: any[]) => {
     repository<R extends import("@loopback/repository").Repository<any>>(repoClass: import("@loopback/repository").Class<R>, nameOrOptions?: string | import("@loopback/core").BindingFromClassOptions | undefined): import("@loopback/boot").Binding<R>;
     getRepository<R_2 extends import("@loopback/repository").Repository<any>>(repo: import("@loopback/repository").Class<R_2>): Promise<R_2>;
@@ -254,8 +254,6 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
         (event: string | symbol, listener: (...args: any[]) => void): import("@loopback/core").Application;
     };
     addListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
-    prependListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
-    prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     removeListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     off: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
     removeAllListeners: (event?: string | symbol | undefined) => import("@loopback/core").Application;
@@ -264,8 +262,10 @@ declare const EventApirestApplication_base: (new (...args: any[]) => {
     listeners: (event: string | symbol) => Function[];
     rawListeners: (event: string | symbol) => Function[];
     emit: (event: string | symbol, ...args: any[]) => boolean;
-    eventNames: () => (string | symbol)[];
     listenerCount: (type: string | symbol) => number;
+    prependListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
+    prependOnceListener: (event: string | symbol, listener: (...args: any[]) => void) => import("@loopback/core").Application;
+    eventNames: () => (string | symbol)[];
 }) & typeof RestApplication;
 export declare class EventApirestApplication extends EventApirestApplication_base {
     constructor(options?: ApplicationConfig);

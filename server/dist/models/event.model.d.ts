@@ -3,10 +3,11 @@ import { Option } from './option.model';
 export declare class Event extends Entity {
     id?: string;
     name: string;
-    date: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
     ownerEmail: string;
     event_option: Option[];
+    [prop: string]: any;
     constructor(data?: Partial<Event>);
 }
 export interface EventRelations {

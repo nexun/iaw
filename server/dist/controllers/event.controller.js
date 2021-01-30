@@ -12,6 +12,8 @@ let EventController = class EventController {
         this.eventRepository = eventRepository;
     }
     async create(event) {
+        console.log("llegooo");
+        console.log(event);
         return this.eventRepository.create(event);
     }
     async count(where) {

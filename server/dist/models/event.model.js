@@ -13,7 +13,7 @@ tslib_1.__decorate([
     repository_1.property({
         type: 'string',
         id: true,
-        generated: false,
+        generated: true,
     }),
     tslib_1.__metadata("design:type", String)
 ], Event.prototype, "id", void 0);
@@ -29,14 +29,14 @@ tslib_1.__decorate([
         type: 'date',
         required: true,
     }),
-    tslib_1.__metadata("design:type", Date)
-], Event.prototype, "date", void 0);
+    tslib_1.__metadata("design:type", String)
+], Event.prototype, "startDate", void 0);
 tslib_1.__decorate([
     repository_1.property({
         type: 'date',
         required: true,
     }),
-    tslib_1.__metadata("design:type", Date)
+    tslib_1.__metadata("design:type", String)
 ], Event.prototype, "endDate", void 0);
 tslib_1.__decorate([
     repository_1.property({
