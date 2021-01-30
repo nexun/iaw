@@ -6,6 +6,9 @@ import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, } from 'angular-calendar';
 //import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 const colors: any = {
     red: {
@@ -34,7 +37,7 @@ export class CalendarComponent implements OnInit {
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
     @ViewChild('modalEventContent', { static: true }) modalEventContent: TemplateRef<any>;
     @ViewChild('modalOptionContent', { static: true }) modalOptionContent: TemplateRef<any>;
-
+    locale: string = "es";
 
     view: CalendarView = CalendarView.Month;
 
@@ -140,12 +143,13 @@ export class CalendarComponent implements OnInit {
             this.backEvents = eventos;
             this.backEvents.forEach((element) => {
                 const id = element.id
-                const fecha = new Date(element.date);
+                const fecha = new Date(element.startDate);
+                const fechaFin = new Date(element.endDate);
                 const name = element.name
                 //traerme tambien el usuario creador
                 const currentEvent = {
                     start:startOfDay(fecha),
-                    end:fecha,
+                    end:startOfDay(fechaFin),
                     title: name,
                     id:id,
                     color: colors.yellow,

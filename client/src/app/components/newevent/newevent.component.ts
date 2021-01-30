@@ -45,20 +45,22 @@ export class NeweventComponent implements OnInit {
       if (idx !== null) {
         const request = {
           name: this.dataForm.value.name,
-          date: this.dataForm.value.date,
+          startDate: this.dataForm.value.startDate,
           endDate: this.dataForm.value.endDate,
-          emailOwner: this.tokenService.getUser().email,
+          ownerEmail: this.tokenService.getUser().email,
         };
+        console.log(request)
         this.service
           .editEvent(idx, request)
           .subscribe(() => this.buttonClicked.emit(true));
       } else {
         const request = {
           name: this.dataForm.value.name,
-          date: this.dataForm.value.date,
-          endDate: this.dataForm.value.endDate,
-          emailOwner: this.tokenService.getUser().email,
+          startDate: new Date(this.dataForm.value.startDate),
+          endDate: new Date(this.dataForm.value.endDate),
+          ownerEmail: this.tokenService.getUser().email,
         };
+        console.log(request)
         this.service.addEvent(request);
         this.buttonClicked.emit(true);
       }
@@ -79,20 +81,20 @@ export class NeweventComponent implements OnInit {
         .eventControllerFindById(this.idx)
         .subscribe((event) => {
           this.event = event;
-          console.log(this.event.date);
+          console.log(this.event.startDate);
           this.dataForm.patchValue({
             name: this.event.name,
-            date: this.event.date,
-            //endDate: this.event.endDate,
+            startDate: this.event.startDate,
+            endDate: this.event.endDate,
           });
         });
     }
   }
   init() {
     this.dataForm = this.newEventForm.group({
-      name: ['', Validators.required],
-      date: ['', Validators.required],
-      endDate: ['', Validators.required],
+      name: [''],
+      startDate: [''],
+      endDate: [''],
     });
   }
   onSubmit(): void {

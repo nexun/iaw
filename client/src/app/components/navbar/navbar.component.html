@@ -18,15 +18,15 @@
     <div *ngIf="!isLogin()==false">
       <ul class="navbar-nav dropdown mr-auto">
         <li class="nav-item dropdown m-1">
-          <span class="btn btn-warning ">Ping {{this.ping}} </span>
+          <span class="btn btn-dark ">Ping {{this.ping}} </span>
         </li>
         <li class="nav-item  dropdown m-1">
           
-          <span class="btn btn-success">{{this.username}} </span>
+          <span class="btn btn-light">{{this.username}} </span>
 
         </li>
         <li class="nav-item m-1">
-          <a class="btn btn-light" (click)="logout()">Salir</a>
+          <a class="btn btn-danger" (click)="logout()">Salir</a>
         </li>
       </ul>
     </div>

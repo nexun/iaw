@@ -16,7 +16,7 @@
  */
 export interface NewEvent { 
     name: string;
-    date: string;
+    startDate: string;
     endDate: string;
     ownerEmail: string;
 }

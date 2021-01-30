@@ -18,7 +18,7 @@ import { OptionWithRelations } from './optionWithRelations';
 export interface EventWithRelations { 
     id?: string;
     name: string;
-    date: string;
+    startDate: string;
     endDate: string;
     ownerEmail: string;
     event_option?: Array<OptionWithRelations>;
