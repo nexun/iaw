@@ -26,11 +26,25 @@ tslib_1.__decorate([
 ], Event.prototype, "name", void 0);
 tslib_1.__decorate([
     repository_1.property({
-        type: 'string',
+        type: 'date',
         required: true,
     }),
     tslib_1.__metadata("design:type", Date)
 ], Event.prototype, "date", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'date',
+        required: true,
+    }),
+    tslib_1.__metadata("design:type", Date)
+], Event.prototype, "endDate", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'string',
+        required: true,
+    }),
+    tslib_1.__metadata("design:type", String)
+], Event.prototype, "ownerEmail", void 0);
 tslib_1.__decorate([
     repository_1.hasMany(() => option_model_1.Option),
     tslib_1.__metadata("design:type", Array)

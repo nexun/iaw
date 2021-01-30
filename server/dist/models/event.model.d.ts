@@ -4,6 +4,8 @@ export declare class Event extends Entity {
     id?: string;
     name: string;
     date: Date;
+    endDate: Date;
+    ownerEmail: string;
     event_option: Option[];
     constructor(data?: Partial<Event>);
 }

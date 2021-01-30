@@ -9,7 +9,7 @@ import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, Cal
 
 const colors: any = {
     red: {
-        primary: '#ad2121',
+        primary: '#1e90ff',
         secondary: '#FAE3E3',
     },
     blue: {
@@ -17,7 +17,7 @@ const colors: any = {
         secondary: '#D1E8FF',
     },
     yellow: {
-        primary: '#e3bc08',
+        primary: '#1e90ff',
         secondary: '#FDF1BA',
     },
 };
@@ -33,6 +33,7 @@ const colors: any = {
 export class CalendarComponent implements OnInit {
     @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
     @ViewChild('modalEventContent', { static: true }) modalEventContent: TemplateRef<any>;
+    @ViewChild('modalOptionContent', { static: true }) modalOptionContent: TemplateRef<any>;
 
 
     view: CalendarView = CalendarView.Month;
@@ -43,6 +44,10 @@ export class CalendarComponent implements OnInit {
 
     modalData: {
         action: string;
+        event: CalendarEvent;
+    };
+
+    modalOptionData: {
         event: CalendarEvent;
     };
 
@@ -65,12 +70,12 @@ export class CalendarComponent implements OnInit {
             label: '<i class="fas fa-fw fa-pencil-alt"></i>',
             a11yLabel: 'Edit',
             onClick: ({ event }: { event: CalendarEvent }): void => {
-                this.handleEvent('Edited', event);
+                this.handleEvent('Editar', event);
             },
         },
         {
             label: '<i class="fas fa-fw fa-trash-alt"></i>',
-            a11yLabel: 'Delete',
+            a11yLabel: 'Eliminar',
             onClick: ({ event }: { event: CalendarEvent }): void => {
                 this.events = this.events.filter((iEvent) => iEvent !== event);
                 this.handleEvent('Deleted', event);
@@ -130,15 +135,17 @@ export class CalendarComponent implements OnInit {
     
     ngOnInit(): void {
         this.events = []
+        //traerme los eventos del usuario
         this.service.getEvents().subscribe((eventos) => {
             this.backEvents = eventos;
             this.backEvents.forEach((element) => {
                 const id = element.id
                 const fecha = new Date(element.date);
                 const name = element.name
+                //traerme tambien el usuario creador
                 const currentEvent = {
                     start:startOfDay(fecha),
-                    end:addDays(fecha, 3),
+                    end:fecha,
                     title: name,
                     id:id,
                     color: colors.yellow,
@@ -184,12 +191,18 @@ export class CalendarComponent implements OnInit {
     }
 
     handleEvent(action: string, event: CalendarEvent): void {
+        //aca le pasa el evento cuando cliqueamos
         this.modalData = { event, action };
         this.modal.open(this.modalContent, { size: 'lg' });
     }
 
     handleAddEvent(): void {
         this.modal.open(this.modalEventContent, { size: 'lg' });
+    }
+
+    handleAddOption(event: CalendarEvent): void {
+        this.modalOptionData = { event };
+        this.modal.open(this.modalOptionContent, { size: 'lg' });
     }
 
     addEvent(): void {

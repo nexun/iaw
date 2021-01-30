@@ -20,7 +20,7 @@ export class EventService {
 
   getEvent(id){
     this.eventController.eventControllerFindById(id).subscribe(events=>events)
-  }
+  }  
   addEvent(event){    
     this.eventController.eventControllerCreate(event).subscribe(response=>response) //ver
   }
@@ -29,6 +29,10 @@ export class EventService {
   }
   removeEvent(id){
     return this.eventController.eventControllerDeleteById(id)
+  }
+  getEventByEmail(email){
+    //este metodo no anda hasta que haga el modelo
+   // this.eventController.eventControllerFindByEmail(email).subscribe(events=>events)
   }
 }
   

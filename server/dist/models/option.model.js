@@ -29,6 +29,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], Option.prototype, "eventId", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    tslib_1.__metadata("design:type", String)
+], Option.prototype, "emailVotante", void 0);
 Option = tslib_1.__decorate([
     repository_1.model(),
     tslib_1.__metadata("design:paramtypes", [Object])

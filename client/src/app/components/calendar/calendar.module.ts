@@ -6,6 +6,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './calendar.component';
 import { NeweventComponent } from 'src/app/components/newevent/newevent.component';
+import { NewOptionComponent } from 'src/app/components/option/option.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -20,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       useFactory: adapterFactory,
     }),
   ],
-  declarations: [CalendarComponent,NeweventComponent],
+  declarations: [CalendarComponent,NeweventComponent,NewOptionComponent],
   exports: [CalendarComponent],
 })
 export class CalendaryModule {}

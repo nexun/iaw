@@ -18,7 +18,12 @@ export class Option extends Entity {
   @property({
     type: 'string',
   })
-  eventId?: string;
+  eventId: string;
+
+  @property({
+    type: 'string',
+  })
+  emailVotante: string;
 
   constructor(data?: Partial<Option>) {
     super(data);

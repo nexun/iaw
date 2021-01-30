@@ -17,11 +17,23 @@ export class Event extends Entity {
   name: string;
 
   @property({
-    type: 'string',
+    type: 'date',
     required: true,
   })
   date: Date;
-  
+
+  @property({
+    type: 'date',
+    required: true,
+  })
+  endDate: Date;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  ownerEmail: string;
+    
   @hasMany(() => Option)
   event_option: Option[];
 
