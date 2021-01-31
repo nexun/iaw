@@ -28,6 +28,9 @@ let EventController = class EventController {
     async findById(id, filter) {
         return this.eventRepository.findById(id, filter);
     }
+    async findByEmail(ownerEmail, filter) {
+        return this.eventRepository.find(filter);
+    }
     async updateById(id, event) {
         await this.eventRepository.updateById(id, event);
     }
@@ -141,6 +144,29 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [String, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "findById", null);
+tslib_1.__decorate([
+    authentication_1.authenticate('jwt'),
+    rest_1.get('/events/owner/{ownerEmail}', {
+        responses: {
+            '200': {
+                description: 'Array of Event model instances',
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'array',
+                            items: rest_1.getModelSchemaRef(models_1.Event, { includeRelations: true }),
+                        },
+                    },
+                },
+            },
+        },
+    }),
+    tslib_1.__param(0, rest_1.param.path.string('ownerEmail')),
+    tslib_1.__param(1, rest_1.param.filter(models_1.Event)),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, Object]),
+    tslib_1.__metadata("design:returntype", Promise)
+], EventController.prototype, "findByEmail", null);
 tslib_1.__decorate([
     authentication_1.authenticate('jwt'),
     rest_1.patch('/events/{id}', {

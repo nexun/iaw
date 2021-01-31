@@ -17,7 +17,7 @@
 export interface OptionWithRelations { 
     id?: string;
     fecha: string;
-    eventId?: string;
-    emailVotante?: string;
+    eventId: string;
+    emailVotante: string;
 }
 

@@ -11,7 +11,6 @@ export class Option extends Entity {
 
   @property({
     type: 'date',
-    required: true,
   })
   fecha: string;
 

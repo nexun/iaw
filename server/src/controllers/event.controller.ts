@@ -135,6 +135,29 @@ export class EventController {
   ): Promise<Event> {
     return this.eventRepository.findById(id, filter);
   }
+ 
+  @authenticate('jwt')
+  @get('/events/owner/{ownerEmail}', {
+    responses: {
+      '200': {
+        description: 'Array of Event model instances',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'array',
+              items: getModelSchemaRef(Event, {includeRelations: true}),
+            },
+          },
+        },
+      },
+    },
+  })
+  async findByEmail(
+    @param.path.string('ownerEmail') ownerEmail: string,
+    @param.filter(Event) filter?: Filter<Event>,
+  ): Promise<Event[]> {
+    return this.eventRepository.find(filter);
+  }
 
   @authenticate('jwt')
   @patch('/events/{id}', {

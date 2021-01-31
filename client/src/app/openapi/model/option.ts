@@ -14,7 +14,7 @@
 export interface Option { 
     id?: string;
     fecha: string;
-    eventId?: string;
-    emailVotante?: string;
+    eventId: string;
+    emailVotante: string;
 }
 

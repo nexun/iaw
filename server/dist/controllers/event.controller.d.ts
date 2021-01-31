@@ -9,6 +9,7 @@ export declare class EventController {
     find(filter?: Filter<Event>): Promise<Event[]>;
     updateAll(event: Event, where?: Where<Event>): Promise<Count>;
     findById(id: string, filter?: FilterExcludingWhere<Event>): Promise<Event>;
+    findByEmail(ownerEmail: string, filter?: Filter<Event>): Promise<Event[]>;
     updateById(id: string, event: Event): Promise<void>;
     replaceById(id: string, event: Event): Promise<void>;
     deleteById(id: string): Promise<void>;

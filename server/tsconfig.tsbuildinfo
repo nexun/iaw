@@ -2037,7 +2037,7 @@
         "affectsGlobalScope": false
       },
       "./src/models/option.model.ts": {
-        "version": "b54473f04fcb7fea2d430b60c7091a84b9275d5d8face27b8f33a8e5c29a3a87",
+        "version": "c7746af248bd730b9c876e72edffa61a66b48091c9bc3be7ecc3d886a5c38900",
         "signature": "6d823836549437dd30caa9420101f80d6e18bf58ccc9b97dda42a5064f82363c",
         "affectsGlobalScope": false
       },
@@ -2087,8 +2087,8 @@
         "affectsGlobalScope": false
       },
       "./src/controllers/event.controller.ts": {
-        "version": "c32b3b7caca438d63b9a063be187555e0cfb5104dc98b76c37be9778f2d3d217",
-        "signature": "4ceb0e25173ab0f527ed954825b9616e744af1d56d7690465df491cb53110a67",
+        "version": "0a855342095ef78215fe9e59ea5b150213203bac2fe57120790ccf29f311e65a",
+        "signature": "5a6a303c69ebf493112b1643ed9a69d78a0b49e282733a23cc957b7cd9b41c74",
         "affectsGlobalScope": false
       },
       "./src/controllers/ping.controller.ts": {

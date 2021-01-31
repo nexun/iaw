@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EventControllerService } from 'src/app/openapi';
+import { EventControllerService, OptionControllerService, EventOptionControllerService } from 'src/app/openapi';
 import { EventModel } from 'src/app/_model/event.model';
 
 @Injectable({  providedIn: 'root' })
@@ -11,6 +11,9 @@ export class EventService {
 
   constructor(  
     private eventController:EventControllerService,
+    private optionController:OptionControllerService,
+
+
     private activeRouter: Router,
     ) {    }
     
@@ -21,8 +24,16 @@ export class EventService {
   getEvent(id){
     this.eventController.eventControllerFindById(id).subscribe(events=>events)
   }  
+
+  getEventOptions(){
+    return this.optionController.optionControllerFind()
+  } 
+
   addEvent(event){    
     this.eventController.eventControllerCreate(event).subscribe(response=>response) //ver
+  }
+  addOption(option){    
+    this.optionController.optionControllerCreate(option).subscribe(response=>response) //ver
   }
   editEvent(id,request){
     return this.eventController.eventControllerUpdateById(id,request)
@@ -30,10 +41,7 @@ export class EventService {
   removeEvent(id){
     return this.eventController.eventControllerDeleteById(id)
   }
-  getEventByEmail(email){
-    //este metodo no anda hasta que haga el modelo
-   // this.eventController.eventControllerFindByEmail(email).subscribe(events=>events)
-  }
+
 }
   
 

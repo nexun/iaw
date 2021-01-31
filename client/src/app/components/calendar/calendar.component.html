@@ -11,7 +11,6 @@
         <div class="col-md-5">
           <div class="btn-group">
             <div
-
               class="btn btn-dark"
               mwlCalendarPreviousView
               [view]="view"
@@ -82,7 +81,7 @@
         >
         </mwl-calendar-month-view>
         <mwl-calendar-week-view
-        [locale]="locale"
+          [locale]="locale"
           *ngSwitchCase="CalendarView.Week"
           [viewDate]="viewDate"
           [events]="events"
@@ -92,7 +91,7 @@
         >
         </mwl-calendar-week-view>
         <mwl-calendar-day-view
-        [locale]="locale"
+          [locale]="locale"
           *ngSwitchCase="CalendarView.Day"
           [viewDate]="viewDate"
           [events]="events"
@@ -209,10 +208,23 @@
                     />
                   </svg>
                 </button>
+                
               </td>
+              
             </tr>
+
+
           </tbody>
         </table>
+        <tr>
+          <th>Event id</th>
+          <th>Votante</th>
+        </tr>
+        <ul>
+          <li *ngFor="let option of options">
+            {{ option.eventId}}
+          </li>
+       </ul>       
       </div>
     </div>
   </div>
@@ -221,14 +233,19 @@
 
   <ng-template #modalOptionContent let-close="close">
     <div class="modal-header">
-      <h5 class="modal-title">Agregar opcion</h5>
+      <h5 class="modal-title">Reservar evento</h5>
       <button type="button" class="close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div>
-        <app-option eventX="{{ modalOptionData?.event.id }}"></app-option>
+        <app-option
+          eventX="{{ modalOptionData?.event.id }}"
+          eventTitle="{{ modalOptionData?.event.title }}"
+          startDate="{{ modalOptionData?.event.start }}"
+          endDate="{{ modalOptionData?.event.end }}"
+        ></app-option>
       </div>
     </div>
   </ng-template>

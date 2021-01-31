@@ -12,12 +12,12 @@ import { EventModel } from 'src/app/_model/event.model';
 import { EventControllerService, UserControllerService } from 'src/app/openapi';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
+import { CalendarEvent } from 'angular-calendar';
 
 @Component({
   selector: 'app-option',
   templateUrl: './option.component.html',
   styleUrls: ['./option.component.css'],
-  
 })
 export class NewOptionComponent implements OnInit {
   dataFormOption: FormGroup;
@@ -25,6 +25,9 @@ export class NewOptionComponent implements OnInit {
   title: string;
   msg: string;
   @Input() eventX: string;
+  @Input() eventTitle: string;
+  @Input() startDate: Date;
+  @Input() endDate: Date;
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -38,14 +41,20 @@ export class NewOptionComponent implements OnInit {
   }
 
   addOption() {
-    console.log("id evento->"+this.eventX+" email->"+this.dataFormOption.value.ownerEmail)
+    console.log(
+      'id evento->' +
+        this.eventX +
+        ' email->' +
+        this.dataFormOption.value.ownerEmail
+    );
     if (this.dataFormOption.valid) {
       const request = {
         eventId: this.eventX,
-        ownerEmail: this.dataFormOption.value.ownerEmail,
+        fecha: new Date(),
+        emailVotante: this.dataFormOption.value.ownerEmail,
       };
 
-      //this.service.addOption(request);
+      this.service.addOption(request);
       this.buttonClicked.emit(true);
     }
   }
@@ -57,7 +66,6 @@ export class NewOptionComponent implements OnInit {
     this.title = 'Elegir opcion';
     //este modelo no iria?
     this.event = new EventModel();
-   
   }
   init() {
     this.dataFormOption = this.newOptionForm.group({
