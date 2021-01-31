@@ -21,8 +21,8 @@ export class EventService {
     return this.eventController.eventControllerFind()
   }
 
-  getEvent(id){
-    this.eventController.eventControllerFindById(id).subscribe(events=>events)
+  getEventById(id){
+    return this.eventController.eventControllerFindById(id)
   }  
 
   getEventOptions(){

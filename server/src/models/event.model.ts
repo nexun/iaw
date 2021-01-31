@@ -34,11 +34,25 @@ export class Event extends Entity {
   })
   ownerEmail: string;
 
+  @property({
+    type: 'string',
+  })
+  publicLink?: string;
+
+  @property({
+    type: 'string',
+  })
+  privateLink?: string;
+
+  @property({
+    type: 'boolean',
+    default: true,
+  })
+  published?: boolean;
+
+  // Define well-known properties here
   @hasMany(() => Option)
   event_option: Option[];
-  
-  // Define well-known properties here
-
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;

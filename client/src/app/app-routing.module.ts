@@ -8,6 +8,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { SignupGuard } from './_guards/signup.guard';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { PublicCalendar } from './components/publicCalendar/publicCalendar.component';
 
 const routes: Routes = [  
 
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'new-event', component: NeweventComponent, canActivate:[AuthGuard] },
   { path: 'modify/:id', component: NeweventComponent, canActivate:[AuthGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate:[AuthGuard] },
+  { path: 'public/:id', component: PublicCalendar },
+  { path: 'private/:id', component: CalendarComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent, canActivate:[SignupGuard] } 
 

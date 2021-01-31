@@ -14,6 +14,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { PingService } from './_services/ping/ping.service';
 import { DatePipe } from '@angular/common';
 import { CalendaryModule } from './components/calendar/calendar.module';
+import { PublicCalendaryModule } from './components/publicCalendar/publicCalendar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CalendaryModule
+    CalendaryModule,
+    PublicCalendaryModule
   ],
   providers: [
     TokenService,

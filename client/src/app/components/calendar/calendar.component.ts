@@ -116,7 +116,7 @@ export class CalendarComponent implements OnInit {
   ];
   refresh: Subject<any> = new Subject();
   backEvents: EventModel[];
-  options: Opcion[] = [];
+  options: Opcion[];
   events: CalendarEvent[] = [
     /*
         {
@@ -194,16 +194,17 @@ export class CalendarComponent implements OnInit {
           opciones.filter((opc) => {
             if (opc.eventId == id) {
               const op = {
-                eventId: opc.eventId,
+                eventId: id,
                 emailVotante: opc.emailVotante,
               };
               this.options.push(op);
+              this.refresh.next();
             }
           });
         });
         this.events.push(currentEvent);
       });
-      console.log(this.options);
+      
       console.log(this.events);
       this.refresh.next();
     });

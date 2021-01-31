@@ -4,7 +4,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarComponent } from './calendar.component';
+import { PublicCalendar } from './publicCalendar.component';
 import { NeweventComponent } from 'src/app/components/newevent/newevent.component';
 import { NewOptionComponent } from 'src/app/components/option/option.component';
 
@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       useFactory: adapterFactory,
     }),
   ],
-  declarations: [CalendarComponent,NeweventComponent],
-  exports: [CalendarComponent],
+  declarations: [PublicCalendar,NewOptionComponent],
+  exports: [PublicCalendar],
 })
-export class CalendaryModule {}
+export class PublicCalendaryModule {}

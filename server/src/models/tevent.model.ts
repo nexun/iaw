@@ -6,7 +6,7 @@ export class Event extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: false,
+    generated: true,
   })
   id?: string;
 
@@ -20,22 +20,28 @@ export class Event extends Entity {
     type: 'date',
     required: true,
   })
-  date: Date;
+  startDate: string;
 
   @property({
     type: 'date',
     required: true,
   })
-  endDate: Date;
+  endDate: string;
 
   @property({
     type: 'string',
     required: true,
   })
   ownerEmail: string;
-    
+
   @hasMany(() => Option)
   event_option: Option[];
+  
+  // Define well-known properties here
+
+  // Indexer property to allow additional data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [prop: string]: any;
 
   constructor(data?: Partial<Event>) {
     super(data);
