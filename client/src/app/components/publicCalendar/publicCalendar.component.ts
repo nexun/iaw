@@ -30,8 +30,8 @@ import { TokenService } from 'src/app/_services/auth/token.service';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { OptionModel } from 'src/app/_model/option.model';
-import { OptionWithRelations } from 'src/app/openapi';
+//import { OptionModel } from 'src/app/_model/option.model';
+//import { OptionWithRelations } from 'src/app/openapi';
 import { ActivatedRoute } from '@angular/router';
 registerLocaleData(localeEs);
 
@@ -106,18 +106,18 @@ export class PublicCalendar implements OnInit {
     const email = this.tokenService.getUser().email;
     this.service.getEventById(idx).subscribe((evento) => {
       const currentEvent = {
-        start: new Date(evento.startDate),
-        end: new Date(evento.endDate),
+        //start: new Date(evento.startDate),
+        //end: new Date(evento.endDate),
         title: evento.name,
         id: evento.id,
         color: colors.yellow,
       };
 
-      this.events.push(currentEvent);
+      //this.events.push(currentEvent);
       this.refresh.next();
     });
 
-    console.log(this.events);
+    //console.log(this.events);
     this.refresh.next();
   }
 

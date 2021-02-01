@@ -1,11 +1,7 @@
 export * from './eventController.service';
 import { EventControllerService } from './eventController.service';
-export * from './eventOptionController.service';
-import { EventOptionControllerService } from './eventOptionController.service';
-export * from './optionController.service';
-import { OptionControllerService } from './optionController.service';
 export * from './pingController.service';
 import { PingControllerService } from './pingController.service';
 export * from './userController.service';
 import { UserControllerService } from './userController.service';
-export const APIS = [EventControllerService, EventOptionControllerService, OptionControllerService, PingControllerService, UserControllerService];
+export const APIS = [EventControllerService, PingControllerService, UserControllerService];

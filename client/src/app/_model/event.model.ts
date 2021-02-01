@@ -1,13 +1,11 @@
-import { Event, EventWithRelations } from "src/app/openapi";
+import { Event, EventWithRelations } from 'src/app/openapi';
 
-export class EventModel implements EventWithRelations, Event {
-    id?
-    name:string;
-    startDate:string;
-    endDate: string;
-    ownerEmail: string;
-    constructor(){
-     
-    }
-
+export class EventModel implements Event {
+  id?;
+  name: string;
+  startDate: string[];
+  endDate: string;
+  published: boolean;
+  ownerEmail: string;
+  constructor() {}
 }

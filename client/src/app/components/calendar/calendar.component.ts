@@ -30,16 +30,14 @@ import { TokenService } from 'src/app/_services/auth/token.service';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { OptionModel } from 'src/app/_model/option.model';
-import { OptionWithRelations } from 'src/app/openapi';
+//import { OptionModel } from 'src/app/_model/option.model';
+//import { OptionWithRelations } from 'src/app/openapi';
 registerLocaleData(localeEs);
-
 
 interface Opcion {
   eventId: string;
   emailVotante: string;
 }
-
 
 const colors: any = {
   red: {
@@ -170,19 +168,19 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.events = [];
     this.options = [];
-
+    //
     //traerme los eventos del usuario
     const email = this.tokenService.getUser().email;
     this.service.getEvents().subscribe((eventos) => {
-      this.backEvents = eventos.filter((event) => event.ownerEmail == email);
+      //this.backEvents = eventos.filter((event) => event.ownerEmail == email);
       this.backEvents.forEach((element) => {
         const id = element.id;
-        const fecha = new Date(element.startDate);
+        // const fecha = new Date(element.startDate);
         const fechaFin = new Date(element.endDate);
         const name = element.name;
         //traerme tambien el usuario creador
         const currentEvent = {
-          start: startOfDay(fecha),
+          // start: startOfDay(fecha),
           end: startOfDay(fechaFin),
           title: name,
           id: id,
@@ -190,7 +188,7 @@ export class CalendarComponent implements OnInit {
           actions: this.actions,
         };
 
-        this.service.getEventOptions().subscribe((opciones) => {
+        /* this.service.getEventOptions().subscribe((opciones) => {
           opciones.filter((opc) => {
             if (opc.eventId == id) {
               const op = {
@@ -201,11 +199,11 @@ export class CalendarComponent implements OnInit {
               this.refresh.next();
             }
           });
-        });
-        this.events.push(currentEvent);
+        });*/
+        // this.events.push(currentEvent);
       });
-      
-      console.log(this.events);
+
+      //console.log(this.events);
       this.refresh.next();
     });
   }

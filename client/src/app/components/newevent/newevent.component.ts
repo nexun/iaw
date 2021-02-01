@@ -22,7 +22,7 @@ import { Subject } from 'rxjs';
 })
 export class NeweventComponent implements OnInit {
   myForm: FormGroup;
-  name = 'Angular';
+  //name = 'Angular';
   dataForm: FormGroup;
   event: EventModel;
   idx: string;
@@ -55,22 +55,29 @@ export class NeweventComponent implements OnInit {
       if (idx !== null) {
         const request = {
           name: this.dataForm.value.name,
-          startDate: this.dataForm.value.startDate,
-          endDate: this.dataForm.value.endDate,
+
+          //startDate: this.dataForm.value.eventList,
+          //endDate: this.dataForm.value.endDate,
           ownerEmail: this.tokenService.getUser().email,
         };
-        console.log(request);
+        //console.log(request);
         this.service
           .editEvent(idx, request)
           .subscribe(() => this.buttonClicked.emit(true));
       } else {
         const request = {
           name: this.dataForm.value.name,
-          startDate: new Date(this.dataForm.value.startDate),
-          endDate: new Date(this.dataForm.value.endDate),
+          startDate: this.myForm.value.item1.eventList,
+          published: true,
+          publicLink: '',
+          privateLink: '',
+          //startDate: new Date(this.dataForm.value.startDate),
+          // endDate: new Date(this.dataForm.value.endDate),
           ownerEmail: this.tokenService.getUser().email,
         };
-        console.log(request);
+        //console.log(request);
+        console.log(this.myForm.value.item1.eventList);
+        //console.log(request);
         this.service.addEvent(request);
         this.buttonClicked.emit(true);
       }
@@ -101,8 +108,9 @@ export class NeweventComponent implements OnInit {
       this.controllerEvent
         .eventControllerFindById(this.idx)
         .subscribe((event) => {
-          this.event = event;
-          console.log(this.event.startDate);
+          //COMENTO PORQUE NO ENTRA EN EL MODIFICAR
+          //this.event = event;
+          //console.log(this.event.startDate);
           this.dataForm.patchValue({
             name: this.event.name,
             startDate: this.event.startDate,
@@ -127,7 +135,7 @@ export class NeweventComponent implements OnInit {
     this.dataForm = this.newEventForm.group({
       name: [''],
       startDate: [''],
-      endDate: [''],
+      //endDate: [''],
     });
   }
   onSubmit(): void {

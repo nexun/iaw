@@ -14,8 +14,10 @@
 export interface Event { 
     id?: string;
     name: string;
-    startDate: string;
-    endDate: string;
+    startDate: Array<string>;
     ownerEmail: string;
+    publicLink?: string;
+    privateLink?: string;
+    published: boolean;
 }
 

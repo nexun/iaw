@@ -9,8 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { EventIncludeFilterItems } from './eventIncludeFilterItems';
-import { EventFields } from './eventFields';
 
 
 export interface EventFilter1 { 
@@ -18,8 +16,6 @@ export interface EventFilter1 {
     limit?: number;
     skip?: number;
     order?: string | Array<string>;
-    where?: { [key: string]: object; };
-    fields?: EventFields;
-    include?: Array<EventIncludeFilterItems>;
+    fields?: object | Array<string>;
 }
 

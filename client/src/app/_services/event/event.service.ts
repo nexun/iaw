@@ -1,47 +1,44 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EventControllerService, OptionControllerService, EventOptionControllerService } from 'src/app/openapi';
+import { EventControllerService } from 'src/app/openapi';
 import { EventModel } from 'src/app/_model/event.model';
 
-@Injectable({  providedIn: 'root' })
+@Injectable({ providedIn: 'root' })
 export class EventService {
+  events: EventModel[];
 
-  events:EventModel[]
+  constructor(
+    private eventController: EventControllerService,
+    //private optionController:OptionControllerService,
 
-  constructor(  
-    private eventController:EventControllerService,
-    private optionController:OptionControllerService,
+    private activeRouter: Router
+  ) {}
 
-
-    private activeRouter: Router,
-    ) {    }
-    
-  getEvents(){
-    return this.eventController.eventControllerFind()
+  getEvents() {
+    return this.eventController.eventControllerFind();
   }
 
-  getEventById(id){
-    return this.eventController.eventControllerFindById(id)
-  }  
+  getEventById(id) {
+    return this.eventController.eventControllerFindById(id);
+  }
 
-  getEventOptions(){
+  /* getEventOptions(){
     return this.optionController.optionControllerFind()
   } 
-
-  addEvent(event){    
-    this.eventController.eventControllerCreate(event).subscribe(response=>response) //ver
+*/
+  addEvent(event) {
+    this.eventController
+      .eventControllerCreate(event)
+      .subscribe((response) => response); //ver
   }
-  addOption(option){    
+  /* addOption(option){    
     this.optionController.optionControllerCreate(option).subscribe(response=>response) //ver
+  }*/
+  editEvent(id, request) {
+    return this.eventController.eventControllerUpdateById(id, request);
   }
-  editEvent(id,request){
-    return this.eventController.eventControllerUpdateById(id,request)
+  removeEvent(id) {
+    return this.eventController.eventControllerDeleteById(id);
   }
-  removeEvent(id){
-    return this.eventController.eventControllerDeleteById(id)
-  }
-
 }
-  
-

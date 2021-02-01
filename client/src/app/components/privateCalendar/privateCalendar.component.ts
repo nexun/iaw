@@ -117,7 +117,7 @@ export class PublicCalendar implements OnInit {
       this.refresh.next();
     });
 
-    console.log(this.events);
+    //console.log(this.events);
     this.refresh.next();
   }
 

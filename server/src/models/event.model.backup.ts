@@ -1,49 +1,55 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property, hasMany } from "@loopback/repository";
+import { Option } from "./option.model";
 
 @model()
 export class Event extends Entity {
   @property({
-    type: 'string',
+    type: "string",
     id: true,
     generated: true,
   })
   id?: string;
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
   name: string;
 
   @property({
-    type: 'array',
-    itemType: 'string',
+    type: "array",
+    itemType: "string",
     required: true,
   })
   startDate: string[];
 
   @property({
-    type: 'string',
+    type: "string",
     required: true,
   })
   ownerEmail: string;
 
   @property({
-    type: 'string',
+    type: "string",
   })
   publicLink?: string;
 
   @property({
-    type: 'string',
+    type: "string",
   })
   privateLink?: string;
 
   @property({
-    type: 'boolean',
-    required: true,
+    type: "boolean",
+    default: true,
   })
-  published: boolean;
-
+  published?: boolean;
+  // Define well-known properties here
+  @hasMany(() => Option)
+  event_option: Option;
+  // Indexer property to allow additional data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [prop: string]: any;
 
   constructor(data?: Partial<Event>) {
     super(data);

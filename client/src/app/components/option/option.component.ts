@@ -54,7 +54,7 @@ export class NewOptionComponent implements OnInit {
         emailVotante: this.dataFormOption.value.ownerEmail,
       };
 
-      this.service.addOption(request);
+      //this.service.addOption(request);
       this.buttonClicked.emit(true);
     }
   }
