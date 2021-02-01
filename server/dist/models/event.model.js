@@ -46,6 +46,25 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], Event.prototype, "ownerEmail", void 0);
 tslib_1.__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    tslib_1.__metadata("design:type", String)
+], Event.prototype, "publicLink", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    tslib_1.__metadata("design:type", String)
+], Event.prototype, "privateLink", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'boolean',
+        default: true,
+    }),
+    tslib_1.__metadata("design:type", Boolean)
+], Event.prototype, "published", void 0);
+tslib_1.__decorate([
     repository_1.hasMany(() => option_model_1.Option),
     tslib_1.__metadata("design:type", Array)
 ], Event.prototype, "event_option", void 0);

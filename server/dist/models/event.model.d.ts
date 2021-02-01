@@ -6,6 +6,9 @@ export declare class Event extends Entity {
     startDate: string;
     endDate: string;
     ownerEmail: string;
+    publicLink?: string;
+    privateLink?: string;
+    published?: boolean;
     event_option: Option[];
     [prop: string]: any;
     constructor(data?: Partial<Event>);

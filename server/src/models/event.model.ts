@@ -18,13 +18,11 @@ export class Event extends Entity {
 
   @property({
     type: 'date',
-    required: true,
   })
   startDate: string;
 
   @property({
     type: 'date',
-    required: true,
   })
   endDate: string;
 

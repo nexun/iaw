@@ -2042,8 +2042,8 @@
         "affectsGlobalScope": false
       },
       "./src/models/event.model.ts": {
-        "version": "03d8175c2c92a18f8b1cd7c285399f8ccce8a1f9f58a9443691066d7a54bdaec",
-        "signature": "b4b17d03f17907ccf0db1221ab6e03e0b3ee0ee8d9dabdef6d7ba2d1c8d67b8d",
+        "version": "e419ae1f371c9a6a7e828647520592050a2571c2e381a1b1158d4a228d60f57b",
+        "signature": "88e4bf31ad6c628cfdf1f1baf59fa8af52dde931e4b5f79e07b35f3dbbe636de",
         "affectsGlobalScope": false
       },
       "./src/models/shared.model.ts": {
@@ -2212,8 +2212,8 @@
         "affectsGlobalScope": false
       },
       "./src/models/tevent.model.ts": {
-        "version": "4dde4e2b9a5eb2716a16c5495c59f86466d8b951fb2ef64b86f5ed3aec7cdac4",
-        "signature": "893b7c136ad560fae4d6dc36e0fc3395c230dfa54eab2415833b27485d2ac265",
+        "version": "03d8175c2c92a18f8b1cd7c285399f8ccce8a1f9f58a9443691066d7a54bdaec",
+        "signature": "b4b17d03f17907ccf0db1221ab6e03e0b3ee0ee8d9dabdef6d7ba2d1c8d67b8d",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {

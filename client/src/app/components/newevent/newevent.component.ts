@@ -2,7 +2,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/_services/auth/token.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
+
 import {
+  FormArray,
   FormGroup,
   FormControl,
   FormBuilder,
@@ -19,6 +21,8 @@ import { Subject } from 'rxjs';
   styleUrls: ['./newevent.component.css'],
 })
 export class NeweventComponent implements OnInit {
+  myForm: FormGroup;
+  name = 'Angular';
   dataForm: FormGroup;
   event: EventModel;
   idx: string;
@@ -39,6 +43,12 @@ export class NeweventComponent implements OnInit {
     this.init();
   }
 
+  isDisabled = true;
+  triggerSomeEvent() {
+    this.isDisabled = !this.isDisabled;
+    return;
+  }
+
   addEvent() {
     if (this.dataForm.valid) {
       var idx = this.route.snapshot.paramMap.get('id');
@@ -49,7 +59,7 @@ export class NeweventComponent implements OnInit {
           endDate: this.dataForm.value.endDate,
           ownerEmail: this.tokenService.getUser().email,
         };
-        console.log(request)
+        console.log(request);
         this.service
           .editEvent(idx, request)
           .subscribe(() => this.buttonClicked.emit(true));
@@ -60,7 +70,7 @@ export class NeweventComponent implements OnInit {
           endDate: new Date(this.dataForm.value.endDate),
           ownerEmail: this.tokenService.getUser().email,
         };
-        console.log(request)
+        console.log(request);
         this.service.addEvent(request);
         this.buttonClicked.emit(true);
       }
@@ -71,6 +81,17 @@ export class NeweventComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.myForm = new FormGroup({});
+    for (let item of ['item1']) {
+      this.myForm.addControl(
+        item,
+        new FormGroup({
+          name: new FormControl(),
+          eventList: new FormArray([]),
+        })
+      );
+    }
+
     this.idx = this.route.snapshot.paramMap.get('id');
     if (this.idx == null) {
       this.title = 'Crear Evento';
@@ -90,6 +111,18 @@ export class NeweventComponent implements OnInit {
         });
     }
   }
+
+  onAddEventDay(group: FormGroup) {
+    (group.get('eventList') as FormArray).push(new FormControl());
+  }
+
+  eventDayArray(group: FormGroup): FormArray {
+    return group.get('eventList') as FormArray;
+  }
+  removeEventDay(group: FormGroup, index: number) {
+    (group.get('eventList') as FormArray).removeAt(index);
+  }
+
   init() {
     this.dataForm = this.newEventForm.group({
       name: [''],
