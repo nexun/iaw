@@ -15,7 +15,7 @@
  * (tsType: @loopback/repository-json-schema#Optional<Omit<Option, \'id\'>, \'eventId\'>, schemaOptions: { title: \'NewOptionInEvent\', exclude: [ \'id\' ], optional: [ \'eventId\' ] })
  */
 export interface NewOptionInEvent { 
-    fecha: string;
+    fecha?: string;
     eventId?: string;
     emailVotante?: string;
 }

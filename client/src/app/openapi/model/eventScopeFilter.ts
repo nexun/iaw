@@ -17,7 +17,7 @@ export interface EventScopeFilter {
     skip?: number;
     order?: string | Array<string>;
     where?: { [key: string]: object; };
-    fields?: { [key: string]: object; };
+    fields?: any | Set<string>;
     include?: Array<{ [key: string]: object; }>;
 }
 

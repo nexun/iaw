@@ -4,6 +4,7 @@ exports.Event = void 0;
 const tslib_1 = require("tslib");
 const repository_1 = require("@loopback/repository");
 const option_model_1 = require("./option.model");
+const event_day_model_1 = require("./event-day.model");
 let Event = class Event extends repository_1.Entity {
     constructor(data) {
         super(data);
@@ -27,14 +28,12 @@ tslib_1.__decorate([
 tslib_1.__decorate([
     repository_1.property({
         type: 'date',
-        required: true,
     }),
     tslib_1.__metadata("design:type", String)
 ], Event.prototype, "startDate", void 0);
 tslib_1.__decorate([
     repository_1.property({
         type: 'date',
-        required: true,
     }),
     tslib_1.__metadata("design:type", String)
 ], Event.prototype, "endDate", void 0);
@@ -64,6 +63,10 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", Boolean)
 ], Event.prototype, "published", void 0);
+tslib_1.__decorate([
+    repository_1.hasMany(() => event_day_model_1.EventDay),
+    tslib_1.__metadata("design:type", Array)
+], Event.prototype, "eventDays", void 0);
 tslib_1.__decorate([
     repository_1.hasMany(() => option_model_1.Option),
     tslib_1.__metadata("design:type", Array)

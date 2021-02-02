@@ -11,11 +11,12 @@
  */
 
 
-export interface EventFields { 
-    id?: boolean;
-    name?: boolean;
-    date?: boolean;
-    endDate?: boolean;
-    ownerEmail?: boolean;
+export interface EventDay { 
+  [key: string]: object | any;
+
+
+    id?: string;
+    date: string;
+    eventId?: string;
 }
 

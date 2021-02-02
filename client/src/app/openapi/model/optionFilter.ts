@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OptionFields } from './optionFields';
 
 
 export interface OptionFilter { 
@@ -17,6 +16,6 @@ export interface OptionFilter {
     limit?: number;
     skip?: number;
     order?: string | Array<string>;
-    fields?: OptionFields;
+    fields?: object | Set<string>;
 }
 

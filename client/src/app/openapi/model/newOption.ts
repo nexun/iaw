@@ -15,7 +15,7 @@
  * (tsType: Omit<Option, \'id\'>, schemaOptions: { title: \'NewOption\', exclude: [ \'id\' ] })
  */
 export interface NewOption { 
-    fecha: string;
+    fecha?: string;
     eventId?: string;
     emailVotante?: string;
 }

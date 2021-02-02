@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 import { EventIncludeFilterItems } from './eventIncludeFilterItems';
-import { EventFields } from './eventFields';
 
 
 export interface EventFilter { 
@@ -18,7 +17,8 @@ export interface EventFilter {
     limit?: number;
     skip?: number;
     order?: string | Array<string>;
-    fields?: EventFields;
-    include?: Array<EventIncludeFilterItems>;
+    where?: { [key: string]: object; };
+    fields?: object | Set<string>;
+    include?: Array<EventIncludeFilterItems | string>;
 }
 

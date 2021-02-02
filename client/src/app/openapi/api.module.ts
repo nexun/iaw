@@ -2,8 +2,9 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
-
 import { EventControllerService } from './api/eventController.service';
+import { EventDayEventControllerService } from './api/eventDayEventController.service';
+import { EventEventDayControllerService } from './api/eventEventDayController.service';
 import { EventOptionControllerService } from './api/eventOptionController.service';
 import { OptionControllerService } from './api/optionController.service';
 import { PingControllerService } from './api/pingController.service';

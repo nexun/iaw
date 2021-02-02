@@ -1,5 +1,6 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Option} from './option.model';
+import {EventDay} from './event-day.model';
 
 @model()
 export class Event extends Entity {
@@ -48,7 +49,10 @@ export class Event extends Entity {
   })
   published?: boolean;
 
+
   // Define well-known properties here
+  @hasMany(() => EventDay)
+  eventDays: EventDay[];
   @hasMany(() => Option)
   event_option: Option[];
   // Indexer property to allow additional data

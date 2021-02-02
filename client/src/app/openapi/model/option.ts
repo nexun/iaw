@@ -13,8 +13,8 @@
 
 export interface Option { 
     id?: string;
-    fecha: string;
-    eventId: string;
-    emailVotante: string;
+    fecha?: string;
+    eventId?: string;
+    emailVotante?: string;
 }
 

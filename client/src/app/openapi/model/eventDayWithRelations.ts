@@ -9,15 +9,19 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { EventWithRelations } from './eventWithRelations';
 
 
 /**
- * (tsType: OptionWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: EventDayWithRelations, schemaOptions: { includeRelations: true })
  */
-export interface OptionWithRelations { 
+export interface EventDayWithRelations { 
+  [key: string]: object | any;
+
+
     id?: string;
-    fecha?: string;
+    date: string;
     eventId?: string;
-    emailVotante?: string;
+    event?: EventWithRelations;
 }
 

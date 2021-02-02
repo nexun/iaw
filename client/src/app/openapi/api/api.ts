@@ -1,5 +1,9 @@
 export * from './eventController.service';
 import { EventControllerService } from './eventController.service';
+export * from './eventDayEventController.service';
+import { EventDayEventControllerService } from './eventDayEventController.service';
+export * from './eventEventDayController.service';
+import { EventEventDayControllerService } from './eventEventDayController.service';
 export * from './eventOptionController.service';
 import { EventOptionControllerService } from './eventOptionController.service';
 export * from './optionController.service';
@@ -8,4 +12,4 @@ export * from './pingController.service';
 import { PingControllerService } from './pingController.service';
 export * from './userController.service';
 import { UserControllerService } from './userController.service';
-export const APIS = [EventControllerService, EventOptionControllerService, OptionControllerService, PingControllerService, UserControllerService];
+export const APIS = [EventControllerService, EventDayEventControllerService, EventEventDayControllerService, EventOptionControllerService, OptionControllerService, PingControllerService, UserControllerService];

@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Event} from './event.model';
 
 @model({settings: {strict: false}})
 export class EventDay extends Entity {
@@ -15,12 +16,8 @@ export class EventDay extends Entity {
   })
   date: string;
 
-  @property({
-    type: 'string',
-    required: true,
-  })
+  @belongsTo(() => Event)
   eventId: string;
-
   // Define well-known properties here
 
   // Indexer property to allow additional data

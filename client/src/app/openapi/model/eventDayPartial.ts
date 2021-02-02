@@ -11,10 +11,15 @@
  */
 
 
-export interface OptionFields { 
-    id?: boolean;
-    fecha?: boolean;
-    eventId?: boolean;
-    emailVotante?: boolean;
+/**
+ * (tsType: Partial<EventDay>, schemaOptions: { partial: true })
+ */
+export interface EventDayPartial { 
+  [key: string]: object | any;
+
+
+    id?: string;
+    date?: string;
+    eventId?: string;
 }
 

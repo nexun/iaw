@@ -17,7 +17,7 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { PingResponse } from '../model/models';
+import { Event } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -27,7 +27,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class PingControllerService {
+export class EventDayEventControllerService {
 
     protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
@@ -85,13 +85,17 @@ export class PingControllerService {
     }
 
     /**
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public pingControllerPing(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<PingResponse>;
-    public pingControllerPing(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<PingResponse>>;
-    public pingControllerPing(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<PingResponse>>;
-    public pingControllerPing(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventDayEventControllerGetEvent(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<Event>>;
+    public eventDayEventControllerGetEvent(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<Event>>>;
+    public eventDayEventControllerGetEvent(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<Event>>>;
+    public eventDayEventControllerGetEvent(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling eventDayEventControllerGetEvent.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -120,7 +124,7 @@ export class PingControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<PingResponse>(`${this.configuration.basePath}/ping`,
+        return this.httpClient.get<Array<Event>>(`${this.configuration.basePath}/event-days/${encodeURIComponent(String(id))}/event`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { OptionWithRelations } from './optionWithRelations';
+import { EventDayWithRelations } from './eventDayWithRelations';
 
 
 /**
@@ -18,9 +19,13 @@ import { OptionWithRelations } from './optionWithRelations';
 export interface EventWithRelations { 
     id?: string;
     name: string;
-    startDate: string;
-    endDate: string;
+    startDate?: string;
+    endDate?: string;
     ownerEmail: string;
+    publicLink?: string;
+    privateLink?: string;
+    published?: boolean;
+    eventDays?: Array<EventDayWithRelations>;
     event_option?: Array<OptionWithRelations>;
 }
 

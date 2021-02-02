@@ -17,8 +17,11 @@
 export interface EventPartial { 
     id?: string;
     name?: string;
-    date?: string;
+    startDate?: string;
     endDate?: string;
     ownerEmail?: string;
+    publicLink?: string;
+    privateLink?: string;
+    published?: boolean;
 }
 

@@ -16,8 +16,11 @@
  */
 export interface NewEvent { 
     name: string;
-    startDate: string;
-    endDate: string;
+    startDate?: string;
+    endDate?: string;
     ownerEmail: string;
+    publicLink?: string;
+    privateLink?: string;
+    published?: boolean;
 }
 

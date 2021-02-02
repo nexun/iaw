@@ -12,12 +12,13 @@
 
 
 /**
- * (tsType: OptionWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: @loopback/repository-json-schema#Optional<Omit<EventDay, \'id\'>, \'eventId\'>, schemaOptions: { title: \'NewEventDayInEvent\', exclude: [ \'id\' ], optional: [ \'eventId\' ] })
  */
-export interface OptionWithRelations { 
-    id?: string;
-    fecha?: string;
+export interface NewEventDayInEvent { 
+  [key: string]: object | any;
+
+
+    date: string;
     eventId?: string;
-    emailVotante?: string;
 }
 

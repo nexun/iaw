@@ -22,7 +22,6 @@ import { Subject } from 'rxjs';
 })
 export class NeweventComponent implements OnInit {
   myForm: FormGroup;
-  name = 'Angular';
   dataForm: FormGroup;
   event: EventModel;
   idx: string;
@@ -50,13 +49,14 @@ export class NeweventComponent implements OnInit {
   }
 
   addEvent() {
-    if (this.dataForm.valid) {
+    console.log(this.dataForm.value.eventName)
+    console.log(this.myForm.value.item1.eventList)
+    debugger;
+    if (this.dataForm.valid ) {
       var idx = this.route.snapshot.paramMap.get('id');
       if (idx !== null) {
         const request = {
-          name: this.dataForm.value.name,
-          startDate: this.dataForm.value.startDate,
-          endDate: this.dataForm.value.endDate,
+          name: this.dataForm.value.eventName,
           ownerEmail: this.tokenService.getUser().email,
         };
         console.log(request);
@@ -65,9 +65,7 @@ export class NeweventComponent implements OnInit {
           .subscribe(() => this.buttonClicked.emit(true));
       } else {
         const request = {
-          name: this.dataForm.value.name,
-          startDate: new Date(this.dataForm.value.startDate),
-          endDate: new Date(this.dataForm.value.endDate),
+          name: this.dataForm.value.eventName,
           ownerEmail: this.tokenService.getUser().email,
         };
         console.log(request);
@@ -86,12 +84,10 @@ export class NeweventComponent implements OnInit {
       this.myForm.addControl(
         item,
         new FormGroup({
-          name: new FormControl(),
           eventList: new FormArray([]),
         })
       );
     }
-
     this.idx = this.route.snapshot.paramMap.get('id');
     if (this.idx == null) {
       this.title = 'Crear Evento';
@@ -125,9 +121,7 @@ export class NeweventComponent implements OnInit {
 
   init() {
     this.dataForm = this.newEventForm.group({
-      name: [''],
-      startDate: [''],
-      endDate: [''],
+      eventName: [''],
     });
   }
   onSubmit(): void {

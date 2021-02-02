@@ -9,8 +9,17 @@
     <div class="col-12 col-md-12 p-1">
       <form [formGroup]="myForm" class="p-1 m-auto">
         <div class="form-group">
-          <label for="example-date-input" class="col-form-label">Nombre</label>
-          <input type="text" [formControlName]="" class="form-control" />
+          <div [formGroup]="dataForm">
+            <label for="example-date-input" class="col-form-label"
+              >Nombre</label
+            >
+            <input
+              type="text"
+              id="eventName"
+              formControlName="eventName"
+              class="form-control"
+            />
+          </div>
         </div>
         <ng-container *ngFor="let group of myForm.controls | keyvalue">
           <div class="p-2" [formGroup]="group.value">
@@ -37,7 +46,7 @@
                   >
                     <label for="">Opcion {{ i + 1 }}</label>
                   </div>
-                  <div class="col-lg-3 p-1">
+                  <div class="col-lg-5 p-1">
                     <input
                       class="form-control"
                       type="datetime-local"
@@ -56,11 +65,10 @@
               </div>
             </div>
           </div>
-          <!-- <pre>
+
+          <pre>
             {{ myForm?.value | json }}
-            </pre
-          >-->
-         
+          </pre>
           <div class="form-group">
             Proteger con contraseña
             <div class="row">
