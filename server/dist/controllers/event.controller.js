@@ -17,7 +17,7 @@ let EventController = class EventController {
         return this.eventRepository.count(where);
     }
     async find(filter) {
-        return this.eventRepository.find(filter);
+        return this.eventRepository.find({ include: ['eventDays'] });
     }
     async updateAll(event, where) {
         return this.eventRepository.updateAll(event, where);

@@ -81,7 +81,7 @@ export class EventController {
   async find(
     @param.filter(Event) filter?: Filter<Event>,
   ): Promise<Event[]> {
-    return this.eventRepository.find(filter);
+    return this.eventRepository.find({include: ['eventDays']})
   }
 
   @patch('/events', {

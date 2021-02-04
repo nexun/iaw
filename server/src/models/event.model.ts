@@ -17,17 +17,6 @@ export class Event extends Entity {
   })
   name: string;
 
-  //no sirven, borrar en la proxima generacion de modelo
-  @property({
-    type: 'date',
-  })
-  startDate: string;
-
-  @property({
-    type: 'date',
-  })
-  endDate: string;
-
   @property({
     type: 'string',
     required: true,
@@ -37,12 +26,8 @@ export class Event extends Entity {
   @property({
     type: 'string',
   })
-  publicLink?: string;
+  password: string;
 
-  @property({
-    type: 'string',
-  })
-  privateLink?: string;
 
   @hasMany(() => EventDay)
   eventDays: EventDay[];
