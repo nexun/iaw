@@ -170,11 +170,13 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.events = [];
     this.options = [];
-
+    this.service.getEvents().subscribe(events=>{this.backEvents=events;this.refresh.next();})
+    this.refresh.next();
     //traerme los eventos del usuario
     const email = this.tokenService.getUser().email;
     this.service.getEvents().subscribe((eventos) => {
-      this.backEvents = eventos.filter((event) => event.ownerEmail == email);
+      //this.backEvents = eventos.filter((event) => event.ownerEmail == email);
+      /*
       this.backEvents.forEach((element) => {
         const id = element.id;
         const fecha = new Date(element.startDate);
@@ -203,11 +205,12 @@ export class CalendarComponent implements OnInit {
           });
         });
         this.events.push(currentEvent);
-      });
+      });*/
       
-      console.log(this.events);
+      console.log(this.backEvents);
       this.refresh.next();
     });
+    this.refresh.next();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
 import { EventModel } from 'src/app/_model/event.model'
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/_services/auth/token.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-eventlist',
   templateUrl: './eventlist.component.html',
   styleUrls: ['./eventlist.component.css']
 })
+
+
+
+
 export class EventlistComponent implements OnInit {
-  
+  @ViewChild('modalEventContent', { static: true })
+  modalEventContent: TemplateRef<any>;  
   events:EventModel[]
+  filteredEvents:EventModel[]
+  valueEmittedFromChildComponent: string = '';
 
   constructor(
     private service: EventService,
-    private activeRouter: Router
+    private activeRouter: Router,
+    private tokenService: TokenService,
+    private modal: NgbModal,
+
     ) {     
   }
   
@@ -25,9 +37,26 @@ export class EventlistComponent implements OnInit {
      
      
   }
+  parentEventHandlerFunction(valueEmitted) {
+    this.valueEmittedFromChildComponent = valueEmitted;
+    //alert(valueEmitted)
+    if (valueEmitted) {
+      this.modal.dismissAll();
+      this.ngOnInit();
+    } else {
+      this.modal.dismissAll();
+    }
+  }
+
+  handleAddEvent(): void {
+    this.modal.open(this.modalEventContent, { size: 'lg' });
+  }
 
   ngOnInit(): void {
-    this.service.getEvents().subscribe(events=>this.events=events)
+    const email = this.tokenService.getUser().email;
+
+    this.service.getEvents().subscribe(events=>this.filteredEvents = events.filter((event) => event.ownerEmail == email))
+    
   }
 
   

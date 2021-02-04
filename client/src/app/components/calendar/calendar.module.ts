@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       useFactory: adapterFactory,
     }),
   ],
-  declarations: [CalendarComponent,NeweventComponent],
+  declarations: [CalendarComponent],
   exports: [CalendarComponent],
 })
 export class CalendaryModule {}

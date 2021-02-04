@@ -11,11 +11,12 @@ import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './_interceptors';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { PingService } from './_services/ping/ping.service';
+//import { PingService } from './_services/ping/ping.service';
 import { DatePipe } from '@angular/common';
 import { CalendaryModule } from './components/calendar/calendar.module';
 import { PublicCalendaryModule } from './components/publicCalendar/publicCalendar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NeweventComponent } from './components/newevent/newevent.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EventlistComponent,
     LoginComponent,
     NavbarComponent,
-    SignupComponent
+    SignupComponent,
+    NeweventComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     TokenService,
     httpInterceptorProviders,
-    PingService,
+    //PingService,
     DatePipe
 
   ],

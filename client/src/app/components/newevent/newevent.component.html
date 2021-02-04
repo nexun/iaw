@@ -7,107 +7,86 @@
 
   <div class="row justify-content-center">
     <div class="col-12 col-md-12 p-1">
-      <form [formGroup]="myForm" class="p-1 m-auto">
+      <form [formGroup]="eventDayForm" class="p-1 m-auto">
         <div class="form-group">
-          <div [formGroup]="dataForm">
-            <label for="example-date-input" class="col-form-label"
-              >Nombre</label
-            >
-            <input
-              type="text"
-              id="eventName"
-              formControlName="eventName"
-              class="form-control"
-            />
-          </div>
+          <label for="example-date-input" class="col-form-label">Nombre</label>
+          <input
+            type="text"
+            id="eventName"
+            formControlName="eventName"
+            class="form-control"
+          />
         </div>
-        <ng-container *ngFor="let group of myForm.controls | keyvalue">
-          <div class="p-2" [formGroup]="group.value">
-            <button
-              class="btn btn-dark"
-              type="button"
-              (click)="onAddEventDay(group.value)"
-            >
-              Agregar fecha al evento
-            </button>
-            <div class="mt-3">
-              <p>Listado de opciones horarias</p>
-            </div>
-            <div formArrayName="eventList">
-              <div
-                *ngFor="
-                  let item of eventDayArray(group.value).controls;
-                  let i = index
-                  let d = index
-                "
-              >
-                <div class="row p-1">                  
-                  <div class="col-lg-5 p-1">
-                    <label for="">Inicio</label>
-                    <input
-                      class="form-control"
-                      type="datetime-local"
-                      [formControlName]="i"
-                    />
-                  </div>
-                  <div class="col-lg-3 p-1">
-                    <label for="">Duracion en horas</label>
-                    <input
-                      class="form-control"
-                      type="number"
-                      [formControlName]="d"
-                    />
-                  </div>
-                  <div
-                    class="col-lg-2"
-                  >
-                    <label for="">Opcion {{ i + 1 }}</label>
-                    <button
-                      class="btn btn-danger"
-                      (click)="removeEventDay(group.value, i)"
-                    >
-                      Eliminar
-                    </button>
-                  </div>
+
+        <div class="mt-3">
+          <p>Listado de opciones horarias</p>
+        </div>
+        <div formArrayName="days">
+          <div *ngFor="let day of days.controls; let i = index">
+            <div [formGroupName]="i">
+              <div class="row p-1">
+                <div class="col-lg-5 p-1">
+                  <input
+                    placeholder="Hora de inicio"
+                    class="form-control"
+                    type="datetime-local"
+                    formControlName="eventDate"
+                  />
+                </div>
+                <div class="col-lg-3 p-1">
+                  <input
+                    placeholder="Duracion en horas"
+                    class="form-control"
+                    type="number"
+                    formControlName="duration"
+                  />
+                </div>
+                <div class="col-lg-2">                  
+                  <button class="btn btn-danger" (click)="removeDay(i)">
+                    Eliminar
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="p-2">
+          <button type="button" class="btn btn-dark" (click)="addDay()">
+            Agregar Fecha
+          </button>
+        </div>
+       
 
-          <pre>
-            {{ myForm?.value | json }}
-          </pre>
-          <div class="form-group">
-            Proteger con contraseña
-            <div class="row">
-              <div class="col-lg-1 p-2">
-                <input
-                  class="form-control"
-                  type="checkbox"
-                  name="myChk"
-                  id="myChk"
-                  (change)="triggerSomeEvent()"
-                />
-              </div>
-              <div class="col-lg-8 p-2">
-                <input
-                  class="form-control"
-                  label="Ingrese el password"
-                  type="password"
-                  name="myTxt"
-                  id="myTxt"
-                  value=""
-                  [disabled]="isDisabled"
-                />
-              </div>
+        <div class="form-group">
+          Proteger con contraseña
+          <div class="row">
+            <div class="col-lg-1 p-2">
+              <input
+                class="form-control"
+                type="checkbox"
+                name="myChk"
+                id="myChk"
+                (change)="triggerSomeEvent()"
+              />
+            </div>
+            <div class="col-lg-8 p-2">
+              <input
+                class="form-control"
+                placeholder="Ingrese el password"
+                type="password"
+                name="myTxt"
+                id="myTxt"
+                value=""
+                [disabled]="isDisabled"
+              />
             </div>
           </div>
-        </ng-container>
+        </div>
 
         <div class="form-group">
           <button
             class="btn btn-dark"
-            [disabled]="!dataForm.valid"
+            [disabled]="!eventDayForm.valid"
             (click)="addEvent()"
           >
             Guardar

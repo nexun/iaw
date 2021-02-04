@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
       this.controllerUser.userControllerLogin(request).subscribe((response)=>{
         this.tokerservice.saveToken(response.token);
-        this.activeRouter.navigateByUrl('/calendar');
+        this.activeRouter.navigateByUrl('/home');
       },
       (err)=>this.msg=' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Usuario y/o Contraseña inválidos</div>'
       )

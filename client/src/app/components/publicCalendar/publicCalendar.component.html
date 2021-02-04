@@ -1,135 +1,106 @@
-<div class="row">
-  <div class="col-lg-12 mt-2">
-    <h2>Estas viendo el evento </h2>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-2"></div>
-  <div class="col-lg-8">
-    <div id="" class="justify-content-md-center mt-5">
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-      />
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!--
+	<div class="content">
 
-      <div class="row text-center">
-        <div class="col-md-5">
-          <div class="btn-group">
-            <div
-              class="btn btn-dark"
-              mwlCalendarPreviousView
-              [view]="view"
-              [(viewDate)]="viewDate"
-              (viewDateChange)="closeOpenMonthViewDay()"
-            >
-              Anterior
-            </div>
-            <div
-              class="btn btn-outline-secondary"
-              mwlCalendarToday
-              [(viewDate)]="viewDate"
-            >
-              Actual
-            </div>
-            <div
-              class="btn btn-dark"
-              mwlCalendarNextView
-              [view]="view"
-              [(viewDate)]="viewDate"
-              (viewDateChange)="closeOpenMonthViewDay()"
-            >
-              Siguiente
-            </div>
-          </div>
-        </div>
-        <div style="text-transform: capitalize" class="col-md-3">
-          <h3>{{ viewDate | calendarDate: view + "ViewTitle":"es" }}</h3>
-        </div>
-        <div class="col-md-4">
-          <div class="btn-group">
-            <div
-              class="btn btn-dark"
-              (click)="setView(CalendarView.Month)"
-              [class.active]="view === CalendarView.Month"
-            >
-              Mensual
-            </div>
-            <div
-              class="btn btn-dark"
-              (click)="setView(CalendarView.Week)"
-              [class.active]="view === CalendarView.Week"
-            >
-              Semanal
-            </div>
-            <div
-              class="btn btn-dark"
-              (click)="setView(CalendarView.Day)"
-              [class.active]="view === CalendarView.Day"
-            >
-              Diario
-            </div>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div style="text-transform: capitalize" [ngSwitch]="view">
-        <mwl-calendar-month-view
-          [locale]="locale"
-          *ngSwitchCase="CalendarView.Month"
-          [viewDate]="viewDate"
-          [events]="events"
-          [refresh]="refresh"
-          [activeDayIsOpen]="activeDayIsOpen"
-          (dayClicked)="dayClicked($event.day)"
-          (eventClicked)="handleAddOption($event.event)"
-          (eventTimesChanged)="eventTimesChanged($event)"
-        >
-        </mwl-calendar-month-view>
-        <mwl-calendar-week-view
-          [locale]="locale"
-          *ngSwitchCase="CalendarView.Week"
-          [viewDate]="viewDate"
-          [events]="events"
-          [refresh]="refresh"
-          (eventClicked)="handleAddOption($event.event)"
-          (eventTimesChanged)="eventTimesChanged($event)"
-        >
-        </mwl-calendar-week-view>
-        <mwl-calendar-day-view
-          [locale]="locale"
-          *ngSwitchCase="CalendarView.Day"
-          [viewDate]="viewDate"
-          [events]="events"
-          [refresh]="refresh"
-          (eventClicked)="handleAddOption('Clicked', $event.event)"
-          (eventTimesChanged)="eventTimesChanged($event)"
-        >
-        </mwl-calendar-day-view>
-      </div>
+	<div class="row justify-content-md-center">
+		<ul class="list-group">
+			<li class="list-group-item list-group-item-action" *ngFor="let event of events;let idx = index" >
+				      <span>{{event.name}}</span>
+				      <span class="badge">{{event.date | date}}</span>
+				      <div class="pull-right">						  
+						  <button class="btn btn-primary btn-xs fa fa-pencil" [routerLink]="['/modify', idx]"></button>
+				          <button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(event)"></button>
+				      </div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="row justify-content-md-center">
+		<nav>
+			<a routerLink="/new-event" class="pull-right">New event</a>
+		</nav>
+	</div>
+</div>
+
+-->
+
+<div class="row p-4 justify-content-md-center">
+  <div class="p-1 align-center">
+    <!--	<span [innerHTML]="msg"></span>-->
+    <table class="table table-responsive table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre del Evento</th>
+          <th>Opciones</th>
+          <th>Publicado</th>
+          <th>Protegido</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of filteredEvents; let idx = index">
+          <td>
+            <span>{{ event.name }}</span>
+          </td>
+
+          <td>            
+            <tr *ngFor="let day of event.eventDays; let idx = index">
+              <span class="badge" type="date">Opcion {{idx+1}} -> {{ day.eventDate | date: 'dd/MM/yyyy h:mm a' }}</span>
+            </tr>
+          </td>
+          <td>            
+              <span class="badge" type="date"> {{ event.published ? ('SI'):('NO') }}</span>
+          </td>
+          <td>
+            No
+          </td>
+          <td>
+            <button
+              class="btn btn-primary btn-xs fa fa-pencil"
+              [routerLink]="['/modify', event.id]"
+            ></button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger btn-xs fa fa-trash-o"
+              (click)="onRemove(event.id)"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row justify-content-md-center">
+      <nav>
+        <button class="btn btn-dark float-right" (click)="handleAddEvent()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            fill="currentColor"
+            class="bi bi-plus-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
+            />
+          </svg>
+        </button>
+      </nav>
     </div>
   </div>
-  <div class="col-lg-2"></div>
-  <!--ACA SEPARAMOS LAS COLUMNAS-->
 
-  <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
-
-  <ng-template #modalOptionContent let-close="close">
+  <ng-template #modalEventContent let-close="close">
     <div class="modal-header">
-      <h5 class="modal-title">Reservar evento</h5>
+      <h5 class="modal-title">Agregar evento</h5>
       <button type="button" class="close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <div>
-        <app-option
+        <app-newevent
           (buttonClicked)="parentEventHandlerFunction($event)"
-          eventX="{{ modalOptionData?.event.id }}"
-          eventTitle="{{ modalOptionData?.event.title }}"
-          startDate="{{ modalOptionData?.event.start }}"
-          endDate="{{ modalOptionData?.event.end }}"
-        ></app-option>
+        ></app-newevent>
       </div>
     </div>
   </ng-template>

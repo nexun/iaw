@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EventControllerService, OptionControllerService, EventOptionControllerService } from 'src/app/openapi';
+import { EventControllerService, OptionControllerService, EventOptionControllerService, EventEventDayControllerService } from 'src/app/openapi';
 import { EventModel } from 'src/app/_model/event.model';
 
 @Injectable({  providedIn: 'root' })
@@ -12,6 +12,8 @@ export class EventService {
   constructor(  
     private eventController:EventControllerService,
     private optionController:OptionControllerService,
+    private dayController:EventEventDayControllerService,
+
 
 
     private activeRouter: Router,
@@ -31,6 +33,9 @@ export class EventService {
 
   addEvent(event){    
     return this.eventController.eventControllerCreate(event)//.subscribe(response=>response) //ver
+  }
+  addDayEvent(id, day){    
+    return this.dayController.eventEventDayControllerCreate(id, day)//.subscribe(response=>response) //ver
   }
   addOption(option){    
     this.optionController.optionControllerCreate(option).subscribe(response=>response) //ver

@@ -11,7 +11,7 @@
   
 </div>
 <div class="row">
-  
+  <!--
   <div class="col-lg-6">
     <div id="" class="justify-content-md-center mt-5">
       <link
@@ -116,9 +116,10 @@
       </div>
     </div>
   </div>
+  -->
   <!--ACA SEPARAMOS LAS COLUMNAS-->
 
-  <div id="edit" class="col-lg-6">
+  <div id="edit" class="col-lg-12">
     <div class="mt-5">
       <h3>
         Editar eventos
@@ -139,8 +140,8 @@
         <div class="clearfix"></div>
       </h3>
 
-      <div class="">
-        <table class="">
+      <div class="container-fluid">
+        <table class="table">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -151,47 +152,9 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let event of events">
-              <td>
-                <input
-                  disabled
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="event.title"
-                  (keyup)="refresh.next()"
-                />
-              </td>
-              <td>
-                <input
-                  class="form-control"
-                  type="date"
-                  mwlFlatpickr
-                  [(ngModel)]="event.start"
-                  (ngModelChange)="refresh.next()"
-                  [altInput]="true"
-                  [convertModelValue]="true"
-                  [enableTime]="false"
-                  dateFormat="Y-m-d"
-                  altFormat="F j, Y H:i"
-                  placeholder="{{ event.start | date: 'dd/MM/yyyy h:mm a' }}"
-                />
-              </td>
-              <td>
-                <input
-                  class="form-control"
-                  type="datetime-local"
-                  mwlFlatpickr
-                  [(ngModel)]="event.end"
-                  (ngModelChange)="refresh.next()"
-                  [altInput]="true"
-                  [convertModelValue]="true"
-                  [enableTime]="true"
-                  dateFormat="Y-m-dTH:i"
-                  altFormat="F j, Y H:i"
-                  placeholder="{{ event.end | date: 'dd/MM/yyyy h:mm a' }}"
-                />
-              </td>
-
+            <tr *ngFor="let event of backEvents">
+              <td> {{event.id}}</td>
+              
               <td>
                 <button class="btn btn-info m-1" (click)="deleteEvent(event)">
                   <svg

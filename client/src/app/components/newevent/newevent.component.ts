@@ -3,18 +3,12 @@ import { TokenService } from 'src/app/_services/auth/token.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
 
-import {
-  FormArray,
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { EventModel } from 'src/app/_model/event.model';
-import { EventControllerService, EventEventDayControllerService, NewEventDayInEvent, UserControllerService } from 'src/app/openapi';
+import {
+  EventControllerService,
+} from 'src/app/openapi';
 import { DatePipe } from '@angular/common';
-import { Subject } from 'rxjs';
-import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-newevent',
@@ -22,22 +16,19 @@ import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
   styleUrls: ['./newevent.component.css'],
 })
 export class NeweventComponent implements OnInit {
-  myForm: FormGroup;
-  dataForm: FormGroup;
   event: EventModel;
   idx: string;
   title: string;
   msg: string;
+  eventDayForm: FormGroup;
 
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private service: EventService,
-    private eventEventDayservice: EventEventDayControllerService,
     private newEventForm: FormBuilder,
     private controllerEvent: EventControllerService,
     private route: ActivatedRoute,
-    private activeRouter: Router,
     public datepipe: DatePipe,
     private tokenService: TokenService
   ) {
@@ -51,35 +42,33 @@ export class NeweventComponent implements OnInit {
   }
 
   addEvent() {
-    console.log(this.dataForm.value.eventName)
-    console.log(this.myForm.value.item1.eventList)    
-    debugger;
-    if (this.dataForm.valid ) {
+    if (this.eventDayForm.valid) {
       var idx = this.route.snapshot.paramMap.get('id');
       if (idx !== null) {
         const request = {
-          name: this.dataForm.value.eventName,
+          name: this.eventDayForm.value.eventName,
           ownerEmail: this.tokenService.getUser().email,
         };
-        console.log(request);
         this.service
           .editEvent(idx, request)
           .subscribe(() => this.buttonClicked.emit(true));
       } else {
         const request = {
-          name: this.dataForm.value.eventName,
+          name: this.eventDayForm.value.eventName,
           ownerEmail: this.tokenService.getUser().email,
         };
-        console.log(request);
-        this.service.addEvent(request).subscribe((response)=>{
-          const id = response.id
-          const days = this.myForm.value.item1.eventList
-          days.map((day)=>{
-            var dato: NewEventDayInEvent;
-            dato.duration = day.duration
-            dato.eventDate = day.eventDate            
-            this.eventEventDayservice.eventEventDayControllerCreate(id,dato)
-          })
+        this.service.addEvent(request).subscribe((response) => {
+          const id = response.id;
+          const days = this.eventDayForm.value.days;
+          days.map((day) => {
+            const request = {
+              eventDate: new Date(day.eventDate),
+              duration: day.duration,
+            };
+            this.service.addDayEvent(id, request).subscribe((response) => {
+              console.log(response);
+            });
+          });
         });
         this.buttonClicked.emit(true);
       }
@@ -90,16 +79,6 @@ export class NeweventComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myForm = new FormGroup({});
-    for (let item of ['item1']) {
-      this.myForm.addControl(
-        item,
-        new FormGroup({          
-          eventList: new FormArray([])
-          
-        })
-      );
-    }
     this.idx = this.route.snapshot.paramMap.get('id');
     if (this.idx == null) {
       this.title = 'Crear Evento';
@@ -111,7 +90,7 @@ export class NeweventComponent implements OnInit {
         .subscribe((event) => {
           this.event = event;
           console.log(this.event.startDate);
-          this.dataForm.patchValue({
+          this.eventDayForm.patchValue({
             name: this.event.name,
             startDate: this.event.startDate,
             endDate: this.event.endDate,
@@ -120,27 +99,29 @@ export class NeweventComponent implements OnInit {
     }
   }
 
-  onAddEventDay(group: FormGroup) {
-    (group.get('eventList') as FormArray).push(new FormControl());
+  get days(): FormArray {
+    return this.eventDayForm.get('days') as FormArray;
   }
 
-  eventDayArray(group: FormGroup): FormArray {
-    return group.get('eventList') as FormArray;
+  newDay(): FormGroup {
+    return this.newEventForm.group({
+      eventDate: '',
+      duration: '',
+    });
   }
-  removeEventDay(group: FormGroup, index: number) {
-    (group.get('eventList') as FormArray).removeAt(index);
+
+  addDay() {
+    this.days.push(this.newDay());
+  }
+
+  removeDay(i: number) {
+    this.days.removeAt(i);
   }
 
   init() {
-    this.dataForm = this.newEventForm.group({
+    this.eventDayForm = this.newEventForm.group({
       eventName: [''],
+      days: this.newEventForm.array([]),
     });
-  }
-  onSubmit(): void {
-    /*
-    this.event.name=this.newEventForm.get('eventName').value
-    if(this.idx==null){this.addEvent(this.event);}
-    this.router.navigateByUrl('/home') 
-    */
   }
 }

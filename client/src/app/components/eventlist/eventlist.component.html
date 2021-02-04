@@ -24,34 +24,84 @@
 -->
 
 <div class="row p-4 justify-content-md-center">
+  <div class="p-1 align-center">
+    <!--	<span [innerHTML]="msg"></span>-->
+    <table class="table table-responsive table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre del Evento</th>
+          <th>Opciones</th>
+          <th>Publicado</th>
+          <th>Protegido</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of filteredEvents; let idx = index">
+          <td>
+            <span>{{ event.name }}</span>
+          </td>
 
-	<div class="p-1 align-center">
-	<!--	<span [innerHTML]="msg"></span>-->
-		<table class="table table-responsive table-bordered ">
-			<thead class="thead-dark">
-				<tr>
-					<th>Nombre del Evento</th>
-					<th>Fecha de inicio</th>
-					<th>Editar</th>
-					<th>Eliminar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let event of events;let idx = index">
-					<td><span>{{event.name}}</span></td>
-					
-					<td><span class="badge" type="date">{{event.startDate }}</span></td>							
-					<td><button class="btn btn-primary btn-xs fa fa-pencil" [routerLink]="['/modify', event.id]"></button></td>
-					<td><button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(event.id)"></button></td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="row justify-content-md-center">
-			<nav>
-				<button class="btn btn-dark" routerLink="/new-event" >Crear evento</button>
-			</nav>
-		</div>
-	</div>
-	
+          <td>            
+            <tr *ngFor="let day of event.eventDays; let idx = index">
+              <span class="badge" type="date">Opcion {{idx+1}} -> {{ day.eventDate | date: 'dd/MM/yyyy h:mm a' }}</span>
+            </tr>
+          </td>
+          <td>            
+              <span class="badge" type="date"> {{ event.published ? ('SI'):('NO') }}</span>
+          </td>
+          <td>
+            No
+          </td>
+          <td>
+            <button
+              class="btn btn-primary btn-xs fa fa-pencil"
+              [routerLink]="['/modify', event.id]"
+            ></button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger btn-xs fa fa-trash-o"
+              (click)="onRemove(event.id)"
+            ></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row justify-content-md-center">
+      <nav>
+        <button class="btn btn-dark float-right" (click)="handleAddEvent()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            fill="currentColor"
+            class="bi bi-plus-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
+            />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </div>
 
+  <ng-template #modalEventContent let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Agregar evento</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <app-newevent
+          (buttonClicked)="parentEventHandlerFunction($event)"
+        ></app-newevent>
+      </div>
+    </div>
+  </ng-template>
 </div>
