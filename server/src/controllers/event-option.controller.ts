@@ -42,7 +42,7 @@ export class EventOptionController {
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Option>,
   ): Promise<Option[]> {
-    return this.eventRepository.event_option(id).find(filter);
+    return this.eventRepository.options(id).find(filter);
   }
 
   @post('/events/{id}/options', {
@@ -67,7 +67,7 @@ export class EventOptionController {
       },
     }) option: Omit<Option, 'id'>,
   ): Promise<Option> {
-    return this.eventRepository.event_option(id).create(option);
+    return this.eventRepository.options(id).create(option);
   }
 
   @patch('/events/{id}/options', {
@@ -90,7 +90,7 @@ export class EventOptionController {
     option: Partial<Option>,
     @param.query.object('where', getWhereSchemaFor(Option)) where?: Where<Option>,
   ): Promise<Count> {
-    return this.eventRepository.event_option(id).patch(option, where);
+    return this.eventRepository.options(id).patch(option, where);
   }
 
   @del('/events/{id}/options', {
@@ -105,6 +105,6 @@ export class EventOptionController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Option)) where?: Where<Option>,
   ): Promise<Count> {
-    return this.eventRepository.event_option(id).delete(where);
+    return this.eventRepository.options(id).delete(where);
   }
 }

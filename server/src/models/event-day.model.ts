@@ -1,7 +1,7 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {Event} from './event.model';
 
-@model({settings: {strict: false}})
+@model()
 export class EventDay extends Entity {
   @property({
     type: 'string',
@@ -14,15 +14,16 @@ export class EventDay extends Entity {
     type: 'date',
     required: true,
   })
-  date: string;
+  eventDate: string;
+
+  @property({
+    type: 'number',
+    required: true,
+  })
+  duration: number;
 
   @belongsTo(() => Event)
   eventId: string;
-  // Define well-known properties here
-
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
 
   constructor(data?: Partial<EventDay>) {
     super(data);

@@ -6,14 +6,11 @@ const repository_1 = require("@loopback/repository");
 const rest_1 = require("@loopback/rest");
 const models_1 = require("../models");
 const repositories_1 = require("../repositories");
-const authentication_1 = require("@loopback/authentication");
 let EventController = class EventController {
     constructor(eventRepository) {
         this.eventRepository = eventRepository;
     }
     async create(event) {
-        console.log("llegooo");
-        console.log(event);
         return this.eventRepository.create(event);
     }
     async count(where) {
@@ -28,9 +25,6 @@ let EventController = class EventController {
     async findById(id, filter) {
         return this.eventRepository.findById(id, filter);
     }
-    async findByEmail(ownerEmail, filter) {
-        return this.eventRepository.find(filter);
-    }
     async updateById(id, event) {
         await this.eventRepository.updateById(id, event);
     }
@@ -42,7 +36,6 @@ let EventController = class EventController {
     }
 };
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.post('/events', {
         responses: {
             '200': {
@@ -66,7 +59,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "create", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.get('/events/count', {
         responses: {
             '200': {
@@ -81,7 +73,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "count", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.get('/events', {
         responses: {
             '200': {
@@ -103,7 +94,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "find", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.patch('/events', {
         responses: {
             '200': {
@@ -125,7 +115,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "updateAll", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.get('/events/{id}', {
         responses: {
             '200': {
@@ -145,30 +134,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "findById", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
-    rest_1.get('/events/owner/{ownerEmail}', {
-        responses: {
-            '200': {
-                description: 'Array of Event model instances',
-                content: {
-                    'application/json': {
-                        schema: {
-                            type: 'array',
-                            items: rest_1.getModelSchemaRef(models_1.Event, { includeRelations: true }),
-                        },
-                    },
-                },
-            },
-        },
-    }),
-    tslib_1.__param(0, rest_1.param.path.string('ownerEmail')),
-    tslib_1.__param(1, rest_1.param.filter(models_1.Event)),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [String, Object]),
-    tslib_1.__metadata("design:returntype", Promise)
-], EventController.prototype, "findByEmail", null);
-tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.patch('/events/{id}', {
         responses: {
             '204': {
@@ -189,7 +154,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "updateById", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.put('/events/{id}', {
         responses: {
             '204': {
@@ -204,7 +168,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "replaceById", null);
 tslib_1.__decorate([
-    authentication_1.authenticate('jwt'),
     rest_1.del('/events/{id}', {
         responses: {
             '204': {

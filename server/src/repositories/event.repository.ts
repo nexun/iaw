@@ -1,9 +1,9 @@
 import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
-import {Event, EventRelations, Option, EventDay} from '../models';
+import {Event, EventRelations, EventDay, Option} from '../models';
 import {MongoDataSource} from '../datasources';
 import {inject, Getter} from '@loopback/core';
-import {OptionRepository} from './option.repository';
 import {EventDayRepository} from './event-day.repository';
+import {OptionRepository} from './option.repository';
 
 export class EventRepository extends DefaultCrudRepository<
   Event,
@@ -11,17 +11,17 @@ export class EventRepository extends DefaultCrudRepository<
   EventRelations
 > {
 
-  public readonly event_option: HasManyRepositoryFactory<Option, typeof Event.prototype.id>;
-
   public readonly eventDays: HasManyRepositoryFactory<EventDay, typeof Event.prototype.id>;
 
+  public readonly options: HasManyRepositoryFactory<Option, typeof Event.prototype.id>;
+
   constructor(
-    @inject('datasources.mongo') dataSource: MongoDataSource, @repository.getter('OptionRepository') protected optionRepositoryGetter: Getter<OptionRepository>, @repository.getter('EventDayRepository') protected eventDayRepositoryGetter: Getter<EventDayRepository>,
+    @inject('datasources.mongo') dataSource: MongoDataSource, @repository.getter('EventDayRepository') protected eventDayRepositoryGetter: Getter<EventDayRepository>, @repository.getter('OptionRepository') protected optionRepositoryGetter: Getter<OptionRepository>,
   ) {
     super(Event, dataSource);
+    this.options = this.createHasManyRepositoryFactoryFor('options', optionRepositoryGetter,);
+    this.registerInclusionResolver('options', this.options.inclusionResolver);
     this.eventDays = this.createHasManyRepositoryFactoryFor('eventDays', eventDayRepositoryGetter,);
     this.registerInclusionResolver('eventDays', this.eventDays.inclusionResolver);
-    this.event_option = this.createHasManyRepositoryFactoryFor('event_option', optionRepositoryGetter,);
-    this.registerInclusionResolver('event_option', this.event_option.inclusionResolver);
   }
 }

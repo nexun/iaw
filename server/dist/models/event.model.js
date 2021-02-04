@@ -57,20 +57,20 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], Event.prototype, "privateLink", void 0);
 tslib_1.__decorate([
-    repository_1.property({
-        type: 'boolean',
-        default: true,
-    }),
-    tslib_1.__metadata("design:type", Boolean)
-], Event.prototype, "published", void 0);
-tslib_1.__decorate([
     repository_1.hasMany(() => event_day_model_1.EventDay),
     tslib_1.__metadata("design:type", Array)
 ], Event.prototype, "eventDays", void 0);
 tslib_1.__decorate([
     repository_1.hasMany(() => option_model_1.Option),
     tslib_1.__metadata("design:type", Array)
-], Event.prototype, "event_option", void 0);
+], Event.prototype, "options", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'boolean',
+        default: true,
+    }),
+    tslib_1.__metadata("design:type", Boolean)
+], Event.prototype, "published", void 0);
 Event = tslib_1.__decorate([
     repository_1.model(),
     tslib_1.__metadata("design:paramtypes", [Object])

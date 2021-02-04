@@ -1,4 +1,4 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {Option} from './option.model';
 import {EventDay} from './event-day.model';
 
@@ -17,6 +17,7 @@ export class Event extends Entity {
   })
   name: string;
 
+  //no sirven, borrar en la proxima generacion de modelo
   @property({
     type: 'date',
   })
@@ -43,6 +44,11 @@ export class Event extends Entity {
   })
   privateLink?: string;
 
+  @hasMany(() => EventDay)
+  eventDays: EventDay[];
+
+  @hasMany(() => Option)
+  options: Option[];
   @property({
     type: 'boolean',
     default: true,
@@ -50,11 +56,10 @@ export class Event extends Entity {
   published?: boolean;
 
 
+
   // Define well-known properties here
-  @hasMany(() => EventDay)
-  eventDays: EventDay[];
-  @hasMany(() => Option)
-  event_option: Option[];
+ 
+  
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;

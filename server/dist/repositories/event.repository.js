@@ -7,18 +7,18 @@ const models_1 = require("../models");
 const datasources_1 = require("../datasources");
 const core_1 = require("@loopback/core");
 let EventRepository = class EventRepository extends repository_1.DefaultCrudRepository {
-    constructor(dataSource, optionRepositoryGetter, eventDayRepositoryGetter) {
+    constructor(dataSource, eventDayRepositoryGetter, optionRepositoryGetter) {
         super(models_1.Event, dataSource);
-        this.optionRepositoryGetter = optionRepositoryGetter;
         this.eventDayRepositoryGetter = eventDayRepositoryGetter;
+        this.optionRepositoryGetter = optionRepositoryGetter;
+        this.options = this.createHasManyRepositoryFactoryFor('options', optionRepositoryGetter);
+        this.registerInclusionResolver('options', this.options.inclusionResolver);
         this.eventDays = this.createHasManyRepositoryFactoryFor('eventDays', eventDayRepositoryGetter);
         this.registerInclusionResolver('eventDays', this.eventDays.inclusionResolver);
-        this.event_option = this.createHasManyRepositoryFactoryFor('event_option', optionRepositoryGetter);
-        this.registerInclusionResolver('event_option', this.event_option.inclusionResolver);
     }
 };
 EventRepository = tslib_1.__decorate([
-    tslib_1.__param(0, core_1.inject('datasources.mongo')), tslib_1.__param(1, repository_1.repository.getter('OptionRepository')), tslib_1.__param(2, repository_1.repository.getter('EventDayRepository')),
+    tslib_1.__param(0, core_1.inject('datasources.mongo')), tslib_1.__param(1, repository_1.repository.getter('EventDayRepository')), tslib_1.__param(2, repository_1.repository.getter('OptionRepository')),
     tslib_1.__metadata("design:paramtypes", [datasources_1.MongoDataSource, Function, Function])
 ], EventRepository);
 exports.EventRepository = EventRepository;

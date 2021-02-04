@@ -6,4 +6,5 @@ tslib_1.__exportStar(require("./option.model"), exports);
 tslib_1.__exportStar(require("./shared.model"), exports);
 tslib_1.__exportStar(require("./event.model"), exports);
 tslib_1.__exportStar(require("./event-day.model"), exports);
+tslib_1.__exportStar(require("./event-day.model"), exports);
 //# sourceMappingURL=index.js.map

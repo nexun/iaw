@@ -11,16 +11,16 @@ let EventOptionController = class EventOptionController {
         this.eventRepository = eventRepository;
     }
     async find(id, filter) {
-        return this.eventRepository.event_option(id).find(filter);
+        return this.eventRepository.options(id).find(filter);
     }
     async create(id, option) {
-        return this.eventRepository.event_option(id).create(option);
+        return this.eventRepository.options(id).create(option);
     }
     async patch(id, option, where) {
-        return this.eventRepository.event_option(id).patch(option, where);
+        return this.eventRepository.options(id).patch(option, where);
     }
     async delete(id, where) {
-        return this.eventRepository.event_option(id).delete(where);
+        return this.eventRepository.options(id).delete(where);
     }
 };
 tslib_1.__decorate([
