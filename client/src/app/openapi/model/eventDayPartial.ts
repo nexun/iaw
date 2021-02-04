@@ -15,11 +15,9 @@
  * (tsType: Partial<EventDay>, schemaOptions: { partial: true })
  */
 export interface EventDayPartial { 
-  [key: string]: object | any;
-
-
     id?: string;
-    date?: string;
+    eventDate?: string;
+    duration?: number;
     eventId?: string;
 }
 

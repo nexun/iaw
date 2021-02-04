@@ -9,16 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { EventIncludeFilterItems } from './eventIncludeFilterItems';
+import { EventDayIncludeFilterItems } from './eventDayIncludeFilterItems';
 
 
-export interface EventFilter1 { 
+export interface EventDayFilter { 
     offset?: number;
     limit?: number;
     skip?: number;
     order?: string | Array<string>;
-    where?: { [key: string]: object; };
     fields?: object | Set<string>;
-    include?: Array<EventIncludeFilterItems | string>;
+    include?: Array<EventDayIncludeFilterItems | string>;
 }
 

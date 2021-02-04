@@ -16,7 +16,7 @@
  */
 export interface NewOption { 
     fecha?: string;
-    eventId?: string;
     emailVotante?: string;
+    eventId?: string;
 }
 

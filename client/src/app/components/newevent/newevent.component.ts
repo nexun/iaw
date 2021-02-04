@@ -11,9 +11,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { EventModel } from 'src/app/_model/event.model';
-import { EventControllerService, UserControllerService } from 'src/app/openapi';
+import { EventControllerService, EventEventDayControllerService, NewEventDayInEvent, UserControllerService } from 'src/app/openapi';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
+import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-newevent',
@@ -32,6 +33,7 @@ export class NeweventComponent implements OnInit {
 
   constructor(
     private service: EventService,
+    private eventEventDayservice: EventEventDayControllerService,
     private newEventForm: FormBuilder,
     private controllerEvent: EventControllerService,
     private route: ActivatedRoute,
@@ -50,7 +52,7 @@ export class NeweventComponent implements OnInit {
 
   addEvent() {
     console.log(this.dataForm.value.eventName)
-    console.log(this.myForm.value.item1.eventList)
+    console.log(this.myForm.value.item1.eventList)    
     debugger;
     if (this.dataForm.valid ) {
       var idx = this.route.snapshot.paramMap.get('id');
@@ -69,7 +71,16 @@ export class NeweventComponent implements OnInit {
           ownerEmail: this.tokenService.getUser().email,
         };
         console.log(request);
-        this.service.addEvent(request);
+        this.service.addEvent(request).subscribe((response)=>{
+          const id = response.id
+          const days = this.myForm.value.item1.eventList
+          days.map((day)=>{
+            var dato: NewEventDayInEvent;
+            dato.duration = day.duration
+            dato.eventDate = day.eventDate            
+            this.eventEventDayservice.eventEventDayControllerCreate(id,dato)
+          })
+        });
         this.buttonClicked.emit(true);
       }
     }
@@ -83,8 +94,9 @@ export class NeweventComponent implements OnInit {
     for (let item of ['item1']) {
       this.myForm.addControl(
         item,
-        new FormGroup({
-          eventList: new FormArray([]),
+        new FormGroup({          
+          eventList: new FormArray([])
+          
         })
       );
     }

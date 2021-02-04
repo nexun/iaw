@@ -16,11 +16,9 @@ import { EventWithRelations } from './eventWithRelations';
  * (tsType: EventDayWithRelations, schemaOptions: { includeRelations: true })
  */
 export interface EventDayWithRelations { 
-  [key: string]: object | any;
-
-
     id?: string;
-    date: string;
+    eventDate: string;
+    duration: number;
     eventId?: string;
     event?: EventWithRelations;
 }

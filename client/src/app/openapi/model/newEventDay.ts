@@ -12,11 +12,11 @@
 
 
 /**
- * (tsType: @loopback/repository-json-schema#Optional<Omit<Option, \'id\'>, \'eventId\'>, schemaOptions: { title: \'NewOptionInEvent\', exclude: [ \'id\' ], optional: [ \'eventId\' ] })
+ * (tsType: Omit<EventDay, \'id\'>, schemaOptions: { title: \'NewEventDay\', exclude: [ \'id\' ] })
  */
-export interface NewOptionInEvent { 
-    fecha?: string;
-    emailVotante?: string;
+export interface NewEventDay { 
+    eventDate: string;
+    duration: number;
     eventId?: string;
 }
 

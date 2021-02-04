@@ -18,7 +18,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { EventDay } from '../model/models';
+import { EventDayPartial } from '../model/models';
 import { LoopbackCount } from '../model/models';
+import { NewEventDayInEvent } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -87,14 +89,14 @@ export class EventEventDayControllerService {
 
     /**
      * @param id 
-     * @param requestBody 
+     * @param newEventDayInEvent 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventEventDayControllerCreate(id: string, requestBody?: { [key: string]: object; }, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<EventDay>;
-    public eventEventDayControllerCreate(id: string, requestBody?: { [key: string]: object; }, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<EventDay>>;
-    public eventEventDayControllerCreate(id: string, requestBody?: { [key: string]: object; }, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<EventDay>>;
-    public eventEventDayControllerCreate(id: string, requestBody?: { [key: string]: object; }, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventEventDayControllerCreate(id: string, newEventDayInEvent?: NewEventDayInEvent, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<EventDay>;
+    public eventEventDayControllerCreate(id: string, newEventDayInEvent?: NewEventDayInEvent, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<EventDay>>;
+    public eventEventDayControllerCreate(id: string, newEventDayInEvent?: NewEventDayInEvent, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<EventDay>>;
+    public eventEventDayControllerCreate(id: string, newEventDayInEvent?: NewEventDayInEvent, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling eventEventDayControllerCreate.');
         }
@@ -136,7 +138,7 @@ export class EventEventDayControllerService {
         }
 
         return this.httpClient.post<EventDay>(`${this.configuration.basePath}/events/${encodeURIComponent(String(id))}/event-days`,
-            requestBody,
+            newEventDayInEvent,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -268,14 +270,14 @@ export class EventEventDayControllerService {
     /**
      * @param id 
      * @param where 
-     * @param requestBody 
+     * @param eventDayPartial 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, requestBody?: { [key: string]: object; }, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoopbackCount>;
-    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, requestBody?: { [key: string]: object; }, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoopbackCount>>;
-    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, requestBody?: { [key: string]: object; }, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoopbackCount>>;
-    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, requestBody?: { [key: string]: object; }, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoopbackCount>;
+    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoopbackCount>>;
+    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoopbackCount>>;
+    public eventEventDayControllerPatch(id: string, where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling eventEventDayControllerPatch.');
         }
@@ -323,7 +325,7 @@ export class EventEventDayControllerService {
         }
 
         return this.httpClient.patch<LoopbackCount>(`${this.configuration.basePath}/events/${encodeURIComponent(String(id))}/event-days`,
-            requestBody,
+            eventDayPartial,
             {
                 params: queryParameters,
                 responseType: <any>responseType,

@@ -38,22 +38,30 @@
                 *ngFor="
                   let item of eventDayArray(group.value).controls;
                   let i = index
+                  let d = index
                 "
               >
-                <div class="row p-1">
-                  <div
-                    class="col-lg-2 justify-content-center align-items-center"
-                  >
-                    <label for="">Opcion {{ i + 1 }}</label>
-                  </div>
+                <div class="row p-1">                  
                   <div class="col-lg-5 p-1">
+                    <label for="">Inicio</label>
                     <input
                       class="form-control"
                       type="datetime-local"
                       [formControlName]="i"
                     />
                   </div>
-                  <div class="col-lg-4 p-1">
+                  <div class="col-lg-3 p-1">
+                    <label for="">Duracion en horas</label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      [formControlName]="d"
+                    />
+                  </div>
+                  <div
+                    class="col-lg-2"
+                  >
+                    <label for="">Opcion {{ i + 1 }}</label>
                     <button
                       class="btn btn-danger"
                       (click)="removeEventDay(group.value, i)"

@@ -26,6 +26,6 @@ export interface EventWithRelations {
     privateLink?: string;
     published?: boolean;
     eventDays?: Array<EventDayWithRelations>;
-    event_option?: Array<OptionWithRelations>;
+    options?: Array<OptionWithRelations>;
 }
 

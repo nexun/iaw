@@ -3,10 +3,12 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 import { EventControllerService } from './api/eventController.service';
+import { EventDayControllerService } from './api/eventDayController.service';
 import { EventDayEventControllerService } from './api/eventDayEventController.service';
 import { EventEventDayControllerService } from './api/eventEventDayController.service';
 import { EventOptionControllerService } from './api/eventOptionController.service';
 import { OptionControllerService } from './api/optionController.service';
+import { OptionEventControllerService } from './api/optionEventController.service';
 import { PingControllerService } from './api/pingController.service';
 import { UserControllerService } from './api/userController.service';
 

@@ -11,13 +11,13 @@
  */
 
 
-/**
- * (tsType: Partial<Option>, schemaOptions: { partial: true })
- */
-export interface OptionPartial { 
-    id?: string;
-    fecha?: string;
-    emailVotante?: string;
-    eventId?: string;
+export interface EventDayScopeFilter { 
+    offset?: number;
+    limit?: number;
+    skip?: number;
+    order?: string | Array<string>;
+    where?: { [key: string]: object; };
+    fields?: any | Set<string>;
+    include?: Array<{ [key: string]: object; }>;
 }
 

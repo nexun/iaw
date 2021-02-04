@@ -17,13 +17,13 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-import { Event } from '../model/models';
-import { EventFilter } from '../model/models';
-import { EventFilter1 } from '../model/models';
-import { EventPartial } from '../model/models';
-import { EventWithRelations } from '../model/models';
+import { EventDay } from '../model/models';
+import { EventDayFilter } from '../model/models';
+import { EventDayFilter1 } from '../model/models';
+import { EventDayPartial } from '../model/models';
+import { EventDayWithRelations } from '../model/models';
 import { LoopbackCount } from '../model/models';
-import { NewEvent } from '../model/models';
+import { NewEventDay } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -33,7 +33,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class EventControllerService {
+export class EventDayControllerService {
 
     protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
@@ -95,10 +95,10 @@ export class EventControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerCount(where?: { [key: string]: object; }, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoopbackCount>;
-    public eventControllerCount(where?: { [key: string]: object; }, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoopbackCount>>;
-    public eventControllerCount(where?: { [key: string]: object; }, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoopbackCount>>;
-    public eventControllerCount(where?: { [key: string]: object; }, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventDayControllerCount(where?: { [key: string]: object; }, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoopbackCount>;
+    public eventDayControllerCount(where?: { [key: string]: object; }, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoopbackCount>>;
+    public eventDayControllerCount(where?: { [key: string]: object; }, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoopbackCount>>;
+    public eventDayControllerCount(where?: { [key: string]: object; }, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: this.encoder});
         if (where !== undefined && where !== null) {
@@ -133,7 +133,7 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<LoopbackCount>(`${this.configuration.basePath}/events/count`,
+        return this.httpClient.get<LoopbackCount>(`${this.configuration.basePath}/event-days/count`,
             {
                 params: queryParameters,
                 responseType: <any>responseType,
@@ -146,14 +146,14 @@ export class EventControllerService {
     }
 
     /**
-     * @param newEvent 
+     * @param newEventDay 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerCreate(newEvent?: NewEvent, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Event>;
-    public eventControllerCreate(newEvent?: NewEvent, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Event>>;
-    public eventControllerCreate(newEvent?: NewEvent, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Event>>;
-    public eventControllerCreate(newEvent?: NewEvent, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventDayControllerCreate(newEventDay?: NewEventDay, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<EventDay>;
+    public eventDayControllerCreate(newEventDay?: NewEventDay, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<EventDay>>;
+    public eventDayControllerCreate(newEventDay?: NewEventDay, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<EventDay>>;
+    public eventDayControllerCreate(newEventDay?: NewEventDay, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -191,8 +191,8 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<Event>(`${this.configuration.basePath}/events`,
-            newEvent,
+        return this.httpClient.post<EventDay>(`${this.configuration.basePath}/event-days`,
+            newEventDay,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -208,12 +208,12 @@ export class EventControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerDeleteById(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public eventControllerDeleteById(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public eventControllerDeleteById(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public eventControllerDeleteById(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public eventDayControllerDeleteById(id: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public eventDayControllerDeleteById(id: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public eventDayControllerDeleteById(id: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public eventDayControllerDeleteById(id: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling eventControllerDeleteById.');
+            throw new Error('Required parameter id was null or undefined when calling eventDayControllerDeleteById.');
         }
 
         let headers = this.defaultHeaders;
@@ -242,7 +242,7 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.delete<any>(`${this.configuration.basePath}/events/${encodeURIComponent(String(id))}`,
+        return this.httpClient.delete<any>(`${this.configuration.basePath}/event-days/${encodeURIComponent(String(id))}`,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -258,10 +258,10 @@ export class EventControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerFind(filter?: EventFilter1, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<EventWithRelations>>;
-    public eventControllerFind(filter?: EventFilter1, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<EventWithRelations>>>;
-    public eventControllerFind(filter?: EventFilter1, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<EventWithRelations>>>;
-    public eventControllerFind(filter?: EventFilter1, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventDayControllerFind(filter?: EventDayFilter1, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<EventDayWithRelations>>;
+    public eventDayControllerFind(filter?: EventDayFilter1, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<EventDayWithRelations>>>;
+    public eventDayControllerFind(filter?: EventDayFilter1, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<EventDayWithRelations>>>;
+    public eventDayControllerFind(filter?: EventDayFilter1, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: this.encoder});
         if (filter !== undefined && filter !== null) {
@@ -296,7 +296,7 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<Array<EventWithRelations>>(`${this.configuration.basePath}/events`,
+        return this.httpClient.get<Array<EventDayWithRelations>>(`${this.configuration.basePath}/event-days`,
             {
                 params: queryParameters,
                 responseType: <any>responseType,
@@ -314,12 +314,12 @@ export class EventControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerFindById(id: string, filter?: EventFilter, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<EventWithRelations>;
-    public eventControllerFindById(id: string, filter?: EventFilter, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<EventWithRelations>>;
-    public eventControllerFindById(id: string, filter?: EventFilter, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<EventWithRelations>>;
-    public eventControllerFindById(id: string, filter?: EventFilter, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventDayControllerFindById(id: string, filter?: EventDayFilter, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<EventDayWithRelations>;
+    public eventDayControllerFindById(id: string, filter?: EventDayFilter, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<EventDayWithRelations>>;
+    public eventDayControllerFindById(id: string, filter?: EventDayFilter, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<EventDayWithRelations>>;
+    public eventDayControllerFindById(id: string, filter?: EventDayFilter, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling eventControllerFindById.');
+            throw new Error('Required parameter id was null or undefined when calling eventDayControllerFindById.');
         }
 
         let queryParameters = new HttpParams({encoder: this.encoder});
@@ -355,7 +355,7 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.get<EventWithRelations>(`${this.configuration.basePath}/events/${encodeURIComponent(String(id))}`,
+        return this.httpClient.get<EventDayWithRelations>(`${this.configuration.basePath}/event-days/${encodeURIComponent(String(id))}`,
             {
                 params: queryParameters,
                 responseType: <any>responseType,
@@ -369,16 +369,16 @@ export class EventControllerService {
 
     /**
      * @param id 
-     * @param event 
+     * @param eventDay 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerReplaceById(id: string, event?: Event, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public eventControllerReplaceById(id: string, event?: Event, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public eventControllerReplaceById(id: string, event?: Event, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public eventControllerReplaceById(id: string, event?: Event, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public eventDayControllerReplaceById(id: string, eventDay?: EventDay, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public eventDayControllerReplaceById(id: string, eventDay?: EventDay, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public eventDayControllerReplaceById(id: string, eventDay?: EventDay, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public eventDayControllerReplaceById(id: string, eventDay?: EventDay, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling eventControllerReplaceById.');
+            throw new Error('Required parameter id was null or undefined when calling eventDayControllerReplaceById.');
         }
 
         let headers = this.defaultHeaders;
@@ -416,8 +416,8 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.put<any>(`${this.configuration.basePath}/events/${encodeURIComponent(String(id))}`,
-            event,
+        return this.httpClient.put<any>(`${this.configuration.basePath}/event-days/${encodeURIComponent(String(id))}`,
+            eventDay,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
@@ -430,14 +430,14 @@ export class EventControllerService {
 
     /**
      * @param where 
-     * @param eventPartial 
+     * @param eventDayPartial 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerUpdateAll(where?: { [key: string]: object; }, eventPartial?: EventPartial, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoopbackCount>;
-    public eventControllerUpdateAll(where?: { [key: string]: object; }, eventPartial?: EventPartial, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoopbackCount>>;
-    public eventControllerUpdateAll(where?: { [key: string]: object; }, eventPartial?: EventPartial, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoopbackCount>>;
-    public eventControllerUpdateAll(where?: { [key: string]: object; }, eventPartial?: EventPartial, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
+    public eventDayControllerUpdateAll(where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<LoopbackCount>;
+    public eventDayControllerUpdateAll(where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<LoopbackCount>>;
+    public eventDayControllerUpdateAll(where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<LoopbackCount>>;
+    public eventDayControllerUpdateAll(where?: { [key: string]: object; }, eventDayPartial?: EventDayPartial, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: this.encoder});
         if (where !== undefined && where !== null) {
@@ -481,8 +481,8 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.patch<LoopbackCount>(`${this.configuration.basePath}/events`,
-            eventPartial,
+        return this.httpClient.patch<LoopbackCount>(`${this.configuration.basePath}/event-days`,
+            eventDayPartial,
             {
                 params: queryParameters,
                 responseType: <any>responseType,
@@ -496,16 +496,16 @@ export class EventControllerService {
 
     /**
      * @param id 
-     * @param eventPartial 
+     * @param eventDayPartial 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public eventControllerUpdateById(id: string, eventPartial?: EventPartial, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public eventControllerUpdateById(id: string, eventPartial?: EventPartial, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public eventControllerUpdateById(id: string, eventPartial?: EventPartial, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public eventControllerUpdateById(id: string, eventPartial?: EventPartial, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public eventDayControllerUpdateById(id: string, eventDayPartial?: EventDayPartial, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public eventDayControllerUpdateById(id: string, eventDayPartial?: EventDayPartial, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public eventDayControllerUpdateById(id: string, eventDayPartial?: EventDayPartial, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public eventDayControllerUpdateById(id: string, eventDayPartial?: EventDayPartial, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling eventControllerUpdateById.');
+            throw new Error('Required parameter id was null or undefined when calling eventDayControllerUpdateById.');
         }
 
         let headers = this.defaultHeaders;
@@ -543,8 +543,8 @@ export class EventControllerService {
             responseType = 'text';
         }
 
-        return this.httpClient.patch<any>(`${this.configuration.basePath}/events/${encodeURIComponent(String(id))}`,
-            eventPartial,
+        return this.httpClient.patch<any>(`${this.configuration.basePath}/event-days/${encodeURIComponent(String(id))}`,
+            eventDayPartial,
             {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,

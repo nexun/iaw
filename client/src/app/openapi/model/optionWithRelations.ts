@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { EventWithRelations } from './eventWithRelations';
 
 
 /**
@@ -17,7 +18,8 @@
 export interface OptionWithRelations { 
     id?: string;
     fecha?: string;
-    eventId?: string;
     emailVotante?: string;
+    eventId?: string;
+    event?: EventWithRelations;
 }
 

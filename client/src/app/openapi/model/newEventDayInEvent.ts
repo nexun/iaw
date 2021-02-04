@@ -15,10 +15,8 @@
  * (tsType: @loopback/repository-json-schema#Optional<Omit<EventDay, \'id\'>, \'eventId\'>, schemaOptions: { title: \'NewEventDayInEvent\', exclude: [ \'id\' ], optional: [ \'eventId\' ] })
  */
 export interface NewEventDayInEvent { 
-  [key: string]: object | any;
-
-
-    date: string;
+    eventDate: string;
+    duration: number;
     eventId?: string;
 }
 

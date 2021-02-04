@@ -9,15 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { OptionScopeFilter } from './optionScopeFilter';
 
 
-/**
- * (tsType: Partial<Option>, schemaOptions: { partial: true })
- */
-export interface OptionPartial { 
-    id?: string;
-    fecha?: string;
-    emailVotante?: string;
-    eventId?: string;
+export interface OptionIncludeFilterItems { 
+    relation?: string;
+    scope?: OptionScopeFilter;
 }
 

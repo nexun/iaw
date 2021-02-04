@@ -4,10 +4,12 @@ README.md
 api.module.ts
 api/api.ts
 api/eventController.service.ts
+api/eventDayController.service.ts
 api/eventDayEventController.service.ts
 api/eventEventDayController.service.ts
 api/eventOptionController.service.ts
 api/optionController.service.ts
+api/optionEventController.service.ts
 api/pingController.service.ts
 api/userController.service.ts
 configuration.ts
@@ -16,7 +18,11 @@ git_push.sh
 index.ts
 model/event.ts
 model/eventDay.ts
+model/eventDayFilter.ts
+model/eventDayFilter1.ts
+model/eventDayIncludeFilterItems.ts
 model/eventDayPartial.ts
+model/eventDayScopeFilter.ts
 model/eventDayWithRelations.ts
 model/eventFilter.ts
 model/eventFilter1.ts
@@ -29,6 +35,7 @@ model/inlineResponse200.ts
 model/loopbackCount.ts
 model/models.ts
 model/newEvent.ts
+model/newEventDay.ts
 model/newEventDayInEvent.ts
 model/newOption.ts
 model/newOptionInEvent.ts
@@ -37,7 +44,9 @@ model/newUserRequest.ts
 model/option.ts
 model/optionFilter.ts
 model/optionFilter1.ts
+model/optionIncludeFilterItems.ts
 model/optionPartial.ts
+model/optionScopeFilter.ts
 model/optionWithRelations.ts
 model/pingResponse.ts
 model/user.ts

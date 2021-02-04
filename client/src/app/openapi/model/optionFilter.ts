@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { OptionIncludeFilterItems } from './optionIncludeFilterItems';
 
 
 export interface OptionFilter { 
@@ -17,5 +18,6 @@ export interface OptionFilter {
     skip?: number;
     order?: string | Array<string>;
     fields?: object | Set<string>;
+    include?: Array<OptionIncludeFilterItems | string>;
 }
 

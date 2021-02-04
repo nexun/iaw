@@ -30,7 +30,7 @@ export class EventService {
   } 
 
   addEvent(event){    
-    this.eventController.eventControllerCreate(event).subscribe(response=>response) //ver
+    return this.eventController.eventControllerCreate(event)//.subscribe(response=>response) //ver
   }
   addOption(option){    
     this.optionController.optionControllerCreate(option).subscribe(response=>response) //ver

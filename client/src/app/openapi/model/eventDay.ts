@@ -12,11 +12,9 @@
 
 
 export interface EventDay { 
-  [key: string]: object | any;
-
-
     id?: string;
-    date: string;
+    eventDate: string;
+    duration: number;
     eventId?: string;
 }
 
