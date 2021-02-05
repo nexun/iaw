@@ -40,9 +40,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let event of filteredEvents; let idx = index">
-          
           <td>
-            <span><h4>{{ event.name }}</h4></span>
+            <span
+              ><h4>{{ event.name }}</h4></span
+            >
           </td>
 
           <td>
@@ -50,10 +51,10 @@
               <span class="badge" type="date"
                 >Opcion {{ idx + 1 }} ->
                 {{ day.eventDate | date: "dd/MM/yyyy h:mm a" }}</span
-              > 
+              >
               <span class="ml-1 badge p-1" type="date"
-                    >- {{ sumDate(day) | date: "dd/MM/yyyy h:mm a" }}</span
-                  >
+                >- {{ sumDate(day) | date: "dd/MM/yyyy h:mm a" }}</span
+              >
             </tr>
             <button
               class="btn btn-success m-1"
@@ -61,12 +62,9 @@
             >
               Ver votos
             </button>
-            <button
-            class="btn btn-info m-1"
-            (click)="handleViewLink(event.id)"
-          >
-            Compartir
-          </button>
+            <button class="btn btn-info m-1" (click)="handleViewLink(event.id)">
+              Compartir
+            </button>
           </td>
           <td>
             <span class="badge" type="date">
@@ -135,11 +133,17 @@
     <div class="modal-body">
       <div>
         <div *ngFor="let day of days; let idy = index">
-          <div class="p-3">Opción <strong> {{day.eventDate | date: "dd/MM/yyyy h:mm a" }}
-            - {{ sumDate(day) | date: "dd/MM/yyyy h:mm a" }} <h6> Total: {{day.options.length}} votos</h6></strong> </div>
-          
-          <ul *ngFor="let option of day.options; let idy = index">            
-            <li>{{option.emailVotante}}</li>
+          <div class="p-3">
+            Opción
+            <strong>
+              {{ day.eventDate | date: "dd/MM/yyyy h:mm a" }} -
+              {{ sumDate(day) | date: "dd/MM/yyyy h:mm a" }}
+              <h6>Total: {{ day?.options?.length || 0 }} votos</h6></strong
+            >
+          </div>
+
+          <ul *ngFor="let option of day.options; let idy = index">
+            <li>{{ option.emailVotante }}</li>
           </ul>
         </div>
       </div>
@@ -156,9 +160,11 @@
     <div class="modal-body">
       <div>
         <h4>
-       <label class="form-label-control" for="link"> Link para compartir el evento:</label>
-        <input class="form-control" value={{id}} disabled/>
-      </h4>
+          <label class="form-label-control" for="link">
+            Link para compartir el evento:</label
+          >
+          <input class="form-control" value="{{ id }}" disabled />
+        </h4>
       </div>
     </div>
   </ng-template>

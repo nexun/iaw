@@ -5,9 +5,7 @@ import { EventService } from 'src/app/_services/event/event.service';
 
 import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { EventModel } from 'src/app/_model/event.model';
-import {
-  EventControllerService,
-} from 'src/app/openapi';
+import { EventControllerService } from 'src/app/openapi';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -40,18 +38,30 @@ export class NeweventComponent implements OnInit {
     this.isDisabled = !this.isDisabled;
     return;
   }
-
+  sumDate(day) {
+    var fecha = new Date(day.eventDate);
+    return fecha.setHours(fecha.getHours() + day.duration);
+  }
   addEvent() {
     if (this.eventDayForm.valid) {
       var idx = this.route.snapshot.paramMap.get('id');
       if (idx !== null) {
         const request = {
           name: this.eventDayForm.value.eventName,
-          ownerEmail: this.tokenService.getUser().email,
         };
-        this.service
-          .editEvent(idx, request)
-          .subscribe(() => this.buttonClicked.emit(true));
+        this.service.editEvent(idx, request).subscribe((response) => {
+          const days = this.eventDayForm.value.days;
+          days.map((day) => {
+            const request = {
+              eventDate: new Date(day.eventDate),
+              duration: day.duration,
+            };
+            this.service.addDayEvent(idx, request).subscribe((response) => {
+              console.log(response);
+            });
+          });
+        });
+        this.buttonClicked.emit(true);
       } else {
         const request = {
           name: this.eventDayForm.value.eventName,
@@ -88,9 +98,10 @@ export class NeweventComponent implements OnInit {
       this.controllerEvent
         .eventControllerFindById(this.idx)
         .subscribe((event) => {
+          console.log(event);
           this.event = event;
           this.eventDayForm.patchValue({
-            name: this.event.name,
+            eventName: this.event.name,
           });
         });
     }

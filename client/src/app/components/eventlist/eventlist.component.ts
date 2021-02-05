@@ -22,7 +22,6 @@ export class EventlistComponent implements OnInit {
   days: EventDay[];
   id: string;
 
-
   filteredEvents: EventModel[];
   optiones: EventDayWithRelations[];
   valueEmittedFromChildComponent: string = '';
@@ -40,11 +39,10 @@ export class EventlistComponent implements OnInit {
     }
   }
 
-  sumDate(day){
-    var fecha = new Date(day.eventDate)
-    return fecha.setHours(fecha.getHours()+day.duration); 
+  sumDate(day) {
+    var fecha = new Date(day.eventDate);
+    return fecha.setHours(fecha.getHours() + day.duration);
   }
-
 
   parentEventHandlerFunction(valueEmitted) {
     this.valueEmittedFromChildComponent = valueEmitted;
@@ -62,25 +60,21 @@ export class EventlistComponent implements OnInit {
   }
 
   handleViewVotes(eventDays): void {
-    this.days = eventDays
+    console.log(eventDays);
+    this.days = eventDays;
     this.modal.open(this.modalOptionContent, { size: 'lg' });
   }
 
- handleViewLink(id): void {
-    this.id = 'http://localhost:4200/public/'+id
+  handleViewLink(id): void {
+    this.id = 'http://localhost:4200/public/' + id;
     this.modal.open(this.modalShared, { size: 'lg' });
   }
 
   ngOnInit(): void {
     const email = this.tokenService.getUser().email;
 
-    this.service
-      .getEvents()
-      .subscribe(
-        (events) =>
-          {
-            this.filteredEvents = events.filter( (event) => event.ownerEmail == email )
-          }
-      );
+    this.service.getEvents().subscribe((events) => {
+      this.filteredEvents = events.filter((event) => event.ownerEmail == email);
+    });
   }
 }
