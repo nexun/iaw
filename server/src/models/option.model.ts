@@ -1,4 +1,5 @@
-import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
+import { EventDay } from './event-day.model';
 import {Event} from './event.model';
 
 @model()
@@ -11,17 +12,12 @@ export class Option extends Entity {
   id?: string;
 
   @property({
-    type: 'date',
-  })
-  fecha: string;
-
-  @property({
     type: 'string',
   })
   emailVotante: string;
 
-  @belongsTo(() => Event)
-  eventId: string;
+  @belongsTo(() => EventDay)
+  eventDayId: string;
 
   constructor(data?: Partial<Option>) {
     super(data);

@@ -1737,7 +1737,7 @@
         "affectsGlobalScope": false
       },
       "./src/sequence.ts": {
-        "version": "d797218fbf3cacdc9db1587d3d460907b50ab3a19e0698b860cec6addf4c74e1",
+        "version": "12e8af986d85cdf521b2aecda816a9f8c6707e47c7e722cb545a42e20555076b",
         "signature": "92ce26be36f17f312491d49afe2a3c0b425dc1bc7cced81a7032eccdad10242a",
         "affectsGlobalScope": false
       },
@@ -1892,32 +1892,32 @@
         "affectsGlobalScope": false
       },
       "./src/datasources/mongo.datasource.ts": {
-        "version": "34979421f7627ba46d1209f129a557cff5a01322f829c404ca398a1e2a761998",
+        "version": "400a11ad8c4bdd775b46f40a8b7495587f28bda5412041205ce9afdec7f1da38",
         "signature": "a041b48e93606c98a7c4c498351d4e1ae6adfefb251205e6ff967a7d0deab0b5",
         "affectsGlobalScope": false
       },
       "./src/datasources/index.ts": {
-        "version": "93b08dcadc7a705c1310a99d2e60199e3e9117952be081112ebc0c5f76f63fc8",
+        "version": "970dfe29ef8492849da07c92af8ddedda93540d88c81faab88ef81159af49eed",
         "signature": "93b08dcadc7a705c1310a99d2e60199e3e9117952be081112ebc0c5f76f63fc8",
         "affectsGlobalScope": false
       },
       "./src/application.ts": {
-        "version": "afbbddbc966f9ab4a52bde031508a5e7751ecdce791ac31e9fc8ef585dac1ed1",
+        "version": "705eabbbf48f70af6288f4b6a8d5b0ce7a8d82c64e4914e8b83c422aad1bafcb",
         "signature": "5bc8e9d95e3583ecef0d696ff1fc47f50b9eab19129a61ac61f8c26bdf5e940f",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "8cfc7beea49f4be89a1824d043182169dd3b608cf991c79eca6d49abb52f551e",
+        "version": "eb42f4b753614909df2960655ac34873ac38fbd65d325dad464dcadd965aa279",
         "signature": "d285b71ba72aa49ed78a253f303bf731ca3e3661e14519bbed3b54c580f6999f",
         "affectsGlobalScope": false
       },
       "./src/migrate.ts": {
-        "version": "ce353898e444617f28d47eb35707a61bfcec8d9a83b0160b9d233ac3be1c9d1d",
+        "version": "1a64855ff29d9712ed4e77b6c2a0e63e331ba236cb02beb6544d8291b8022f5f",
         "signature": "e9b8dbbcc0cb738d2836845996cec05b75916fe8314d6d515028b0cab71df9c9",
         "affectsGlobalScope": false
       },
       "./src/openapi-spec.ts": {
-        "version": "163e62053f8a6b5e9df7270954a8a9d851f6ba7a4cf3a3e85c91b2ebbc9829e4",
+        "version": "221dbc0ebdb697e44f5b499e9c420686bb0f5de1f99261d65f58cac773b6f19d",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -2022,33 +2022,33 @@
         "affectsGlobalScope": false
       },
       "./src/__tests__/acceptance/test-helper.ts": {
-        "version": "c8d767fdab4fdd39bd18b4dea4a53660f0b8c121dfd8880045efe7bc9372d243",
+        "version": "13145b900d095bb77c4cda520a3bd6eb5215ab9ac8fa7dd2e61e54f7ad4d28ce",
         "signature": "a5b3e622290ec5c16215a4413a0c973f69448e9e72d871b386dfe5783ba87e89",
         "affectsGlobalScope": false
       },
       "./src/__tests__/acceptance/home-page.acceptance.ts": {
-        "version": "7908817e9cb125fc47c68c3fbc25283fb8d3af3467c2feea6f24b6f8c5d4e7d9",
+        "version": "edc391e83c0eb5673ce96066861aececa7676ebc02533272546f6518c47ad014",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "./src/__tests__/acceptance/ping.controller.acceptance.ts": {
-        "version": "87f5b829ce5c0ac801cf045e3faa394fdfa99d4873b481ba14b06b2e2c4ad93d",
+        "version": "3150c585053b1a3223905a7e546c8d2a917b549d350ccb63d0714d1535e2fc8d",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
-      "./src/models/option.model.ts": {
-        "version": "cd167e0e0c156deba24f0687d648a373ebdf88a97c9e5ce4292643c4c3388cbc",
-        "signature": "8064e8116d5195ad2eae86f19fffdd906d529473b27923680385878033ad0dc4",
+      "./src/models/event-day.model.ts": {
+        "version": "0d119a382d1af4c12fe1daf723834acb54062000cbf72740caa77d4966909e8a",
+        "signature": "33bc7d34c3b6a954bc9b632e854084f2989f75a7cb1b21a3091056de234db313",
         "affectsGlobalScope": false
       },
-      "./src/models/event-day.model.ts": {
-        "version": "8dd6c654ac5d0563f1ecd56a33215badbe6080820e5e3c70a52cafc17fdac2ce",
-        "signature": "e3f7c8bf286653c49a8f0b0e4b86786131f6652179e77b95981c552bb2f9d5ce",
+      "./src/models/option.model.ts": {
+        "version": "3ad52a1a7aae17e62ccb7795f25b751df9238982e3146ea7a71816693cb4a4fe",
+        "signature": "ae1a38896a05d616c7e4d6b5a7ffd1a6f5b8fe0c318515e508d370fe29cebc53",
         "affectsGlobalScope": false
       },
       "./src/models/event.model.ts": {
-        "version": "0d049f7939c138ad14e6e35885ed9d4fc9e520333cc1ee98defcfdcc6ecb2da7",
-        "signature": "0b0f1dc37bd549190ec9ee1dc115742cf3dbc8dec28d7959c64fa934bb40ebb9",
+        "version": "cecee26ca9cf024af3fc0da9467de00c19be1ca6f5cbb81a314b4243339c719c",
+        "signature": "b15b165500bef1ce5b4aaf2e0436878e921381e67f219825e09850b25bb66609",
         "affectsGlobalScope": false
       },
       "./src/models/index.ts": {
@@ -2056,69 +2056,74 @@
         "signature": "981cba267308cea079494c7ff83a06014caead66f5a3be7236622665126d1bc7",
         "affectsGlobalScope": false
       },
-      "./src/repositories/event-day.repository.ts": {
-        "version": "f63c31313f17412baf02fc9147bb422c7c71ccf9378c44a568130d17fd4b2ecf",
-        "signature": "a234ae5f2e64e5c6ca89d7f931752f72f05b77c000cb60ec41b7a10f2cdb1ada",
+      "./src/repositories/option.repository.ts": {
+        "version": "581c91ae3eceff166992249b1c69cd7b57f1ecd923ba5898b70f4dcf6773cbd5",
+        "signature": "c11df82331e7fc3946d976ab1009afe743ce4ba4a701d37505d675937fe4267f",
         "affectsGlobalScope": false
       },
-      "./src/repositories/option.repository.ts": {
-        "version": "44bada3dd311a784c90bc0b03fbeb71ef47d7a0b5a6d061e21a9c115d1217fa4",
-        "signature": "4149acba8e3320cd2a66fd4c24f4e2f4ffbbee9c89b52a7ac00682c7268c523e",
+      "./src/repositories/event-day.repository.ts": {
+        "version": "802ffb102b9db5a1ce19f6055d7738e42be1f889e3a5611ffa04042d7a00b333",
+        "signature": "5c917794a386a1c74d6d293565092b6690bd58295bef1962581f53eab65b1285",
         "affectsGlobalScope": false
       },
       "./src/repositories/event.repository.ts": {
-        "version": "bf827ccd81b8e12c9c0c467a10946e493116f31b235d7cdd1c637fa7a2aa1514",
-        "signature": "f05d628688ba19109670332bdc40ab1215c7f596f1541a33896e46143ae0ba25",
+        "version": "e4aec436dd612fa340609cd58730c86e0d69b1dec77cbf9d27d8e03687627ccf",
+        "signature": "1e87328036d9c704e7cd998db65e5956375822d01e59e27c2a1e42a10321e722",
         "affectsGlobalScope": false
       },
       "./src/repositories/index.ts": {
-        "version": "22a58b338e2c714c49db53a31d5c0077782f9e032c5a0228aa2b9fc0f26b1b69",
+        "version": "e184828c466fe19ff71212142fa692562405b814ae8819292b45d87ed47e5965",
         "signature": "22a58b338e2c714c49db53a31d5c0077782f9e032c5a0228aa2b9fc0f26b1b69",
         "affectsGlobalScope": false
       },
+      "./src/controllers/even.controller.ts": {
+        "version": "cc4880b3aae5199097c6199ca5b3e2c6b4a744761b71643570767ffa31be2e9a",
+        "signature": "4ceb0e25173ab0f527ed954825b9616e744af1d56d7690465df491cb53110a67",
+        "affectsGlobalScope": false
+      },
       "./src/controllers/event-day-event.controller.ts": {
-        "version": "f4fe31873d4182244c6bda8f60a738a9bb6c534356d6f8528af984431e3295c9",
+        "version": "d083aa008d988c57c94c20509cfac880eb799eee73cade968bb82d9399f748b0",
         "signature": "6878cb110ffadc8ae808347c5b676e93096c00ddc58e722be8b65aeaa76ad307",
         "affectsGlobalScope": false
       },
+      "./src/controllers/event-day-option.controller.ts": {
+        "version": "f70bab473b5af3d7ca010d5e18eabc828ce99fdea4c3072c2f63e8653e627746",
+        "signature": "ead8dfa47bdfb97f17ce7061cf7ca55b55155c454501da6f9ac9c96db0fb69cc",
+        "affectsGlobalScope": false
+      },
       "./src/controllers/event-day.controller.ts": {
-        "version": "0462a682552dbe6355a81f31569a8bc8a7b2f08482ec6a401fc7ae1ea055fd95",
+        "version": "efaec2433206a7c375aebf6450e9725ef9d72dae490be7df22cddd8f84609355",
         "signature": "a9c23553348b6b8dd3bb6d7bac8a8e1095516340594aac4535e0d29c02688bec",
         "affectsGlobalScope": false
       },
       "./src/controllers/event-event-day.controller.ts": {
-        "version": "af9d23d1997cf16e8096632d20cfa0a75633ee0bef073c63c70267b324685e50",
+        "version": "319303cd9cdc56b6a696386ed3d90803eac774eada319e3d767f00fff63cf758",
         "signature": "cc80542e1f2448e6bb2b3d7bca8f063fb2d6fae5faf4c741c90ecfe841f5f5c2",
         "affectsGlobalScope": false
       },
-      "./src/controllers/event-option.controller.ts": {
-        "version": "914f7a3e2654e9cfb0379c8ac94f36b4006707decb0f16c42061f8442a547a60",
-        "signature": "5170ca8e0b9be6889d09302460d53537174d656482b68eb26c58c669cb85c34f",
-        "affectsGlobalScope": false
-      },
       "./src/controllers/event.controller.ts": {
-        "version": "ba9b098f86aab7e9293e070f1ad15a8a67f95d5bd554b2c1f859da5fa6e1d18b",
+        "version": "3e7b50e52af26a5f196756087c590e0c95d1ad14de9caf0c2fcba47fa1e35284",
         "signature": "4ceb0e25173ab0f527ed954825b9616e744af1d56d7690465df491cb53110a67",
         "affectsGlobalScope": false
       },
       "./src/controllers/ping.controller.ts": {
-        "version": "837373906cb65222388f22b852a4c295daacceab02e22b05c6a150bfb30575d1",
+        "version": "b225f53bcbed62b8c64fdaed320ffaa1252ad6fe28735258eb794a0707fb0da8",
         "signature": "298dcf42626620a1d183c7a1d1f08ad2311840ec09f9512d57335dd1c7d9fc72",
         "affectsGlobalScope": false
       },
       "./src/controllers/option.controller.ts": {
-        "version": "8313ad4768ab012723825c7c8e4540ac8d04be6a505fad9024111df0dbfc7bde",
+        "version": "1328218732a56e1dd4aa606a1a40f22a3af2ebf89eac42472b2acb5085532cec",
         "signature": "c9e238e521f18550004c699efff3323e27b1b11adff40308ddd6f79297894bc5",
         "affectsGlobalScope": false
       },
-      "./src/controllers/option-event.controller.ts": {
-        "version": "01a582f17960875a620f35e6aaa160b1e3ead844d434957bdb74bb747e2ac519",
-        "signature": "b5e7db3e3a9d51c82b0b50d6655dcaa9a9186e3adfd6ebc608888a6b2d0c3fa7",
+      "./src/controllers/option-event-day.controller.ts": {
+        "version": "d319ab96d75a341fdf7b4a7a9f9ed46d86ede4926161af65fcf1dc61a5095b09",
+        "signature": "248da49217b91a90e654fca8f209c44402994301230913ba3d3eba904d8b89e2",
         "affectsGlobalScope": false
       },
       "./src/controllers/index.ts": {
-        "version": "8cdfe1ca6c02ad0df6efeda13b89beafd48e44f1e6733dd34dc0eca840995c78",
-        "signature": "8cdfe1ca6c02ad0df6efeda13b89beafd48e44f1e6733dd34dc0eca840995c78",
+        "version": "b978ea9675234ed58168c7a59889ad34201667055db217d6625b8c60eb17b645",
+        "signature": "a826744c6b316ced2e45ef9ef53f77279a58ad202679a5d9a4d421069b5b6e34",
         "affectsGlobalScope": false
       },
       "./node_modules/@loopback/authentication-jwt/dist/services/jwt.auth.strategy.d.ts": {
@@ -2222,7 +2227,7 @@
         "affectsGlobalScope": true
       },
       "./src/controllers/user.controller.ts": {
-        "version": "2eb847c5e6709150a2e859e68d81eabb535089f01126fc55b0e6f79979b9c51b",
+        "version": "56b73ab1ee3e2956971a97c27791c3c0a231a81242aa8f8a2759f1badf1c3160",
         "signature": "8d29bd6b2d61c7183158ab3ebb09ff85c24f85687b9fd3a14deaddc461e6ead2",
         "affectsGlobalScope": false
       },
@@ -4216,7 +4221,21 @@
         "./src/datasources/index.ts",
         "./src/sequence.ts"
       ],
+      "./src/controllers/even.controller.ts": [
+        "./node_modules/@loopback/repository/dist/index.d.ts",
+        "./node_modules/@loopback/rest/dist/index.d.ts",
+        "./node_modules/tslib/tslib.d.ts",
+        "./src/models/index.ts",
+        "./src/repositories/index.ts"
+      ],
       "./src/controllers/event-day-event.controller.ts": [
+        "./node_modules/@loopback/repository/dist/index.d.ts",
+        "./node_modules/@loopback/rest/dist/index.d.ts",
+        "./node_modules/tslib/tslib.d.ts",
+        "./src/models/index.ts",
+        "./src/repositories/index.ts"
+      ],
+      "./src/controllers/event-day-option.controller.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./node_modules/@loopback/rest/dist/index.d.ts",
         "./node_modules/tslib/tslib.d.ts",
@@ -4237,13 +4256,6 @@
         "./src/models/index.ts",
         "./src/repositories/index.ts"
       ],
-      "./src/controllers/event-option.controller.ts": [
-        "./node_modules/@loopback/repository/dist/index.d.ts",
-        "./node_modules/@loopback/rest/dist/index.d.ts",
-        "./node_modules/tslib/tslib.d.ts",
-        "./src/models/index.ts",
-        "./src/repositories/index.ts"
-      ],
       "./src/controllers/event.controller.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./node_modules/@loopback/rest/dist/index.d.ts",
@@ -4254,15 +4266,15 @@
       "./src/controllers/index.ts": [
         "./node_modules/tslib/tslib.d.ts",
         "./src/controllers/event-day-event.controller.ts",
+        "./src/controllers/event-day-option.controller.ts",
         "./src/controllers/event-day.controller.ts",
         "./src/controllers/event-event-day.controller.ts",
-        "./src/controllers/event-option.controller.ts",
         "./src/controllers/event.controller.ts",
-        "./src/controllers/option-event.controller.ts",
+        "./src/controllers/option-event-day.controller.ts",
         "./src/controllers/option.controller.ts",
         "./src/controllers/ping.controller.ts"
       ],
-      "./src/controllers/option-event.controller.ts": [
+      "./src/controllers/option-event-day.controller.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./node_modules/@loopback/rest/dist/index.d.ts",
         "./node_modules/tslib/tslib.d.ts",
@@ -4312,7 +4324,8 @@
       "./src/models/event-day.model.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./node_modules/tslib/tslib.d.ts",
-        "./src/models/event.model.ts"
+        "./src/models/event.model.ts",
+        "./src/models/option.model.ts"
       ],
       "./src/models/event.model.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
@@ -4329,6 +4342,7 @@
       "./src/models/option.model.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./node_modules/tslib/tslib.d.ts",
+        "./src/models/event-day.model.ts",
         "./src/models/event.model.ts"
       ],
       "./src/models/shared.model.ts": [
@@ -4346,7 +4360,8 @@
         "./node_modules/tslib/tslib.d.ts",
         "./src/datasources/index.ts",
         "./src/models/index.ts",
-        "./src/repositories/event.repository.ts"
+        "./src/repositories/event.repository.ts",
+        "./src/repositories/option.repository.ts"
       ],
       "./src/repositories/event.repository.ts": [
         "./node_modules/@loopback/core/dist/index.d.ts",
@@ -4354,8 +4369,7 @@
         "./node_modules/tslib/tslib.d.ts",
         "./src/datasources/index.ts",
         "./src/models/index.ts",
-        "./src/repositories/event-day.repository.ts",
-        "./src/repositories/option.repository.ts"
+        "./src/repositories/event-day.repository.ts"
       ],
       "./src/repositories/index.ts": [
         "./node_modules/tslib/tslib.d.ts",
@@ -4369,7 +4383,7 @@
         "./node_modules/tslib/tslib.d.ts",
         "./src/datasources/index.ts",
         "./src/models/index.ts",
-        "./src/repositories/event.repository.ts"
+        "./src/repositories/event-day.repository.ts"
       ],
       "./src/sequence.ts": [
         "./node_modules/@loopback/rest/dist/index.d.ts",
@@ -6275,7 +6289,17 @@
         "./node_modules/@loopback/rest/dist/index.d.ts",
         "./node_modules/loopback-datasource-juggler/index.d.ts"
       ],
+      "./src/controllers/even.controller.ts": [
+        "./node_modules/@loopback/repository/dist/index.d.ts",
+        "./src/models/index.ts",
+        "./src/repositories/index.ts"
+      ],
       "./src/controllers/event-day-event.controller.ts": [
+        "./src/models/index.ts",
+        "./src/repositories/index.ts"
+      ],
+      "./src/controllers/event-day-option.controller.ts": [
+        "./node_modules/@loopback/repository/dist/index.d.ts",
         "./src/models/index.ts",
         "./src/repositories/index.ts"
       ],
@@ -6289,11 +6313,6 @@
         "./src/models/index.ts",
         "./src/repositories/index.ts"
       ],
-      "./src/controllers/event-option.controller.ts": [
-        "./node_modules/@loopback/repository/dist/index.d.ts",
-        "./src/models/index.ts",
-        "./src/repositories/index.ts"
-      ],
       "./src/controllers/event.controller.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./src/models/index.ts",
@@ -6301,15 +6320,15 @@
       ],
       "./src/controllers/index.ts": [
         "./src/controllers/event-day-event.controller.ts",
+        "./src/controllers/event-day-option.controller.ts",
         "./src/controllers/event-day.controller.ts",
         "./src/controllers/event-event-day.controller.ts",
-        "./src/controllers/event-option.controller.ts",
         "./src/controllers/event.controller.ts",
-        "./src/controllers/option-event.controller.ts",
+        "./src/controllers/option-event-day.controller.ts",
         "./src/controllers/option.controller.ts",
         "./src/controllers/ping.controller.ts"
       ],
-      "./src/controllers/option-event.controller.ts": [
+      "./src/controllers/option-event-day.controller.ts": [
         "./src/models/index.ts",
         "./src/repositories/index.ts"
       ],
@@ -6338,12 +6357,12 @@
         "./src/application.ts"
       ],
       "./src/models/event-day.model.ts": [
-        "./node_modules/@loopback/repository/dist/index.d.ts"
+        "./node_modules/@loopback/repository/dist/index.d.ts",
+        "./src/models/option.model.ts"
       ],
       "./src/models/event.model.ts": [
         "./node_modules/@loopback/repository/dist/index.d.ts",
-        "./src/models/event-day.model.ts",
-        "./src/models/option.model.ts"
+        "./src/models/event-day.model.ts"
       ],
       "./src/models/index.ts": [
         "./src/models/event-day.model.ts",
@@ -6361,15 +6380,15 @@
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./src/datasources/index.ts",
         "./src/models/index.ts",
-        "./src/repositories/event.repository.ts"
+        "./src/repositories/event.repository.ts",
+        "./src/repositories/option.repository.ts"
       ],
       "./src/repositories/event.repository.ts": [
         "./node_modules/@loopback/core/dist/index.d.ts",
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./src/datasources/index.ts",
         "./src/models/index.ts",
-        "./src/repositories/event-day.repository.ts",
-        "./src/repositories/option.repository.ts"
+        "./src/repositories/event-day.repository.ts"
       ],
       "./src/repositories/index.ts": [
         "./src/repositories/event-day.repository.ts",
@@ -6381,7 +6400,7 @@
         "./node_modules/@loopback/repository/dist/index.d.ts",
         "./src/datasources/index.ts",
         "./src/models/index.ts",
-        "./src/repositories/event.repository.ts"
+        "./src/repositories/event-day.repository.ts"
       ],
       "./src/sequence.ts": [
         "./node_modules/@loopback/rest/dist/index.d.ts"
@@ -6817,13 +6836,14 @@
       "./src/__tests__/acceptance/ping.controller.acceptance.ts",
       "./src/__tests__/acceptance/test-helper.ts",
       "./src/application.ts",
+      "./src/controllers/even.controller.ts",
       "./src/controllers/event-day-event.controller.ts",
+      "./src/controllers/event-day-option.controller.ts",
       "./src/controllers/event-day.controller.ts",
       "./src/controllers/event-event-day.controller.ts",
-      "./src/controllers/event-option.controller.ts",
       "./src/controllers/event.controller.ts",
       "./src/controllers/index.ts",
-      "./src/controllers/option-event.controller.ts",
+      "./src/controllers/option-event-day.controller.ts",
       "./src/controllers/option.controller.ts",
       "./src/controllers/ping.controller.ts",
       "./src/controllers/user.controller.ts",

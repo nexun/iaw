@@ -1,5 +1,6 @@
 import {Entity, model, property, hasMany, belongsTo} from '@loopback/repository';
 import {Event} from './event.model';
+import {Option} from './option.model';
 
 @model()
 export class EventDay extends Entity {
@@ -24,6 +25,9 @@ export class EventDay extends Entity {
 
   @belongsTo(() => Event)
   eventId: string;
+
+  @hasMany(() => Option)
+  options: Option[];
 
   constructor(data?: Partial<EventDay>) {
     super(data);

@@ -29,6 +29,7 @@
     <table class="table table-responsive table-bordered">
       <thead class="thead-dark">
         <tr>
+          <th>ID</th>
           <th>Nombre del Evento</th>
           <th>Opciones</th>
           <th>Publicado</th>
@@ -39,6 +40,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let event of filteredEvents; let idx = index">
+          
+          <td>
+            <span>{{ event.id }}</span>
+          </td>
           <td>
             <span>{{ event.name }}</span>
           </td>

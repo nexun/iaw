@@ -81,14 +81,7 @@ export class EventController {
   async find(
     @param.filter(Event) filter?: Filter<Event>,
   ): Promise<Event[]> {
-    return this.eventRepository.find({include: [
-      {
-        relation: 'eventDays',
-        scope: {
-          include: ['options'],
-        },
-      },
-    ]},filter);
+    return this.eventRepository.find({include: ['eventDays']})
   }
 
   @patch('/events', {
@@ -129,14 +122,7 @@ export class EventController {
     @param.path.string('id') id: string,
     @param.filter(Event, {exclude: 'where'}) filter?: FilterExcludingWhere<Event>
   ): Promise<Event> {
-    return this.eventRepository.findById(id,{include: [
-      {
-        relation: 'eventDays',
-        scope: {
-          include: ['options'],
-        },
-      },
-    ]}, filter);
+    return this.eventRepository.findById(id, {include: ['eventDays']},filter);
   }
 
   @patch('/events/{id}', {

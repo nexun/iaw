@@ -1,8 +1,8 @@
 import {DefaultCrudRepository, repository, BelongsToAccessor} from '@loopback/repository';
-import {Option, OptionRelations, Event} from '../models';
+import {Option, OptionRelations, EventDay} from '../models';
 import {MongoDataSource} from '../datasources';
 import {inject, Getter} from '@loopback/core';
-import {EventRepository} from './event.repository';
+import {EventDayRepository} from './event-day.repository';
 
 export class OptionRepository extends DefaultCrudRepository<
   Option,
@@ -10,13 +10,13 @@ export class OptionRepository extends DefaultCrudRepository<
   OptionRelations
 > {
 
-  public readonly event: BelongsToAccessor<Event, typeof Option.prototype.id>;
+  public readonly eventDay: BelongsToAccessor<EventDay, typeof Option.prototype.id>;
 
   constructor(
-    @inject('datasources.mongo') dataSource: MongoDataSource, @repository.getter('EventRepository') protected eventRepositoryGetter: Getter<EventRepository>,
+    @inject('datasources.mongo') dataSource: MongoDataSource, @repository.getter('EventDayRepository') protected eventDayRepositoryGetter: Getter<EventDayRepository>,
   ) {
     super(Option, dataSource);
-    this.event = this.createBelongsToAccessorFor('event', eventRepositoryGetter,);
-    this.registerInclusionResolver('event', this.event.inclusionResolver);
+    this.eventDay = this.createBelongsToAccessorFor('eventDay', eventDayRepositoryGetter,);
+    this.registerInclusionResolver('eventDay', this.eventDay.inclusionResolver);
   }
 }

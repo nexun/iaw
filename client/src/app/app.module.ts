@@ -14,9 +14,10 @@ import { SignupComponent } from './components/signup/signup.component';
 //import { PingService } from './_services/ping/ping.service';
 import { DatePipe } from '@angular/common';
 import { CalendaryModule } from './components/calendar/calendar.module';
-import { PublicCalendaryModule } from './components/publicCalendar/publicCalendar.module';
+//import { PublicCalendaryModule } from './components/publicCalendar/publicCalendar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NeweventComponent } from './components/newevent/newevent.component';
+import { PublicCalendarComponent } from './components/publicCalendar/publicCalendar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { NeweventComponent } from './components/newevent/newevent.component';
     LoginComponent,
     NavbarComponent,
     SignupComponent,
-    NeweventComponent
+    NeweventComponent,
+    PublicCalendarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,6 @@ import { NeweventComponent } from './components/newevent/newevent.component';
     ReactiveFormsModule,
     HttpClientModule,
     CalendaryModule,
-    PublicCalendaryModule
   ],
   providers: [
     TokenService,

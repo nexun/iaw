@@ -14,11 +14,8 @@
 export interface Event { 
     id?: string;
     name: string;
-    startDate?: string;
-    endDate?: string;
     ownerEmail: string;
-    publicLink?: string;
-    privateLink?: string;
+    password?: string;
     published?: boolean;
 }
 

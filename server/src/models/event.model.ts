@@ -27,21 +27,15 @@ export class Event extends Entity {
     type: 'string',
   })
   password: string;
-
-
-  @hasMany(() => EventDay)
-  eventDays: EventDay[];
-
-  @hasMany(() => Option)
-  options: Option[];
+    
   @property({
     type: 'boolean',
     default: true,
   })
   published?: boolean;
 
-
-
+  @hasMany(() => EventDay)
+  eventDays: EventDay[];
   // Define well-known properties here
  
   

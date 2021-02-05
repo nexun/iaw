@@ -8,31 +8,31 @@ import {
 } from '@loopback/rest';
 import {
   Option,
-  Event,
+  EventDay,
 } from '../models';
 import {OptionRepository} from '../repositories';
 
-export class OptionEventController {
+export class OptionEventDayController {
   constructor(
     @repository(OptionRepository)
     public optionRepository: OptionRepository,
   ) { }
 
-  @get('/options/{id}/event', {
+  @get('/options/{id}/event-day', {
     responses: {
       '200': {
-        description: 'Event belonging to Option',
+        description: 'EventDay belonging to Option',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Event)},
+            schema: {type: 'array', items: getModelSchemaRef(EventDay)},
           },
         },
       },
     },
   })
-  async getEvent(
+  async getEventDay(
     @param.path.string('id') id: typeof Option.prototype.id,
-  ): Promise<Event> {
-    return this.optionRepository.event(id);
+  ): Promise<EventDay> {
+    return this.optionRepository.eventDay(id);
   }
 }

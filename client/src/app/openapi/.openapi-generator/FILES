@@ -6,10 +6,12 @@ api/api.ts
 api/eventController.service.ts
 api/eventDayController.service.ts
 api/eventDayEventController.service.ts
+api/eventDayOptionController.service.ts
 api/eventEventDayController.service.ts
 api/eventOptionController.service.ts
 api/optionController.service.ts
 api/optionEventController.service.ts
+api/optionEventDayController.service.ts
 api/pingController.service.ts
 api/userController.service.ts
 configuration.ts
@@ -39,6 +41,7 @@ model/newEventDay.ts
 model/newEventDayInEvent.ts
 model/newOption.ts
 model/newOptionInEvent.ts
+model/newOptionInEventDay.ts
 model/newUser.ts
 model/newUserRequest.ts
 model/option.ts

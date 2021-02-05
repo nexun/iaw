@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { OptionWithRelations } from './optionWithRelations';
 import { EventWithRelations } from './eventWithRelations';
 
 
@@ -21,5 +22,6 @@ export interface EventDayWithRelations {
     duration: number;
     eventId?: string;
     event?: EventWithRelations;
+    options?: Array<OptionWithRelations>;
 }
 

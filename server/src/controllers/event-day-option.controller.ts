@@ -16,20 +16,20 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  Event,
+  EventDay,
   Option,
 } from '../models';
-import {EventRepository} from '../repositories';
+import {EventDayRepository} from '../repositories';
 
-export class EventOptionController {
+export class EventDayOptionController {
   constructor(
-    @repository(EventRepository) protected eventRepository: EventRepository,
+    @repository(EventDayRepository) protected eventDayRepository: EventDayRepository,
   ) { }
 
-  @get('/events/{id}/options', {
+  @get('/event-days/{id}/options', {
     responses: {
       '200': {
-        description: 'Array of Event has many Option',
+        description: 'Array of EventDay has many Option',
         content: {
           'application/json': {
             schema: {type: 'array', items: getModelSchemaRef(Option)},
@@ -42,38 +42,38 @@ export class EventOptionController {
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Option>,
   ): Promise<Option[]> {
-    return this.eventRepository.options(id).find(filter);
+    return this.eventDayRepository.options(id).find(filter);
   }
 
-  @post('/events/{id}/options', {
+  @post('/event-days/{id}/options', {
     responses: {
       '200': {
-        description: 'Event model instance',
+        description: 'EventDay model instance',
         content: {'application/json': {schema: getModelSchemaRef(Option)}},
       },
     },
   })
   async create(
-    @param.path.string('id') id: typeof Event.prototype.id,
+    @param.path.string('id') id: typeof EventDay.prototype.id,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Option, {
-            title: 'NewOptionInEvent',
+            title: 'NewOptionInEventDay',
             exclude: ['id'],
-            optional: ['eventId']
+            optional: ['eventDayId']
           }),
         },
       },
     }) option: Omit<Option, 'id'>,
   ): Promise<Option> {
-    return this.eventRepository.options(id).create(option);
+    return this.eventDayRepository.options(id).create(option);
   }
 
-  @patch('/events/{id}/options', {
+  @patch('/event-days/{id}/options', {
     responses: {
       '200': {
-        description: 'Event.Option PATCH success count',
+        description: 'EventDay.Option PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -90,13 +90,13 @@ export class EventOptionController {
     option: Partial<Option>,
     @param.query.object('where', getWhereSchemaFor(Option)) where?: Where<Option>,
   ): Promise<Count> {
-    return this.eventRepository.options(id).patch(option, where);
+    return this.eventDayRepository.options(id).patch(option, where);
   }
 
-  @del('/events/{id}/options', {
+  @del('/event-days/{id}/options', {
     responses: {
       '200': {
-        description: 'Event.Option DELETE success count',
+        description: 'EventDay.Option DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -105,6 +105,6 @@ export class EventOptionController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Option)) where?: Where<Option>,
   ): Promise<Count> {
-    return this.eventRepository.options(id).delete(where);
+    return this.eventDayRepository.options(id).delete(where);
   }
 }

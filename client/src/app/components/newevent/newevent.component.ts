@@ -89,11 +89,8 @@ export class NeweventComponent implements OnInit {
         .eventControllerFindById(this.idx)
         .subscribe((event) => {
           this.event = event;
-          console.log(this.event.startDate);
           this.eventDayForm.patchValue({
             name: this.event.name,
-            startDate: this.event.startDate,
-            endDate: this.event.endDate,
           });
         });
     }

@@ -20,6 +20,7 @@ export * from './newEventDay';
 export * from './newEventDayInEvent';
 export * from './newOption';
 export * from './newOptionInEvent';
+export * from './newOptionInEventDay';
 export * from './newUser';
 export * from './newUserRequest';
 export * from './option';

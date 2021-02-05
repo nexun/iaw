@@ -17,13 +17,27 @@ let EventController = class EventController {
         return this.eventRepository.count(where);
     }
     async find(filter) {
-        return this.eventRepository.find({ include: ['eventDays'] });
+        return this.eventRepository.find({ include: [
+                {
+                    relation: 'eventDays',
+                    scope: {
+                        include: ['options'],
+                    },
+                },
+            ] }, filter);
     }
     async updateAll(event, where) {
         return this.eventRepository.updateAll(event, where);
     }
     async findById(id, filter) {
-        return this.eventRepository.findById(id, filter);
+        return this.eventRepository.findById(id, { include: [
+                {
+                    relation: 'eventDays',
+                    scope: {
+                        include: ['options'],
+                    },
+                },
+            ] }, filter);
     }
     async updateById(id, event) {
         await this.eventRepository.updateById(id, event);

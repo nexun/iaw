@@ -7,6 +7,6 @@ tslib_1.__exportStar(require("./event-day.controller"), exports);
 tslib_1.__exportStar(require("./option.controller"), exports);
 tslib_1.__exportStar(require("./event-day-event.controller"), exports);
 tslib_1.__exportStar(require("./event-event-day.controller"), exports);
-tslib_1.__exportStar(require("./option-event.controller"), exports);
-tslib_1.__exportStar(require("./event-option.controller"), exports);
+tslib_1.__exportStar(require("./event-day-option.controller"), exports);
+tslib_1.__exportStar(require("./option-event-day.controller"), exports);
 //# sourceMappingURL=index.js.map

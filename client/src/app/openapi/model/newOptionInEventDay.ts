@@ -9,16 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { EventDayWithRelations } from './eventDayWithRelations';
 
 
 /**
- * (tsType: OptionWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: @loopback/repository-json-schema#Optional<Omit<Option, \'id\'>, \'eventDayId\'>, schemaOptions: { title: \'NewOptionInEventDay\', exclude: [ \'id\' ], optional: [ \'eventDayId\' ] })
  */
-export interface OptionWithRelations { 
-    id?: string;
+export interface NewOptionInEventDay { 
     emailVotante?: string;
     eventDayId?: string;
-    eventDay?: EventDayWithRelations;
 }
 
