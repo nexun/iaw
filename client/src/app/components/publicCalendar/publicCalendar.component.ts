@@ -1,10 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
 import { EventModel } from 'src/app/_model/event.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/_services/auth/token.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-publicCalendar',
@@ -19,7 +19,6 @@ export class PublicCalendarComponent implements OnInit {
   valueEmittedFromChildComponent: string = '';
   idx: string;
   eventDayForm: FormGroup;
-
   constructor(
     private service: EventService,
     private activeRouter: Router,
@@ -58,6 +57,8 @@ export class PublicCalendarComponent implements OnInit {
       }
       this.service.addOptionDay(opcion,opc).subscribe((response)=>{
         console.log(response)
+        this.activeRouter.navigate(['/signup', { success: true }]);
+
         /*
         this.service.addOptionDay(opcion, opc).subscribe((response)=>{
           
@@ -95,8 +96,8 @@ export class PublicCalendarComponent implements OnInit {
       this.event = event;
     });
     this.eventDayForm = this.fb.group({
-      opcion: this.fb.array([]),
-      nombre: this.fb.control(''),
+      opcion: this.fb.array([],  Validators.required),
+      nombre: this.fb.control('', [Validators.required, Validators.email]),
     });
   }
 }

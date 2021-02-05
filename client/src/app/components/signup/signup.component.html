@@ -1,11 +1,13 @@
 <body>
     <div class="signup-form">
+        
         <form [formGroup]="dataForm" method="post">
-            <h2>Register</h2>
+            <h2>Registrarse</h2>
+            {{success ? ("yes"):("no")}}
             <div class="form-group">
                 <div class="row">
-                    <div class="col"><input type="text" class="form-control" name="first_name" placeholder="First Name" formControlName="firstname" required="required"></div>
-                    <div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" formControlName="lastname" required="required"></div>
+                    <div class="col"><input type="text" class="form-control" name="first_name" placeholder="Nombre" formControlName="firstname" required="required"></div>
+                    <div class="col"><input type="text" class="form-control" name="last_name" placeholder="Apellido" formControlName="lastname" required="required"></div>
                 </div>        	
             </div>
             <div class="form-group">
@@ -15,7 +17,7 @@
                 <input type="password" class="form-control" name="password" placeholder="Password" formControlName="password" required="required">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" formControlName="repassword" required="required">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Confirmar Password" formControlName="repassword" required="required">
             </div>        
             <div class="form-group">
                 <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!dataForm.valid" (click)="signup()">Sign in</button>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserControllerService } from 'src/app/openapi';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -9,11 +10,13 @@ import { UserControllerService } from 'src/app/openapi';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  success: Boolean;
   dataForm: FormGroup;
   constructor(private signUpForm: FormBuilder,
     private controllerUser: UserControllerService,
-    private activeRouter: Router) {
+    private activeRouter: Router,
+    private route: ActivatedRoute
+    ) {
     this.init();
    }
 
@@ -34,6 +37,7 @@ export class SignupComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+   
   }
   init(){
     this.dataForm = this.signUpForm.group({

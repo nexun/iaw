@@ -4,7 +4,7 @@ import { EventModel } from 'src/app/_model/event.model';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/_services/auth/token.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EventDayWithRelations } from 'src/app/openapi';
+import { EventDay, EventDayWithRelations } from 'src/app/openapi';
 
 @Component({
   selector: 'app-eventlist',
@@ -14,7 +14,15 @@ import { EventDayWithRelations } from 'src/app/openapi';
 export class EventlistComponent implements OnInit {
   @ViewChild('modalEventContent', { static: true })
   modalEventContent: TemplateRef<any>;
+  @ViewChild('modalOptionContent', { static: true })
+  modalOptionContent: TemplateRef<any>;
+  @ViewChild('modalShare', { static: true })
+  modalShared: TemplateRef<any>;
   events: EventModel[];
+  days: EventDay[];
+  id: string;
+
+
   filteredEvents: EventModel[];
   optiones: EventDayWithRelations[];
   valueEmittedFromChildComponent: string = '';
@@ -31,6 +39,13 @@ export class EventlistComponent implements OnInit {
       this.service.removeEvent(id).subscribe((response) => this.ngOnInit());
     }
   }
+
+  sumDate(day){
+    var fecha = new Date(day.eventDate)
+    return fecha.setHours(fecha.getHours()+day.duration); 
+  }
+
+
   parentEventHandlerFunction(valueEmitted) {
     this.valueEmittedFromChildComponent = valueEmitted;
     //alert(valueEmitted)
@@ -44,6 +59,16 @@ export class EventlistComponent implements OnInit {
 
   handleAddEvent(): void {
     this.modal.open(this.modalEventContent, { size: 'lg' });
+  }
+
+  handleViewVotes(eventDays): void {
+    this.days = eventDays
+    this.modal.open(this.modalOptionContent, { size: 'lg' });
+  }
+
+ handleViewLink(id): void {
+    this.id = 'http://localhost:4200/public/'+id
+    this.modal.open(this.modalShared, { size: 'lg' });
   }
 
   ngOnInit(): void {
