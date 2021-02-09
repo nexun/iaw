@@ -1,4 +1,8 @@
-<div *ngIf="(!private)" class="row justify-content-md-center">  
+<div *ngIf="(private === 'cargando')">
+<h1 class="m-5">Cargando..</h1>
+</div>
+
+<div *ngIf="(private === 'publico')" class="row justify-content-md-center">  
   <div   class="col-lg-6 p-5">
 
     <h3>Evento: {{ event?.name }} de {{ event?.ownerEmail }}</h3>
@@ -60,21 +64,27 @@
     </button>
   </div>
 </div>
-<div *ngIf="(private)" class="row justify-content-md-center">  
-  <div   class="col-lg-6 p-5">
-    <input
-                    class="ml-2"
-                    type="text"
-                    class="form-control"
-                  />
-    <button
-    class="btn btn-dark"
-    [disabled]="!eventDayForm.valid"
-    (click)="checkPassword()"
-  >
-    Aceptar
-  </button>
+<div *ngIf="(private === 'privado')" class="row justify-content-md-center">  
     
-  </div>
+  <body class="text-center">
+    <form class="form-signin" [formGroup]="dataForm">
+		<span class="glyphicon glyphicon-list-alt"></span>
+    <h1 class="h3 m-3 font-weight-normal">Evento protegido con contraseña, solicitela al creador del mismo</h1>
+    <h3 class="m-3">Si ya la conoce, ingresela</h3>
+     <span [innerHTML]="msg"></span>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" formControlName="password" required>
+
+      <button
+      class="m-3 btn btn-dark"
+      [disabled]="!dataForm.valid"
+      (click)="checkPassword()"
+    >
+      Aceptar
+    </button>    </form>
+</body>
+
+   
+    
 </div>
 

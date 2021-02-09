@@ -10,6 +10,7 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  msg:String;
   success: Boolean;
   dataForm: FormGroup;
   constructor(private signUpForm: FormBuilder,
@@ -37,9 +38,19 @@ export class SignupComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    
+     this.route.params.subscribe(params => {
+      this.success = params.success;
+      if(this.success){
+        this.msg=' <div class="alert alert-success" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <h3>Su eleccion fue enviada correctamente</h3><h4>Registrese para crear sus propios eventos!</h4></div>'
+
+      }      
+      });
+
    
   }
   init(){
+    
     this.dataForm = this.signUpForm.group({
       email:['', Validators.required],
       firstname:['', Validators.required],

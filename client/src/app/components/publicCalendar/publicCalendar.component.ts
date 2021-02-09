@@ -32,7 +32,9 @@ export class PublicCalendarComponent implements OnInit {
   valueEmittedFromChildComponent: string = '';
   idx: string;
   eventDayForm: FormGroup;
-  private: Boolean;
+  dataForm: FormGroup;
+  msg:String;
+  private: String;
 
   constructor(
     private service: EventService,
@@ -103,19 +105,33 @@ export class PublicCalendarComponent implements OnInit {
     this.modal.open(this.modalEventContent, { size: 'lg' });
   }
 
+  checkPassword():void{
+    if (this.event.password == this.dataForm.value.password){
+      this.private = "publico"
+    }else{
+      this.msg=' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>'
+    }
+  }
+
   ngOnInit(): void {
-    this.private=true
+    this.private="cargando"
     this.idx = this.route.snapshot.paramMap.get('id');
     this.service.getEventById(this.idx).subscribe((event) => {
       this.event = event;
-      if (event.password !== undefined && event.password !== null) {
-        this.private = true;
+      console.log("la password es "+event.password)
+      if (event.password !== undefined ) {
+        this.private = "privado";
+      }else{
+        this.private = "publico";
       }
     });
 
     this.eventDayForm = this.fb.group({
       opcion: this.fb.array([], Validators.required),
       nombre: this.fb.control('', [Validators.required, Validators.email]),
+    });
+    this.dataForm = this.fb.group({
+      password: this.fb.control('', [Validators.required]),
     });
   }
 }
