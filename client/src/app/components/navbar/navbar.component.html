@@ -1,5 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Meeting-o-Matic</a>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+ 
+ <!-- <img src="assets/logo.png"  width="100" height="100">-->
+  <a class=" m-2 navbar-brand" href="#">Meeting-o-Matic</a>
+  
 
   <div class="collapse navbar-collapse" id="navbarNav" class="ml-auto">
     <div *ngIf="isLogin() == false">
@@ -16,10 +40,12 @@
     <div *ngIf="!isLogin() == false">
       <ul class="navbar-nav dropdown mr-auto">
         <li class="nav-item dropdown m-1">
-          <span class="btn btn-light">{{ this.username }} </span>
+          <span class="btn btn-info fa fa-user"><span  class="m-1">{{ this.username }} </span> </span>
         </li>
         <li class="nav-item m-1">
-          <a class="btn btn-danger" (click)="logout()">Salir</a>
+          <button  class="btn btn-danger fa fa-sign-out"
+              (click)="logout()"
+            ></button>
         </li>
       </ul>
     </div>

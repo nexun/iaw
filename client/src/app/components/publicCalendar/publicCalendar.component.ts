@@ -1,10 +1,23 @@
-import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
 import { EventModel } from 'src/app/_model/event.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/_services/auth/token.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-publicCalendar',
@@ -19,6 +32,8 @@ export class PublicCalendarComponent implements OnInit {
   valueEmittedFromChildComponent: string = '';
   idx: string;
   eventDayForm: FormGroup;
+  private: Boolean;
+
   constructor(
     private service: EventService,
     private activeRouter: Router,
@@ -46,17 +61,17 @@ export class PublicCalendarComponent implements OnInit {
   }
 
   handleClick() {
-    console.log(this.eventDayForm.value.opcion)
-    const opciones = this.eventDayForm.value.opcion
-    const email = this.eventDayForm.value.nombre
-    
-    opciones.map((opcion)=>{
+    console.log(this.eventDayForm.value.opcion);
+    const opciones = this.eventDayForm.value.opcion;
+    const email = this.eventDayForm.value.nombre;
+
+    opciones.map((opcion) => {
       const opc = {
-        emailVotante:email,
-        eventDayId:opcion
-      }
-      this.service.addOptionDay(opcion,opc).subscribe((response)=>{
-        console.log(response)
+        emailVotante: email,
+        eventDayId: opcion,
+      };
+      this.service.addOptionDay(opcion, opc).subscribe((response) => {
+        console.log(response);
         this.activeRouter.navigate(['/signup', { success: true }]);
 
         /*
@@ -64,15 +79,13 @@ export class PublicCalendarComponent implements OnInit {
           
           console.log(response)
         })*/
-      })
-    })
-
-
+      });
+    });
   }
 
-  sumDate(day){
-    var fecha = new Date(day.eventDate)
-    return fecha.setHours(fecha.getHours()+day.duration); 
+  sumDate(day) {
+    var fecha = new Date(day.eventDate);
+    return fecha.setHours(fecha.getHours() + day.duration);
   }
 
   parentEventHandlerFunction(valueEmitted) {
@@ -91,12 +104,17 @@ export class PublicCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.private=true
     this.idx = this.route.snapshot.paramMap.get('id');
     this.service.getEventById(this.idx).subscribe((event) => {
       this.event = event;
+      if (event.password !== undefined && event.password !== null) {
+        this.private = true;
+      }
     });
+
     this.eventDayForm = this.fb.group({
-      opcion: this.fb.array([],  Validators.required),
+      opcion: this.fb.array([], Validators.required),
       nombre: this.fb.control('', [Validators.required, Validators.email]),
     });
   }

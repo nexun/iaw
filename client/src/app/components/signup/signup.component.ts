@@ -26,8 +26,8 @@ export class SignupComponent implements OnInit {
       const request = {
         email:this.dataForm.value.email,
         password:this.dataForm.value.password,
-        first_name:this.dataForm.value.firstname,
-        last_name:this.dataForm.value.lastname
+        firstname:this.dataForm.value.firstname,
+        lastname:this.dataForm.value.lastname
       }
 
       this.controllerUser.userControllerSignUp(request).subscribe((response)=>{
@@ -42,6 +42,8 @@ export class SignupComponent implements OnInit {
   init(){
     this.dataForm = this.signUpForm.group({
       email:['', Validators.required],
+      firstname:['', Validators.required],
+      lastname:['', Validators.required],
       password:['', Validators.required],
       repassword:['', Validators.required]
 

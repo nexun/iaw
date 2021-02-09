@@ -1,9 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/_services/auth/token.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
 
-import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { EventModel } from 'src/app/_model/event.model';
 import { EventControllerService } from 'src/app/openapi';
 import { DatePipe } from '@angular/common';
@@ -19,8 +19,11 @@ export class NeweventComponent implements OnInit {
   title: string;
   msg: string;
   eventDayForm: FormGroup;
+  deletedOptions: FormGroup;
+
 
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
+  @Input() eventId: string;
 
   constructor(
     private service: EventService,
@@ -28,27 +31,48 @@ export class NeweventComponent implements OnInit {
     private controllerEvent: EventControllerService,
     private route: ActivatedRoute,
     public datepipe: DatePipe,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private activeRouter: Router,
+    private fb: FormBuilder
+
   ) {
     this.init();
   }
 
   isDisabled = true;
+
   triggerSomeEvent() {
     this.isDisabled = !this.isDisabled;
     return;
   }
+
   sumDate(day) {
     var fecha = new Date(day.eventDate);
     return fecha.setHours(fecha.getHours() + day.duration);
   }
+
   addEvent() {
+
     if (this.eventDayForm.valid) {
-      var idx = this.route.snapshot.paramMap.get('id');
-      if (idx !== null) {
-        const request = {
-          name: this.eventDayForm.value.eventName,
-        };
+      var request = {}
+      var idx = this.eventId;
+      console.log(this.eventId)
+      if (idx !== undefined) {
+
+        if (this.eventDayForm.value.password !== undefined) {
+          console.log("manda el password")
+          request = {
+            name: this.eventDayForm.value.eventName,
+            password: this.eventDayForm.value.password,
+          };
+        }else{
+          console.log("no manda el password")
+
+          request = {
+            name: this.eventDayForm.value.eventName,
+          };
+        }
+        
         this.service.editEvent(idx, request).subscribe((response) => {
           const days = this.eventDayForm.value.days;
           days.map((day) => {
@@ -59,14 +83,31 @@ export class NeweventComponent implements OnInit {
             this.service.addDayEvent(idx, request).subscribe((response) => {
               console.log(response);
             });
+            this.buttonClicked.emit(true);
           });
         });
-        this.buttonClicked.emit(true);
+        
       } else {
-        const request = {
-          name: this.eventDayForm.value.eventName,
-          ownerEmail: this.tokenService.getUser().email,
-        };
+        if (this.eventDayForm.value.password !== undefined) {
+          console.log("manda el password")
+
+          request = {
+            name: this.eventDayForm.value.eventName,
+            password: this.eventDayForm.value.password,
+            ownerEmail: this.tokenService.getUser().email,
+          };
+        }
+        else{
+          console.log("no manda el password")
+
+           request = {
+            name: this.eventDayForm.value.eventName,
+            ownerEmail: this.tokenService.getUser().email,
+          };
+          
+        }
+        
+
         this.service.addEvent(request).subscribe((response) => {
           const id = response.id;
           const days = this.eventDayForm.value.days;
@@ -77,19 +118,34 @@ export class NeweventComponent implements OnInit {
             };
             this.service.addDayEvent(id, request).subscribe((response) => {
               console.log(response);
+              
             });
           });
         });
         this.buttonClicked.emit(true);
+        
       }
     }
   }
+
   closeEvent() {
     this.buttonClicked.emit(false);
   }
 
+  onChange(optionId: string, isChecked: boolean) {
+    console.log(this.deletedOptions.value.opcion.length)
+    const daysForm = <FormArray>this.deletedOptions.controls.opcion;
+
+    if (isChecked) {
+      daysForm.push(new FormControl(optionId));
+    } else {
+      let index = daysForm.controls.findIndex((x) => x.value == optionId);
+      daysForm.removeAt(index);
+    }
+  }
+  
   ngOnInit() {
-    this.idx = this.route.snapshot.paramMap.get('id');
+    this.idx = this.eventId;
     if (this.idx == null) {
       this.title = 'Crear Evento';
       this.event = new EventModel();
@@ -126,10 +182,26 @@ export class NeweventComponent implements OnInit {
     this.days.removeAt(i);
   }
 
+  removeSelected() {
+    const opciones = this.deletedOptions.value.opcion
+
+    opciones.map((opcion)=>{
+      
+      this.service.removeEventDay(opcion).subscribe((response)=>{
+        console.log(response)      
+      })
+    })
+    this.buttonClicked.emit(true);
+  }
+
   init() {
     this.eventDayForm = this.newEventForm.group({
-      eventName: [''],
-      days: this.newEventForm.array([]),
+      eventName: ['',Validators.required],
+      password: ['',Validators.required],
+      days: this.newEventForm.array([],Validators.required),
+    });
+    this.deletedOptions  = this.fb.group({
+      opcion: this.fb.array([],  Validators.required),
     });
   }
 }

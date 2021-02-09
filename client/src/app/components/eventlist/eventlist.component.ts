@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TokenService } from 'src/app/_services/auth/token.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventDay, EventDayWithRelations } from 'src/app/openapi';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-eventlist',
@@ -14,6 +15,8 @@ import { EventDay, EventDayWithRelations } from 'src/app/openapi';
 export class EventlistComponent implements OnInit {
   @ViewChild('modalEventContent', { static: true })
   modalEventContent: TemplateRef<any>;
+  @ViewChild('modalEditContent', { static: true })
+  modalEditContent: TemplateRef<any>;
   @ViewChild('modalOptionContent', { static: true })
   modalOptionContent: TemplateRef<any>;
   @ViewChild('modalShare', { static: true })
@@ -25,6 +28,8 @@ export class EventlistComponent implements OnInit {
   filteredEvents: EventModel[];
   optiones: EventDayWithRelations[];
   valueEmittedFromChildComponent: string = '';
+  eventId: any;
+  refresh: Subject<any> = new Subject();
 
   constructor(
     private service: EventService,
@@ -46,7 +51,7 @@ export class EventlistComponent implements OnInit {
 
   parentEventHandlerFunction(valueEmitted) {
     this.valueEmittedFromChildComponent = valueEmitted;
-    //alert(valueEmitted)
+        
     if (valueEmitted) {
       this.modal.dismissAll();
       this.ngOnInit();
@@ -57,6 +62,11 @@ export class EventlistComponent implements OnInit {
 
   handleAddEvent(): void {
     this.modal.open(this.modalEventContent, { size: 'lg' });
+  }
+
+  handleEditEvent(eventId): void {
+    this.eventId = eventId;
+    this.modal.open(this.modalEditContent, { size: 'lg' });    
   }
 
   handleViewVotes(eventDays): void {
@@ -70,11 +80,11 @@ export class EventlistComponent implements OnInit {
     this.modal.open(this.modalShared, { size: 'lg' });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     const email = this.tokenService.getUser().email;
 
     this.service.getEvents().subscribe((events) => {
-      this.filteredEvents = events.filter((event) => event.ownerEmail == email);
+      this.filteredEvents = events.filter((event) => event.ownerEmail == email).reverse();
     });
   }
 }
