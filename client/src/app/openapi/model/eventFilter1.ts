@@ -17,7 +17,6 @@ export interface EventFilter1 {
     limit?: number;
     skip?: number;
     order?: string | Array<string>;
-    where?: { [key: string]: object; };
     fields?: object | Set<string>;
     include?: Array<EventIncludeFilterItems | string>;
 }

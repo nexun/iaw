@@ -4,7 +4,6 @@ export class EventModel implements EventWithRelations, Event {
     id?
     name:string;
     ownerEmail: string;
-    password?: string;
     eventDays?: Array<EventDayWithRelations>;
     constructor(){
      

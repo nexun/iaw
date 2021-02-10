@@ -17,27 +17,44 @@ let EventController = class EventController {
         return this.eventRepository.count(where);
     }
     async find(filter) {
-        return this.eventRepository.find({ include: [
+        return this.eventRepository.find({
+            include: [
                 {
-                    relation: 'eventDays',
+                    relation: "eventDays",
                     scope: {
-                        include: ['options'],
+                        include: ["options"],
                     },
                 },
-            ] }, filter);
+            ],
+        }, filter);
     }
     async updateAll(event, where) {
         return this.eventRepository.updateAll(event, where);
     }
     async findById(id, filter) {
-        return this.eventRepository.findById(id, { include: [
+        return this.eventRepository.findById(id, {
+            include: [
                 {
-                    relation: 'eventDays',
+                    relation: "eventDays",
                     scope: {
-                        include: ['options'],
+                        include: ["options"],
                     },
                 },
-            ] }, filter);
+            ],
+        }, filter);
+    }
+    async findByEmail(email, filter) {
+        return await this.eventRepository.find({
+            where: { ownerEmail: email },
+            include: [
+                {
+                    relation: "eventDays",
+                    scope: {
+                        include: ["options"],
+                    },
+                },
+            ],
+        });
     }
     async updateById(id, event) {
         await this.eventRepository.updateById(id, event);
@@ -48,22 +65,46 @@ let EventController = class EventController {
     async deleteById(id) {
         await this.eventRepository.deleteById(id);
     }
+    async checkPassword(id, event) {
+        const evento = await this.eventRepository.findById(id);
+        if (evento.password === event.password) {
+        }
+        else {
+            throw {
+                code: 400,
+                message: "Password error",
+                name: "IncorrectPasswordError",
+            };
+        }
+    }
+    async checkPrivacy(id, event) {
+        const evento = await this.eventRepository.findById(id);
+        if (evento.password) {
+        }
+        else {
+            throw {
+                code: 400,
+                message: "Password error",
+                name: "IncorrectPasswordError",
+            };
+        }
+    }
 };
 tslib_1.__decorate([
-    rest_1.post('/events', {
+    rest_1.post("/events", {
         responses: {
-            '200': {
-                description: 'Event model instance',
-                content: { 'application/json': { schema: rest_1.getModelSchemaRef(models_1.Event) } },
+            "200": {
+                description: "Event model instance",
+                content: { "application/json": { schema: rest_1.getModelSchemaRef(models_1.Event) } },
             },
         },
     }),
     tslib_1.__param(0, rest_1.requestBody({
         content: {
-            'application/json': {
+            "application/json": {
                 schema: rest_1.getModelSchemaRef(models_1.Event, {
-                    title: 'NewEvent',
-                    exclude: ['id'],
+                    title: "NewEvent",
+                    exclude: ["id"],
                 }),
             },
         },
@@ -73,11 +114,11 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "create", null);
 tslib_1.__decorate([
-    rest_1.get('/events/count', {
+    rest_1.get("/events/count", {
         responses: {
-            '200': {
-                description: 'Event model count',
-                content: { 'application/json': { schema: repository_1.CountSchema } },
+            "200": {
+                description: "Event model count",
+                content: { "application/json": { schema: repository_1.CountSchema } },
             },
         },
     }),
@@ -87,14 +128,14 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "count", null);
 tslib_1.__decorate([
-    rest_1.get('/events', {
+    rest_1.get("/events", {
         responses: {
-            '200': {
-                description: 'Array of Event model instances',
+            "200": {
+                description: "Array of Event model instances",
                 content: {
-                    'application/json': {
+                    "application/json": {
                         schema: {
-                            type: 'array',
+                            type: "array",
                             items: rest_1.getModelSchemaRef(models_1.Event, { includeRelations: true }),
                         },
                     },
@@ -108,17 +149,17 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "find", null);
 tslib_1.__decorate([
-    rest_1.patch('/events', {
+    rest_1.patch("/events", {
         responses: {
-            '200': {
-                description: 'Event PATCH success count',
-                content: { 'application/json': { schema: repository_1.CountSchema } },
+            "200": {
+                description: "Event PATCH success count",
+                content: { "application/json": { schema: repository_1.CountSchema } },
             },
         },
     }),
     tslib_1.__param(0, rest_1.requestBody({
         content: {
-            'application/json': {
+            "application/json": {
                 schema: rest_1.getModelSchemaRef(models_1.Event, { partial: true }),
             },
         },
@@ -129,36 +170,58 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "updateAll", null);
 tslib_1.__decorate([
-    rest_1.get('/events/{id}', {
+    rest_1.get("/events/{id}", {
         responses: {
-            '200': {
-                description: 'Event model instance',
+            "200": {
+                description: "Event model instance",
                 content: {
-                    'application/json': {
+                    "application/json": {
                         schema: rest_1.getModelSchemaRef(models_1.Event, { includeRelations: true }),
                     },
                 },
             },
         },
     }),
-    tslib_1.__param(0, rest_1.param.path.string('id')),
-    tslib_1.__param(1, rest_1.param.filter(models_1.Event, { exclude: 'where' })),
+    tslib_1.__param(0, rest_1.param.path.string("id")),
+    tslib_1.__param(1, rest_1.param.filter(models_1.Event, { exclude: "where" })),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [String, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "findById", null);
 tslib_1.__decorate([
-    rest_1.patch('/events/{id}', {
+    rest_1.get("/events/email/{email}", {
         responses: {
-            '204': {
-                description: 'Event PATCH success',
+            "200": {
+                description: "Array of Event model instances",
+                content: {
+                    "application/json": {
+                        schema: {
+                            type: "array",
+                            items: rest_1.getModelSchemaRef(models_1.Event, { includeRelations: true }),
+                        },
+                    },
+                },
             },
         },
     }),
-    tslib_1.__param(0, rest_1.param.path.string('id')),
+    tslib_1.__param(0, rest_1.param.path.string("email")),
+    tslib_1.__param(1, rest_1.param.filter(models_1.Event)),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, Object]),
+    tslib_1.__metadata("design:returntype", Promise)
+], EventController.prototype, "findByEmail", null);
+tslib_1.__decorate([
+    rest_1.patch("/events/{id}", {
+        responses: {
+            "204": {
+                description: "Event PATCH success",
+            },
+        },
+    }),
+    tslib_1.__param(0, rest_1.param.path.string("id")),
     tslib_1.__param(1, rest_1.requestBody({
         content: {
-            'application/json': {
+            "application/json": {
                 schema: rest_1.getModelSchemaRef(models_1.Event, { partial: true }),
             },
         },
@@ -168,32 +231,72 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "updateById", null);
 tslib_1.__decorate([
-    rest_1.put('/events/{id}', {
+    rest_1.put("/events/{id}", {
         responses: {
-            '204': {
-                description: 'Event PUT success',
+            "204": {
+                description: "Event PUT success",
             },
         },
     }),
-    tslib_1.__param(0, rest_1.param.path.string('id')),
+    tslib_1.__param(0, rest_1.param.path.string("id")),
     tslib_1.__param(1, rest_1.requestBody()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [String, models_1.Event]),
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "replaceById", null);
 tslib_1.__decorate([
-    rest_1.del('/events/{id}', {
+    rest_1.del("/events/{id}", {
         responses: {
-            '204': {
-                description: 'Event DELETE success',
+            "204": {
+                description: "Event DELETE success",
             },
         },
     }),
-    tslib_1.__param(0, rest_1.param.path.string('id')),
+    tslib_1.__param(0, rest_1.param.path.string("id")),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [String]),
     tslib_1.__metadata("design:returntype", Promise)
 ], EventController.prototype, "deleteById", null);
+tslib_1.__decorate([
+    rest_1.post("/events/access/{id}", {
+        responses: {
+            "200": {
+                description: "Event POST success",
+            },
+        },
+    }),
+    tslib_1.__param(0, rest_1.param.path.string("id")),
+    tslib_1.__param(1, rest_1.requestBody({
+        content: {
+            "application/json": {
+                schema: rest_1.getModelSchemaRef(models_1.Event, { partial: true }),
+            },
+        },
+    })),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, models_1.Event]),
+    tslib_1.__metadata("design:returntype", Promise)
+], EventController.prototype, "checkPassword", null);
+tslib_1.__decorate([
+    rest_1.get("/events/access/{id}", {
+        responses: {
+            "200": {
+                description: "Event GET success",
+            },
+        },
+    }),
+    tslib_1.__param(0, rest_1.param.path.string("id")),
+    tslib_1.__param(1, rest_1.requestBody({
+        content: {
+            "application/json": {
+                schema: rest_1.getModelSchemaRef(models_1.Event, { partial: true }),
+            },
+        },
+    })),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, models_1.Event]),
+    tslib_1.__metadata("design:returntype", Promise)
+], EventController.prototype, "checkPrivacy", null);
 EventController = tslib_1.__decorate([
     tslib_1.__param(0, repository_1.repository(repositories_1.EventRepository)),
     tslib_1.__metadata("design:paramtypes", [repositories_1.EventRepository])

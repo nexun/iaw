@@ -83,8 +83,9 @@ export class EventlistComponent implements OnInit {
   ngOnInit(): void { 
     const email = this.tokenService.getUser().email;
 
-    this.service.getEvents().subscribe((events) => {
-      this.filteredEvents = events.filter((event) => event.ownerEmail == email).reverse();
-    });
+    this.service.getEventsByEmail(email).subscribe((events) => {
+      this.filteredEvents = events;
+    }
+    );
   }
 }

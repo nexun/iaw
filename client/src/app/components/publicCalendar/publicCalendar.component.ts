@@ -33,7 +33,7 @@ export class PublicCalendarComponent implements OnInit {
   idx: string;
   eventDayForm: FormGroup;
   dataForm: FormGroup;
-  msg:String;
+  msg: String;
   private: String;
 
   constructor(
@@ -105,26 +105,58 @@ export class PublicCalendarComponent implements OnInit {
     this.modal.open(this.modalEventContent, { size: 'lg' });
   }
 
-  checkPassword():void{
-    if (this.event.password == this.dataForm.value.password){
-      this.private = "publico"
-    }else{
-      this.msg=' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>'
-    }
+  async checkPassword(): Promise<void> {
+    var url = 'http://localhost:3000/events/access/' + this.idx;
+    var data = { password: this.dataForm.value.password };
+
+    const response = await fetch(url, {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        console.log('Success:', response.status);
+        if (response.status === 204){
+          this.service.getEventById(this.idx).subscribe((event) => {
+            this.event = event;       
+            this.private = 'publico';   
+          });
+          
+        }else{
+          this.msg =
+          ' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>';
+        }
+      })
+      .catch((error) => console.error('Error:', 'Password incorrecto'));    
+  }
+
+  async checkPrivacy(): Promise<void> {
+    var url = 'http://localhost:3000/events/access/' + this.idx;
+
+    const response = await fetch(url, {
+      method: 'GET', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+        if (response.status === 204){
+          this.private = 'privado';
+        }else{
+          this.service.getEventById(this.idx).subscribe((event) => {
+            this.event = event;          
+          });
+          this.private = 'publico';
+          }
+      })
+      .catch();    
   }
 
   ngOnInit(): void {
-    this.private="cargando"
-    this.idx = this.route.snapshot.paramMap.get('id');
-    this.service.getEventById(this.idx).subscribe((event) => {
-      this.event = event;
-      console.log("la password es "+event.password)
-      if (event.password !== undefined ) {
-        this.private = "privado";
-      }else{
-        this.private = "publico";
-      }
-    });
+    this.private = 'cargando';
+    this.idx = this.route.snapshot.paramMap.get('id');    
+    this.checkPrivacy()
 
     this.eventDayForm = this.fb.group({
       opcion: this.fb.array([], Validators.required),

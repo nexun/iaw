@@ -24,6 +24,10 @@ export class EventService {
   getEvents(){
     return this.eventController.eventControllerFind()
   }
+  getEventsByEmail(email){
+    return this.eventController.eventControllerFindByEmail(email)
+  }
+
 
   getEventById(id){
     return this.eventController.eventControllerFindById(id)

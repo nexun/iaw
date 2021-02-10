@@ -30,7 +30,7 @@
           <td data-label="Publicado">
             {{ event.published ? "SI" : "NO" }}
           </td>
-          <td data-label="Seguridad">No</td>
+          <td data-label="Seguridad">{{ event.password && event.password.length > 0 ? "SI" : "NO" }}</td>
           <td data-label="Revisar">
             <button
               class="btn btn-success m-1 fa fa-eye"
