@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
       this.controllerUser
         .userControllerSignUp(request)
         .subscribe((response) => {
-          this.activeRouter.navigateByUrl('/login');
+          this.activeRouter.navigate(['/login', { success: true }]);
         });
     }
   }

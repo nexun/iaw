@@ -31,22 +31,13 @@ export class NewOptionComponent implements OnInit {
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private service: EventService,
-    //cambiar por el de option
     private newOptionForm: FormBuilder,
     public datepipe: DatePipe,
-    private tokenService: TokenService
   ) {
     this.init();
   }
 
-  addOption() {
-    console.log(
-      'id evento->' +
-        this.eventX +
-        ' email->' +
-        this.dataFormOption.value.ownerEmail
-    );
+  addOption() {    
     if (this.dataFormOption.valid) {
       const request = {
         eventId: this.eventX,

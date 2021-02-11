@@ -71,7 +71,6 @@ export class EventlistComponent implements OnInit {
   }
 
   handleViewVotes(eventDays): void {
-    console.log(eventDays);
     this.days = eventDays;
     this.modal.open(this.modalOptionContent, { size: 'lg' });
   }

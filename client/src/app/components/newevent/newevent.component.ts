@@ -28,6 +28,7 @@ export class NeweventComponent implements OnInit {
   deletedOptions: FormGroup;
   isDisabled: Boolean;
   id: string;
+  loading:boolean;
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
   @Input() eventId: string;
   @Input() public: Boolean;
@@ -47,7 +48,6 @@ export class NeweventComponent implements OnInit {
 
   triggerSomeEvent() {
     this.isDisabled = !this.isDisabled;
-    console.log(this.isDisabled);
   }
 
   sumDate(day) {
@@ -56,12 +56,11 @@ export class NeweventComponent implements OnInit {
   }
 
   async addEvent() {
-    if (this.eventDayForm.valid) {
+    if(this.eventDayForm.value.days.length > 0){
+      if (this.eventDayForm.valid) {
       var request = {};
       var idx = this.eventId;
-      console.log(this.eventId);
       if (idx !== undefined) {
-        console.log("entro distinto undefined")
         if (this.eventDayForm.value.password !== undefined) {
           request = {
             name: this.eventDayForm.value.eventName,
@@ -81,17 +80,14 @@ export class NeweventComponent implements OnInit {
               duration: day.duration,
             };
             this.service.addDayEvent(idx, request).subscribe((response) => {
-              console.log(response);
             });
             this.buttonClicked.emit(true);
           });
           this.buttonClicked.emit(true);
         });
       } else {
-        console.log("entro igual undefined")
 
         if (this.eventDayForm.value.password !== undefined) {
-          // console.log("manda el password")
           if (this.public) {
             request = {
               name: this.eventDayForm.value.eventName,
@@ -106,7 +102,6 @@ export class NeweventComponent implements OnInit {
             };
           }
         } else {
-          // console.log("no manda el password")
           if (this.public) {
             request = {
               name: this.eventDayForm.value.eventName,
@@ -119,7 +114,6 @@ export class NeweventComponent implements OnInit {
             };
           }
         }
-        console.log(request);
         await this.service.addEvent(request).subscribe((response) => {
           this.id = response.id;
           const days = this.eventDayForm.value.days;
@@ -129,19 +123,24 @@ export class NeweventComponent implements OnInit {
               duration: day.duration,
             };
             this.service.addDayEvent(this.id, request).subscribe((response) => {
-              console.log(response);   
               if (this.public) {
                 this.activeRouter.navigateByUrl('/private/' + this.id);
               }          
+              this.buttonClicked.emit(true);
             });
           });
         });
-        this.buttonClicked.emit(true);
+        
 
 
          
       }
     }
+    }else{
+      alert("Debe agregar al menos una fecha")
+    }
+    
+    
   }
 
   closeEvent() {
@@ -160,9 +159,10 @@ export class NeweventComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading=true;
     this.idx = this.eventId;
+  
     if (this.public) {
-      console.log('entro init public');
       this.eventDayForm = this.newEventForm.group({
         eventName: ['', Validators.required],
         password: [''],
@@ -173,7 +173,6 @@ export class NeweventComponent implements OnInit {
         opcion: this.fb.array([], Validators.required),
       });
     } else {
-      console.log('entro init private');
 
       this.eventDayForm = this.newEventForm.group({
         eventName: ['', Validators.required],
@@ -187,6 +186,7 @@ export class NeweventComponent implements OnInit {
     if (this.idx == null) {
       this.title = 'Crear Evento';
       this.event = new EventModel();
+      this.loading=false;
     } else {
       this.title = 'Modificar Evento';
       this.controllerEvent
@@ -196,6 +196,7 @@ export class NeweventComponent implements OnInit {
           this.eventDayForm.patchValue({
             eventName: this.event.name,
           });
+          this.loading=false;
         });
     }
   }
@@ -206,8 +207,8 @@ export class NeweventComponent implements OnInit {
 
   newDay(): FormGroup {
     return this.newEventForm.group({
-      eventDate: '',
-      duration: '',
+      eventDate: ['', Validators.required],
+      duration: ['', Validators.required],
     });
   }
 
@@ -224,7 +225,6 @@ export class NeweventComponent implements OnInit {
 
     opciones.map((opcion) => {
       this.service.removeEventDay(opcion).subscribe((response) => {
-        console.log(response);
       });
     });
     this.buttonClicked.emit(true);

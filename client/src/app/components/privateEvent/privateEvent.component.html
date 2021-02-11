@@ -27,7 +27,7 @@
       <tbody>
         <tr>
           <td scope="row" data-label="Nombre">
-            {{ event.name }}
+            <h3><span class="badge badge-secondary"> {{ event.name }}</span></h3>
           </td>
 
           <td data-label="Fecha">
@@ -45,16 +45,16 @@
           </td>
           <td data-label="Revisar">
             <button
-              class="btn btn-success m-1"
+              class="btn btn-warning m-1 "
               (click)="handleViewVotes(event.eventDays)"
             >
-              <span class="fa fa-eye"></span>
+            <span class="fa fa-eye"></span>
               Ver votos
             </button>
             <button
-              class="btn btn-info fa fa-share-alt"
-              (click)="handleViewLink()"
-            ></button>
+              class="btn btn-info m-1"
+              (click)="handleViewLink(event.id)"
+            ><span class=" fa fa-share-alt"></span> Compartir </button>
           </td>
           <td data-label="Editar">
             <button

@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { EventService } from 'src/app/_services/event/event.service';
 import { EventModel } from 'src/app/_model/event.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -64,7 +57,6 @@ export class PublicEventComponent implements OnInit {
   }
 
   handleClick() {
-    console.log(this.eventDayForm.value.opcion);
     const opciones = this.eventDayForm.value.opcion;
     const email = this.eventDayForm.value.nombre;
 
@@ -74,14 +66,7 @@ export class PublicEventComponent implements OnInit {
         eventDayId: opcion,
       };
       this.service.addOptionDay(opcion, opc).subscribe((response) => {
-        console.log(response);
         this.activeRouter.navigate(['/signup', { success: true }]);
-
-        /*
-        this.service.addOptionDay(opcion, opc).subscribe((response)=>{
-          
-          console.log(response)
-        })*/
       });
     });
   }
@@ -119,7 +104,6 @@ export class PublicEventComponent implements OnInit {
       },
     })
       .then((response) => {
-        console.log('Success:', response.status);
         if (response.status === 204) {
           this.service.getEventById(this.idx).subscribe((event) => {
             this.event = event;
@@ -129,8 +113,8 @@ export class PublicEventComponent implements OnInit {
         } else {
           this.msg =
             ' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>';
-            this.loading = false;
-          }
+          this.loading = false;
+        }
       })
       .catch((error) => console.error('Error:', 'Password incorrecto'));
   }
