@@ -74,6 +74,8 @@ CHECKBOX DELETE
                     class="form-control"
                     type="datetime-local"
                     formControlName="eventDate"
+                    name="eventDate"
+                    [min]="fechaActual"
                   />
                 </div>
                 <div class="col-lg-4 p-1">
@@ -82,6 +84,8 @@ CHECKBOX DELETE
                     class="form-control"
                     type="number"
                     formControlName="duration"
+                    min="1"
+                    value="1"
                   />
                 </div>
                 <div class="col-lg-2">
@@ -149,4 +153,5 @@ CHECKBOX DELETE
     </div>
   </div>
 </div>
+
 

@@ -28,10 +28,11 @@ export class NeweventComponent implements OnInit {
   deletedOptions: FormGroup;
   isDisabled: Boolean;
   id: string;
-  loading:boolean;
+  loading: boolean;
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
   @Input() eventId: string;
   @Input() public: Boolean;
+  fechaActual: string;
 
   constructor(
     private service: EventService,
@@ -56,91 +57,87 @@ export class NeweventComponent implements OnInit {
   }
 
   async addEvent() {
-    if(this.eventDayForm.value.days.length > 0){
+    if (this.eventDayForm.value.days.length > 0) {
       if (this.eventDayForm.valid) {
-      var request = {};
-      var idx = this.eventId;
-      if (idx !== undefined) {
-        if (this.eventDayForm.value.password !== undefined) {
-          request = {
-            name: this.eventDayForm.value.eventName,
-            password: this.eventDayForm.value.password,
-          };
-        } else {
-          request = {
-            name: this.eventDayForm.value.eventName,
-          };
-        }
-
-        this.service.editEvent(idx, request).subscribe((response) => {
-          const days = this.eventDayForm.value.days;
-          days.map((day) => {
-            const request = {
-              eventDate: new Date(day.eventDate),
-              duration: day.duration,
+        var request = {};
+        var idx = this.eventId;
+        if (idx !== undefined) {
+          if (this.eventDayForm.value.password !== undefined) {
+            request = {
+              name: this.eventDayForm.value.eventName,
+              password: this.eventDayForm.value.password,
             };
-            this.service.addDayEvent(idx, request).subscribe((response) => {
+          } else {
+            request = {
+              name: this.eventDayForm.value.eventName,
+            };
+          }
+
+          this.service.editEvent(idx, request).subscribe((response) => {
+            const days = this.eventDayForm.value.days;
+            days.map((day) => {
+              const request = {
+                eventDate: new Date(day.eventDate),
+                duration: day.duration,
+              };
+              this.service
+                .addDayEvent(idx, request)
+                .subscribe((response) => {});
+              this.buttonClicked.emit(true);
             });
             this.buttonClicked.emit(true);
           });
-          this.buttonClicked.emit(true);
-        });
-      } else {
-
-        if (this.eventDayForm.value.password !== undefined) {
-          if (this.public) {
-            request = {
-              name: this.eventDayForm.value.eventName,
-              password: this.eventDayForm.value.password,
-              ownerEmail: this.eventDayForm.value.ownerEmail,
-            };
-          } else {
-            request = {
-              name: this.eventDayForm.value.eventName,
-              password: this.eventDayForm.value.password,
-              ownerEmail: this.tokenService.getUser().email,
-            };
-          }
         } else {
-          if (this.public) {
-            request = {
-              name: this.eventDayForm.value.eventName,
-              ownerEmail: this.eventDayForm.value.ownerEmail,
-            };
+          if (this.eventDayForm.value.password !== undefined) {
+            if (this.public) {
+              request = {
+                name: this.eventDayForm.value.eventName,
+                password: this.eventDayForm.value.password,
+                ownerEmail: this.eventDayForm.value.ownerEmail,
+              };
+            } else {
+              request = {
+                name: this.eventDayForm.value.eventName,
+                password: this.eventDayForm.value.password,
+                ownerEmail: this.tokenService.getUser().email,
+              };
+            }
           } else {
-            request = {
-              name: this.eventDayForm.value.eventName,
-              ownerEmail: this.tokenService.getUser().email,
-            };
+            if (this.public) {
+              request = {
+                name: this.eventDayForm.value.eventName,
+                ownerEmail: this.eventDayForm.value.ownerEmail,
+              };
+            } else {
+              request = {
+                name: this.eventDayForm.value.eventName,
+                ownerEmail: this.tokenService.getUser().email,
+              };
+            }
           }
-        }
-        await this.service.addEvent(request).subscribe((response) => {
-          this.id = response.id;
-          const days = this.eventDayForm.value.days;
-          days.map((day) => {
-            const request = {
-              eventDate: new Date(day.eventDate),
-              duration: day.duration,
-            };
-            this.service.addDayEvent(this.id, request).subscribe((response) => {
-              if (this.public) {
-                this.activeRouter.navigateByUrl('/private/' + this.id);
-              }          
-              this.buttonClicked.emit(true);
+          await this.service.addEvent(request).subscribe((response) => {
+            this.id = response.id;
+            const days = this.eventDayForm.value.days;
+            days.map((day) => {
+              const request = {
+                eventDate: new Date(day.eventDate),
+                duration: day.duration,
+              };
+              this.service
+                .addDayEvent(this.id, request)
+                .subscribe((response) => {
+                  if (this.public) {
+                    this.activeRouter.navigateByUrl('/private/' + this.id);
+                  }
+                  this.buttonClicked.emit(true);
+                });
             });
           });
-        });
-        
-
-
-         
+        }
       }
+    } else {
+      alert('Debe agregar al menos una fecha');
     }
-    }else{
-      alert("Debe agregar al menos una fecha")
-    }
-    
-    
   }
 
   closeEvent() {
@@ -159,9 +156,11 @@ export class NeweventComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading=true;
+    this.fechaActual=(new Date()).toISOString().slice(0,16);
+    console.log(this.fechaActual)
+    this.loading = true;
     this.idx = this.eventId;
-  
+
     if (this.public) {
       this.eventDayForm = this.newEventForm.group({
         eventName: ['', Validators.required],
@@ -173,7 +172,6 @@ export class NeweventComponent implements OnInit {
         opcion: this.fb.array([], Validators.required),
       });
     } else {
-
       this.eventDayForm = this.newEventForm.group({
         eventName: ['', Validators.required],
         password: [''],
@@ -186,7 +184,7 @@ export class NeweventComponent implements OnInit {
     if (this.idx == null) {
       this.title = 'Crear Evento';
       this.event = new EventModel();
-      this.loading=false;
+      this.loading = false;
     } else {
       this.title = 'Modificar Evento';
       this.controllerEvent
@@ -196,7 +194,7 @@ export class NeweventComponent implements OnInit {
           this.eventDayForm.patchValue({
             eventName: this.event.name,
           });
-          this.loading=false;
+          this.loading = false;
         });
     }
   }
@@ -224,8 +222,7 @@ export class NeweventComponent implements OnInit {
     const opciones = this.deletedOptions.value.opcion;
 
     opciones.map((opcion) => {
-      this.service.removeEventDay(opcion).subscribe((response) => {
-      });
+      this.service.removeEventDay(opcion).subscribe((response) => {});
     });
     this.buttonClicked.emit(true);
   }
