@@ -8,7 +8,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { SignupGuard } from './_guards/signup.guard';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { PublicCalendarComponent } from './components/publicCalendar/publicCalendar.component';
+import { PublicEventComponent } from './components/publicEvent/publicEvent.component';
+import { PrivateEventComponent } from './components/privateEvent/privateEvent.component';
 
 const routes: Routes = [  
 
@@ -17,8 +18,8 @@ const routes: Routes = [
   { path: 'new-event', component: NeweventComponent, canActivate:[AuthGuard] },
   { path: 'modify/:id', component: NeweventComponent, canActivate:[AuthGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate:[AuthGuard] },
-  { path: 'public/:id', component: PublicCalendarComponent },
-  { path: 'private/:id', component: CalendarComponent },
+  { path: 'public/:id', component: PublicEventComponent },
+  { path: 'private/:id', component: PrivateEventComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent, canActivate:[SignupGuard] } 
 

@@ -11,13 +11,12 @@ import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './_interceptors';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignupComponent } from './components/signup/signup.component';
-//import { PingService } from './_services/ping/ping.service';
 import { DatePipe } from '@angular/common';
 import { CalendaryModule } from './components/calendar/calendar.module';
-//import { PublicCalendaryModule } from './components/publicCalendar/publicCalendar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NeweventComponent } from './components/newevent/newevent.component';
-import { PublicCalendarComponent } from './components/publicCalendar/publicCalendar.component';
+import { PublicEventComponent } from './components/publicEvent/publicEvent.component';
+import { PrivateEventComponent } from './components/privateEvent/privateEvent.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,8 @@ import { PublicCalendarComponent } from './components/publicCalendar/publicCalen
     NavbarComponent,
     SignupComponent,
     NeweventComponent,
-    PublicCalendarComponent
+    PublicEventComponent,
+    PrivateEventComponent
 
   ],
   imports: [

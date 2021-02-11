@@ -1,23 +1,5 @@
-
 <div class="justify-content-md-center">
-  <h1 class="m-3">Mis eventos</h1>
-  <button class="btn btn-dark" (click)="handleAddEvent()">         
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
-      fill="currentColor"
-      class="bi bi-plus-circle-fill"
-      viewBox="0 0 16 16"
-    >
-
-      <path
-        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
-      />
-      
-    </svg>
-    Crear
-  </button>
+  <h1 class="m-3">Mi evento</h1>  
 </div>
 
 <div *ngIf="loading">
@@ -28,11 +10,9 @@
   </div>
 </div>
 
-<div *ngIf="!loading" class="row m-2 ">
-
-  <div *ngFor="let event of filteredEvents; let idx = index" id="wrapper" class="col-lg-6 p-2 align-center" >
-    <div class="page-header">
-    </div>
+<div *ngIf="!loading" id="wrapper" class="row m-2">
+  <div class="col-lg-6 p-2 align-center">
+    <div class="page-header"></div>
     <table>
       <thead>
         <tr>
@@ -45,9 +25,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr >
+        <tr>
           <td scope="row" data-label="Nombre">
-            <h3><span class="badge badge-secondary"> {{ event.name }}</span></h3>
+            {{ event.name }}
           </td>
 
           <td data-label="Fecha">
@@ -60,24 +40,26 @@
           <td data-label="Publicado">
             {{ event.published ? "SI" : "NO" }}
           </td>
-          <td data-label="Seguridad">{{ event.password && event.password.length > 0 ? "SI" : "NO" }}</td>
+          <td data-label="Seguridad">
+            {{ event?.password && event?.password.length > 0 ? "SI" : "NO" }}
+          </td>
           <td data-label="Revisar">
             <button
-              class="btn btn-warning m-1 "
+              class="btn btn-success m-1"
               (click)="handleViewVotes(event.eventDays)"
             >
-            <span class="fa fa-eye"></span>
+              <span class="fa fa-eye"></span>
               Ver votos
             </button>
             <button
-              class="btn btn-info m-1"
-              (click)="handleViewLink(event.id)"
-            ><span class=" fa fa-share-alt"></span> Compartir </button>
+              class="btn btn-info fa fa-share-alt"
+              (click)="handleViewLink()"
+            ></button>
           </td>
           <td data-label="Editar">
             <button
               class="btn btn-primary btn-lg m-1 fa fa-pencil"
-              (click)="handleEditEvent(event.id)"
+              (click)="handleEditEvent()"
             ></button>
             <button
               class="btn btn-danger btn-lg m-1 fa fa-trash-o"
@@ -100,6 +82,7 @@
     <div class="modal-body">
       <div>
         <app-newevent
+          [public]="true"
           (buttonClicked)="parentEventHandlerFunction($event)"
         ></app-newevent>
       </div>
@@ -116,7 +99,7 @@
     <div class="modal-body">
       <div>
         <app-newevent
-          [eventId] = "eventId"
+          [eventId]="eventId"
           (buttonClicked)="parentEventHandlerFunction($event)"
         ></app-newevent>
       </div>

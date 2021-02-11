@@ -20,11 +20,11 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-publicCalendar',
-  templateUrl: './publicCalendar.component.html',
-  styleUrls: ['./publicCalendar.component.css'],
+  selector: 'app-publicEvent',
+  templateUrl: './publicEvent.component.html',
+  styleUrls: ['./publicEvent.component.css'],
 })
-export class PublicCalendarComponent implements OnInit {
+export class PublicEventComponent implements OnInit {
   @ViewChild('modalEventContent', { static: true })
   modalEventContent: TemplateRef<any>;
   event: EventModel;
@@ -35,6 +35,7 @@ export class PublicCalendarComponent implements OnInit {
   dataForm: FormGroup;
   msg: String;
   private: String;
+  loading: boolean;
 
   constructor(
     private service: EventService,
@@ -106,6 +107,7 @@ export class PublicCalendarComponent implements OnInit {
   }
 
   async checkPassword(): Promise<void> {
+    this.loading = true;
     var url = 'http://localhost:3000/events/access/' + this.idx;
     var data = { password: this.dataForm.value.password };
 
@@ -118,18 +120,19 @@ export class PublicCalendarComponent implements OnInit {
     })
       .then((response) => {
         console.log('Success:', response.status);
-        if (response.status === 204){
+        if (response.status === 204) {
           this.service.getEventById(this.idx).subscribe((event) => {
-            this.event = event;       
-            this.private = 'publico';   
+            this.event = event;
+            this.private = 'publico';
+            this.loading = false;
           });
-          
-        }else{
+        } else {
           this.msg =
-          ' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>';
-        }
+            ' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>';
+            this.loading = false;
+          }
       })
-      .catch((error) => console.error('Error:', 'Password incorrecto'));    
+      .catch((error) => console.error('Error:', 'Password incorrecto'));
   }
 
   async checkPrivacy(): Promise<void> {
@@ -140,23 +143,27 @@ export class PublicCalendarComponent implements OnInit {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((response) => {
-        if (response.status === 204){
+    })
+      .then((response) => {
+        if (response.status === 204) {
           this.private = 'privado';
-        }else{
+          this.loading = false;
+        } else {
           this.service.getEventById(this.idx).subscribe((event) => {
-            this.event = event;          
+            this.event = event;
+            this.private = 'publico';
+            this.loading = false;
           });
-          this.private = 'publico';
-          }
+        }
       })
-      .catch();    
+      .catch();
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.private = 'cargando';
-    this.idx = this.route.snapshot.paramMap.get('id');    
-    this.checkPrivacy()
+    this.idx = this.route.snapshot.paramMap.get('id');
+    this.checkPrivacy();
 
     this.eventDayForm = this.fb.group({
       opcion: this.fb.array([], Validators.required),

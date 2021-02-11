@@ -1,0 +1,10 @@
+#grupoBotones {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#alinear {
+    align-items: center;
+}
+    

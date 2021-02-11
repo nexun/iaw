@@ -1,5 +1,7 @@
 body {
     background-size:     cover;                      /* <------ */
     background-repeat:   no-repeat;
-    background-position: center center;              /* optional, center the image */
+    background-position: center center;    
+    font-family: 'Roboto', sans-serif;
+              /* optional, center the image */
 }

@@ -88,4 +88,6 @@ table th {
 #wrapper {
   height: 100%;     /* full height of the content box */
   min-height: 20em; /* Will be AT LEAST 20em tall */
+  display: flex;
+  justify-content: center;
 }
