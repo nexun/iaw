@@ -4,7 +4,7 @@ Pasos para ejecutar el proyecto
 
 Levantar cliente y servidor con los siguientes comandos 
 
-Para instalar y levantar el cliente (linux)
+Para instalar y levantar el cliente (Linux y Windows)
 
 - **$ cd /client**
 
@@ -12,7 +12,7 @@ Para instalar y levantar el cliente (linux)
 
 - **$ ./serverUp.sh (Linux) o npm start (Windows)**
 
-Para instalar y levantar el servidor (linux)
+Para instalar y levantar el servidor (Linux y Windows)
 - **$ cd /server**
 - **$ npm i**
 - **$ ./serverUp.sh (Linux) o npm start (Windows)**
