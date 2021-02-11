@@ -19,7 +19,7 @@ Para instalar y levantar el servidor (Linux y Windows)
 
 Ingresamos a nuestro cliente mediante http://localhost:4200
 
-Utilizamos las siguientes credenciales para acceder:
+Utilizamos las siguientes credenciales para acceder (o creamos las propias en la pagina de Register):
 
 flb@gmail.com
 12345678
