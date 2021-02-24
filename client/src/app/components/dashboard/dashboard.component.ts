@@ -8,11 +8,11 @@ import { EventDay, EventDayWithRelations } from 'src/app/openapi';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-eventlist',
-  templateUrl: './eventlist.component.html',
-  styleUrls: ['./eventlist.component.css'],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
 })
-export class EventlistComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   @ViewChild('modalEventContent', { static: true })
   modalEventContent: TemplateRef<any>;
   @ViewChild('modalEditContent', { static: true })
@@ -32,6 +32,7 @@ export class EventlistComponent implements OnInit {
   refresh: Subject<any> = new Subject();
   loading: boolean;
   loadingVotes: boolean;
+  
   constructor(
     private service: EventService,
     private activeRouter: Router,
@@ -67,7 +68,7 @@ export class EventlistComponent implements OnInit {
 
   handleEditEvent(eventId): void {
     this.eventId = eventId;
-    this.modal.open(this.modalEditContent, { size: 'lg' });    
+    this.modal.open(this.modalEditContent, { size: 'lg' });
   }
 
   handleViewVotes(eventId): void {
@@ -89,7 +90,7 @@ export class EventlistComponent implements OnInit {
   ngOnInit(): void { 
     this.loading = true;
     const email = this.tokenService.getUser().email;
-    this.service.getEventsByEmail(email).subscribe((events) => {
+    this.service.getEvents().subscribe((events) => {
       this.filteredEvents = events.reverse();
       this.loading = false;
     }

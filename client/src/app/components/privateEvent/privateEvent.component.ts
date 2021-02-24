@@ -30,6 +30,8 @@ export class PrivateEventComponent implements OnInit {
   eventId: any;
   refresh: Subject<any> = new Subject();
   loading: boolean;
+  loadingVotes: boolean;
+
   constructor(
     private service: EventService,
     private activeRouter: Router,
@@ -59,9 +61,17 @@ export class PrivateEventComponent implements OnInit {
     this.modal.open(this.modalEditContent, { size: 'lg' });
   }
 
-  handleViewVotes(eventDays): void {
-    this.days = eventDays;
+  handleViewVotes(): void {
+    this.loadingVotes = true;
     this.modal.open(this.modalOptionContent, { size: 'lg' });
+    this.service.getEventById(this.idx).subscribe((evento) => {
+      this.event = evento;
+      this.eventId = evento.id
+      this.loadingVotes = false;
+      this.days = this.event.eventDays;
+      console.log(this.days)
+
+    });
   }
 
   parentEventHandlerFunction(valueEmitted) {
@@ -82,11 +92,14 @@ export class PrivateEventComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.loadingVotes = false;
     this.idx = this.route.snapshot.paramMap.get('id');
     this.service.getEventById(this.idx).subscribe((evento) => {
       this.event = evento;
       this.eventId = evento.id
       this.loading = false;
-    });
+    },
+    (err) => {this.activeRouter.navigateByUrl('/signup')}
+    );
   }
 }

@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NeweventComponent } from './components/newevent/newevent.component';
 import { PublicEventComponent } from './components/publicEvent/publicEvent.component';
 import { PrivateEventComponent } from './components/privateEvent/privateEvent.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,8 @@ import { PrivateEventComponent } from './components/privateEvent/privateEvent.co
     SignupComponent,
     NeweventComponent,
     PublicEventComponent,
-    PrivateEventComponent
-
+    PrivateEventComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

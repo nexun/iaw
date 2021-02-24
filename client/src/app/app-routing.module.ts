@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { EventlistComponent }  from './components/eventlist/eventlist.component';
+import { DashboardComponent }  from './components/dashboard/dashboard.component';
 import { NeweventComponent }  from './components/newevent/newevent.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -13,16 +14,17 @@ import { PrivateEventComponent } from './components/privateEvent/privateEvent.co
 
 const routes: Routes = [  
 
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/signup', pathMatch: 'full' },
   { path: 'home', component: EventlistComponent, canActivate:[AuthGuard] },
+  { path: 'admin', component: DashboardComponent, canActivate:[AuthGuard] },
   { path: 'new-event', component: NeweventComponent, canActivate:[AuthGuard] },
   { path: 'modify/:id', component: NeweventComponent, canActivate:[AuthGuard] },
   { path: 'calendar', component: CalendarComponent, canActivate:[AuthGuard] },
   { path: 'public/:id', component: PublicEventComponent },
   { path: 'private/:id', component: PrivateEventComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent, canActivate:[SignupGuard] } 
-
+  { path: 'signup', component: SignupComponent, canActivate:[SignupGuard] } ,
+  { path: '**', redirectTo: '/signup' }
 ];
 
 @NgModule({

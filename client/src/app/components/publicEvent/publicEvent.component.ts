@@ -85,11 +85,7 @@ export class PublicEventComponent implements OnInit {
     } else {
       this.modal.dismissAll();
     }
-  }
-
-  handleAddEvent(): void {
-    this.modal.open(this.modalEventContent, { size: 'lg' });
-  }
+  } 
 
   async checkPassword(): Promise<void> {
     this.loading = true;
@@ -109,7 +105,8 @@ export class PublicEventComponent implements OnInit {
             this.event = event;
             this.private = 'publico';
             this.loading = false;
-          });
+          },
+          (err) => {this.activeRouter.navigateByUrl('/signup')});
         } else {
           this.msg =
             ' <div class="alert alert-danger" display="" role="alert"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Contraseña inválida</div>';
@@ -137,7 +134,8 @@ export class PublicEventComponent implements OnInit {
             this.event = event;
             this.private = 'publico';
             this.loading = false;
-          });
+          },
+          (err) => {this.activeRouter.navigateByUrl('/signup')});
         }
       })
       .catch();

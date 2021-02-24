@@ -1,7 +1,6 @@
-
 <div class="justify-content-md-center">
   <h1 class="m-3">Mis eventos</h1>
-  <button class="btn btn-dark" (click)="handleAddEvent()">         
+  <button class="btn btn-dark" (click)="handleAddEvent()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="28"
@@ -10,11 +9,9 @@
       class="bi bi-plus-circle-fill"
       viewBox="0 0 16 16"
     >
-
       <path
         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
       />
-      
     </svg>
     Crear
   </button>
@@ -22,22 +19,29 @@
 
 <div *ngIf="loading">
   <div class="d-flex justify-content-center m-5">
-    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
       <span class="sr-only">Cargando...</span>
     </div>
   </div>
 </div>
 
-<div *ngIf="!loading" id="wrapper" class="row m-2 ">
+<div *ngIf="!loading" id="wrapper" class="row m-2">
   <div class="col-lg-12 d-flex justify-content-center mt-2">
-    <div *ngIf="(filteredEvents.length===0)"><h3> Aun no tiene eventos</h3><h4> Presione el boton Crear, ingrese el nombre y las fechas del mismo y compartalo con sus amigos</h4></div>
-  </div>
-  
-
-  <div *ngFor="let event of filteredEvents; let idx = index" id="wrapper" class="col-lg-6 p-2 align-center" >
-    <div class="page-header">
-
+    <div *ngIf="filteredEvents.length === 0">
+      <h3>Aun no tiene eventos</h3>
+      <h4>
+        Presione el boton Crear, ingrese el nombre y las fechas del mismo y
+        compartalo con sus amigos
+      </h4>
     </div>
+  </div>
+
+  <div
+    *ngFor="let event of filteredEvents; let idx = index"
+    id="wrapper"
+    class="col-lg-6 p-2 align-center"
+  >
+    <div class="page-header"></div>
     <table>
       <thead>
         <tr>
@@ -50,9 +54,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr >
+        <tr>
           <td scope="row" data-label="Nombre">
-            <h3><span class="badge badge-secondary"> {{ event.name }}</span></h3>
+            <h3>
+              <span class="badge badge-secondary"> {{ event.name }}</span>
+            </h3>
           </td>
 
           <td data-label="Fecha">
@@ -65,19 +71,20 @@
           <td data-label="Publicado">
             {{ event.published ? "SI" : "NO" }}
           </td>
-          <td data-label="Seguridad">{{ event.password && event.password.length > 0 ? "SI" : "NO" }}</td>
+          <td data-label="Seguridad">
+            {{ event.password && event.password.length > 0 ? "SI" : "NO" }}
+          </td>
           <td data-label="Revisar">
             <button
-              class="btn btn-warning m-1 "
-              (click)="handleViewVotes(event.eventDays)"
+              class="btn btn-warning m-1"
+              (click)="handleViewVotes(event.id)"
             >
-            <span class="fa fa-eye"></span>
+              <span class="fa fa-eye"></span>
               Ver votos
             </button>
-            <button
-              class="btn btn-info m-1"
-              (click)="handleViewLink(event.id)"
-            ><span class=" fa fa-share-alt"></span> Compartir </button>
+            <button class="btn btn-info m-1" (click)="handleViewLink(event.id)">
+              <span class="fa fa-share-alt"></span> Compartir
+            </button>
           </td>
           <td data-label="Editar">
             <button
@@ -95,47 +102,60 @@
   </div>
 </div>
 
-  <ng-template #modalEventContent let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Agregar evento</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<ng-template #modalEventContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Agregar evento</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <app-newevent
+        (buttonClicked)="parentEventHandlerFunction($event)"
+      ></app-newevent>
     </div>
-    <div class="modal-body">
-      <div>
-        <app-newevent
-          (buttonClicked)="parentEventHandlerFunction($event)"
-        ></app-newevent>
+  </div>
+</ng-template>
+
+<ng-template #modalEditContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Editar evento</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <app-newevent
+        [eventId]="eventId"
+        (buttonClicked)="parentEventHandlerFunction($event)"
+      ></app-newevent>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalOptionContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Votos</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div *ngIf="loadingVotes">
+      <div class="d-flex justify-content-center m-5">
+        <div
+          class="spinner-border"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="sr-only">Cargando...</span>
+        </div>
       </div>
     </div>
-  </ng-template>
-
-  <ng-template #modalEditContent let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Editar evento</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>
-        <app-newevent
-          [eventId] = "eventId"
-          (buttonClicked)="parentEventHandlerFunction($event)"
-        ></app-newevent>
-      </div>
-    </div>
-  </ng-template>
-
-  <ng-template #modalOptionContent let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Votos</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
+    <div *ngIf="!loadingVotes">
       <ul ul class="list-group" *ngFor="let day of days; let idy = index">
         <div class="p-3">
           Opción {{ idy + 1 }} -->
@@ -158,23 +178,24 @@
         </div>
       </ul>
     </div>
-  </ng-template>
+  </div>
+</ng-template>
 
-  <ng-template #modalShare let-close="close">
-    <div class="modal-header">
-      <h5 class="modal-title">Compartir</h5>
-      <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<ng-template #modalShare let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Compartir</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h4>
+        <label class="form-label-control" for="link">
+          Link para compartir el evento:</label
+        >
+        <input class="form-control" value="{{ id }}" disabled />
+      </h4>
     </div>
-    <div class="modal-body">
-      <div>
-        <h4>
-          <label class="form-label-control" for="link">
-            Link para compartir el evento:</label
-          >
-          <input class="form-control" value="{{ id }}" disabled />
-        </h4>
-      </div>
-    </div>
-  </ng-template>
+  </div>
+</ng-template>

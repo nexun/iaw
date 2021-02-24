@@ -13,10 +13,11 @@ import {
   UserServiceBindings,
 } from '@loopback/authentication-jwt';
 import {inject} from '@loopback/core';
-import {model, property, repository} from '@loopback/repository';
+import {Filter, model, property, repository} from '@loopback/repository';
 import {
   get,
   getModelSchemaRef,
+  param,
   post,
   requestBody,
   SchemaObject,
@@ -98,6 +99,25 @@ export class UserController {
     // create a JSON Web Token based on the user profile
     const token = await this.jwtService.generateToken(userProfile);
     return {token};
+  }
+
+  @get("/users", {
+    responses: {
+      "200": {
+        description: "Array of Event model instances",
+        content: {
+          "application/json": {
+            schema: {
+              type: "array",
+              items: getModelSchemaRef(User, { includeRelations: true }),
+            },
+          },
+        },
+      },
+    },
+  })
+  async find(@param.filter(User) filter?: Filter<User>): Promise<User[]> {
+    return this.userRepository.find();
   }
 
   @authenticate('jwt')
